@@ -1,9 +1,6 @@
-import 'package:blood/injection.dart';
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
 void main() {
-  configureInjection(Environment.prod);
   runApp(MyApp());
 }
 
@@ -20,10 +17,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget{
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(),
+    );
   }
 }
