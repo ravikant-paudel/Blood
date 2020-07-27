@@ -6,7 +6,9 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: Container(
+        color: Colors.red,
+      ),
 //      body: ExtendedNavigator(
 //        initialRoute: Routes.dashboardPage,
 //        router: Router(),

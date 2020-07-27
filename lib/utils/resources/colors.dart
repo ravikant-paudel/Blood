@@ -1,6 +1,6 @@
 // Copyright (c) 2020 The Blood Authors. All rights reserved.
 
-part  of '../resources/theme.dart';
+part  of 'theme.dart';
 
 const int _rawPrimary = 0xFFDE2C2C;
 const int _rawSurface = 0xFF1A1A1A;

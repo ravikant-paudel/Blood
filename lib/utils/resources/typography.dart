@@ -10,7 +10,7 @@
 // 800: ExtraBold
 // 900: Black
 
-part  of '../resources/theme.dart';
+part  of 'theme.dart';
 
 TextTheme _bloodTextTheme = TextTheme(
   headline1: const TextStyle(
