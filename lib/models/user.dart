@@ -23,8 +23,6 @@ class User {
     data['name'] = user.name;
     data['email'] = user.email;
     data['username'] = user.username;
-    data['status'] = user.status;
-    data['state'] = user.state;
     data['profile_photo'] = user.profilePhoto;
     return data;
   }
@@ -34,8 +32,6 @@ class User {
     name = mapData['name'] as String;
     email = mapData['email'] as String;
     username = mapData['username'] as String;
-    status = mapData['status'] as String;
-    state = mapData['state'] as int;
     profilePhoto = mapData['profile_photo'] as String;
   }
 }

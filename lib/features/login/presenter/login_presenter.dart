@@ -21,7 +21,7 @@ abstract class LoginState with _$LoginState {
 class LoginPresenter extends StateNotifier<LoginState> with LocatorMixin {
   LoginPresenter() : super(_LoginLoading());
 
-  void fetchLogin() {
+  void fetchGoogleLogin() {
     try {
       signIn().then((FirebaseUser user) {
         if (user != null) {
