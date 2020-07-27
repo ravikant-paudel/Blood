@@ -12,6 +12,7 @@ class LoginPage extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 16,top: 30, left: 16, right: 16),
         child: Consumer((context, read) {
           final loginPre = read(loginProvider);
+          loginPre.state.when(loading: null, loaded: null, failed: null);
           return SingleChildScrollView(
             child: Column(
               children: [
