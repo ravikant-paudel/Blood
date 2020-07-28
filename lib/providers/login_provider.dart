@@ -7,14 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-
-final StateNotifierProvider<LoginProvider> loginProvide = StateNotifierProvider((_) => LoginProvider());
+final StateNotifierProvider<LoginProvider> loginProvider = StateNotifierProvider((_) => LoginProvider());
 
 class LoginProvider extends StateNotifier<LoginState> {
   LoginProvider() : super(LoginState(isLoading: false, isLoaded: false));
 
   Future<void> fetchGoogleLogin() async {
-    print('is isLoaded ');
     state = state.copyWith(isLoading: true);
     try {
       signIn().then((FirebaseUser user) {
@@ -22,24 +20,22 @@ class LoginProvider extends StateNotifier<LoginState> {
           authenticateUser(user).then((isNewUser) {
             if (isNewUser) {
               addDataToDb(user).then((value) {
-                print('is isLoaded 11');
-                state = state.copyWith(isLoaded: true);
+                state = state.copyWith(isLoading: false, isLoaded: true);
               });
             } else {
-              print('Elsee is isLoaded ');
-              state = state.copyWith(isLoaded: true);
+              state = state.copyWith(isLoading: false, isLoaded: true);
             }
           });
         } else {
-          print('Isedr is isLoaded ');
-          state = state.copyWith(isLoaded: true, isFailed: Failure('User is null'));
+          state = state.copyWith(isLoading: false, isLoaded: true, isFailed: Failure('User is null'));
         }
       });
     } on Failure catch (e) {
-      print('Failure is Failure ');
-      state = state.copyWith(isLoading: false, isFailed: Failure(e.message));
+      state = state.copyWith(isLoading: false, isLoaded: false, isFailed: Failure(e.message));
     }
   }
+
+
 }
 
 class LoginState {

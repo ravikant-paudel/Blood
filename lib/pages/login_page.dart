@@ -10,22 +10,20 @@ class LoginPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(bottom: 16, top: 30, left: 16, right: 16),
         child: Consumer((context, read) {
-          final loginState = read(loginProvide.state);
+          final loginState = read(loginProvider.state);
           if (loginState.isLoading) {
-            print('Here is isLoaded ');
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
-          if (loginState.isLoaded) {
-            print('is isLoaded Calledddd');
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-              return MainPage();
-            }));
+          if (loginState.isLoaded== true) {
+            return MainPage();
+//            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+//              return MainPage();
+//            }));
           }
           final failed = loginState.isFailed;
           if (failed != null) {
-            print('is Failed ${failed.message}');
           }
           return SingleChildScrollView(
             child: Column(
@@ -36,7 +34,7 @@ class LoginPage extends StatelessWidget {
                 Center(
                   child: RaisedButton(
                     onPressed: () {
-                      loginProvide.read(context).fetchGoogleLogin();
+                      loginProvider.read(context).fetchGoogleLogin();
                     },
                     child: const Text('Google Login'),
                   ),
