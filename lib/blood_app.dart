@@ -16,7 +16,11 @@ class BloodApp extends StatelessWidget {
     return MaterialApp(
       title: 'Blood',
       theme: ThemeData(
-        primaryColor: UniversalVariables.primaryColor
+        primarySwatch: Colors.red,
+        scaffoldBackgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+        color: Colors.black, //change your color here
+      ),
       ),
       home: Consumer((context, read) {
         final authState = read(authProvider.state);
