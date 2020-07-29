@@ -1,4 +1,4 @@
-// Copyright (c) 2020 The Bloog Authors. All rights reserved.
+// Copyright (c) 2020 The Blood Authors. All rights reserved.
 
 import 'package:auto_route/auto_route.dart';
 import 'package:blood/helper/router/router.gr.dart';
@@ -13,7 +13,6 @@ class MainPage extends StatelessWidget {
         router: Router(),
         name: 'mainRouter',
       ),
-
     );
   }
 }

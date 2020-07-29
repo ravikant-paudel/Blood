@@ -18,9 +18,6 @@ class LoginPage extends StatelessWidget {
           }
           if (loginState.isLoaded== true) {
             return MainPage();
-//            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-//              return MainPage();
-//            }));
           }
           final failed = loginState.isFailed;
           if (failed != null) {

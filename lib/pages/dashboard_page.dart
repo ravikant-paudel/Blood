@@ -1,3 +1,5 @@
+import 'package:blood/component/bottom_nav_bar.dart';
+import 'package:blood/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -8,8 +10,16 @@ class DashboardPage extends StatelessWidget {
         title: const Text('aklsdjf'),
       ),
       body: Container(
-        color: Colors.teal,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: UniversalVariables.primaryColor,
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BloodBottomNavBar(),
     );
   }
 }
+
+
