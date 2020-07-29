@@ -9,7 +9,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ExtendedNavigator(
-        initialRoute: Routes.dashboardPage,
+        initialRoute: Routes.homePage,
         router: Router(),
         name: 'mainRouter',
       ),

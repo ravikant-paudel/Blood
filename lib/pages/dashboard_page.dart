@@ -7,17 +7,11 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('aklsdjf'),
+        title: const Text('aklsdjf', style: TextStyle(color: UniversalVariables.primaryBlack),),
+        backgroundColor: Colors.white,
       ),
       body: Container(
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: UniversalVariables.primaryColor,
-        child: Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BloodBottomNavBar(),
     );
   }
 }
