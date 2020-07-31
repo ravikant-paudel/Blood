@@ -1,3 +1,4 @@
+import 'package:blood/utils/locator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -9,17 +10,15 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 GoogleSignIn _googleSignIn = GoogleSignIn();
 
 class AuthProvider extends StateNotifier<AuthState> {
-  AuthProvider() : super(AuthState());
+  AuthProvider() : super(AuthState.isInitial);
 
   Future<void> appStarted() async {
-    print('appStarted  appStarted ');
+    await LocatorB.init();
     final FirebaseUser currentUser = await _auth.currentUser();
     if (currentUser != null) {
-      print('not null ${currentUser.email}');
-      state = state.copyWith(authenticated: Authenticated());
+      state = AuthState.isAuthenticated;
     } else {
-      print('not null nukkk');
-      state = state.copyWith(unAuthenticated: UnAuthenticated());
+      state = AuthState.isUnAuthenticated;
     }
   }
 
@@ -30,29 +29,6 @@ class AuthProvider extends StateNotifier<AuthState> {
   }
 }
 
-class AuthState {
-  final AuthInitial authInitial;
-  final Authenticated authenticated;
-  final UnAuthenticated unAuthenticated;
-
-  AuthState({
-    this.authInitial,
-    this.authenticated,
-    this.unAuthenticated,
-  });
-
-  AuthState copyWith({AuthInitial authInitial, Authenticated authenticated, UnAuthenticated unAuthenticated}) => AuthState(
-        authInitial: authInitial ?? this.authInitial,
-        authenticated: authenticated ?? this.authenticated,
-        unAuthenticated: unAuthenticated ?? this.unAuthenticated,
-      );
-
-  @override
-  String toString() => 'AuthState(authInitial: $authInitial,authenticated: $authenticated,unAuthenticated: $unAuthenticated)';
+enum AuthState{
+  isInitial, isAuthenticated, isUnAuthenticated
 }
-
-class AuthInitial extends AuthState {}
-
-class Authenticated extends AuthState {}
-
-class UnAuthenticated extends AuthState {}

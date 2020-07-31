@@ -1,4 +1,4 @@
-class User {
+class UserModel {
   String uid;
   String name;
   String email;
@@ -7,7 +7,7 @@ class User {
   int state;
   String profilePhoto;
 
-  User({
+  UserModel({
     this.uid,
     this.name,
     this.email,
@@ -17,7 +17,7 @@ class User {
     this.profilePhoto,
   });
 
-  Map<String, dynamic> toMap(User user) {
+  Map<String, dynamic> toMap(UserModel user) {
     final data = <String, dynamic>{};
     data['uid'] = user.uid;
     data['name'] = user.name;
@@ -27,7 +27,7 @@ class User {
     return data;
   }
 
-  User.fromMap(Map<String, dynamic> mapData) {
+  UserModel.fromMap(Map<String, dynamic> mapData) {
     uid = mapData['uid'] as String;
     name = mapData['name'] as String;
     email = mapData['email'] as String;

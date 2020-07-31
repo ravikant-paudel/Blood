@@ -13,40 +13,45 @@ class AddDonorPage extends StatelessWidget {
       appBar: const CustomAppBar(
         title: 'AddDonorPage',
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            const TextField(
-                decoration: InputDecoration(
-              hintText: 'Donor name',
-            )),
-            const VerticalGap(),
-            const TextField(
-                decoration: InputDecoration(
-              hintText: 'Donor Number',
-            )),
-            const VerticalGap(),
-            DropdownButton<String>(
-              isExpanded: true,
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: <Widget>[
+                const TextField(
+                    decoration: InputDecoration(
+                  hintText: 'Donor name',
+                )),
+                const VerticalGap(),
+                TextField(
+                  style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 16),
+                    decoration: const InputDecoration(
+                  hintText: 'Donor Number',
+                )),
+                const VerticalGap(),
+                DropdownButton<String>(
+                  isExpanded: true,
 //              isDense: true,
-              hint: const Text('-- Select Group --'),
-              items: _dropdownItems.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
+                  hint: const Text('-- Select Group --'),
+                  items: _dropdownItems.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
 //              value: ,
-              onChanged: (String value) {},
+                  onChanged: (String value) {},
+                ),
+                const VerticalGap(d_margin6),
+                BloodButton(
+                  buttonText: 'Add Donor',
+                  onPressed: () {},
+                ),
+              ],
             ),
-            const VerticalGap(d_margin6),
-            BloodButton(
-              buttonText: 'Add Donor',
-              onPressed: () {},
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

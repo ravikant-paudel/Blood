@@ -3,43 +3,12 @@
 part  of 'theme.dart';
 
 const int _rawPrimary = 0xFFDE2C2C;
-const int _rawSurface = 0xFF1A1A1A;
-const int _rawAccent = 0xFFEE2A7B;
-
-const Color _secondaryColor = Color(0xFFFAA61A);
-const Color _complementaryColor = Color(0xFFFED236);
-const Color _errorColor = Color(0xFFCF3636);
-
-// --------------- Accent Color-----------------
-
-const BloodColor _accentColorLight = BloodColor(
-  'AccentLight',
-  _rawAccent,
-  {
-    200: Color(0xFFF85C9D),
-    500: Color(_rawAccent),
-  },
-);
-
-const BloodColor _accentColorDark = BloodColor(
-  'AccentDark',
-  _rawAccent,
-  {
-    200: Color(0xFFF85C9D),
-    500: Color(_rawAccent),
-  },
-);
 
 // --------------- Primary Color-----------------
 
-const BloodColor _primaryColorLight = BloodColor(
-  'PrimaryLight',
+ const MaterialColor primaryColorLight = MaterialColor(
   _rawPrimary,
   {
-    10: Color(0xFFfbe9e9),
-    20: Color(0xFFf8d4d4),
-    30: Color(0xFFf5bfbf),
-    40: Color(0xFFf1aaaa),
     50: Color(0xFFee9595),
     100: Color(0xFFeb8080),
     200: Color(0xFFe76b6b),
@@ -53,14 +22,9 @@ const BloodColor _primaryColorLight = BloodColor(
   },
 );
 
-const BloodColor _primaryColorDark = BloodColor(
-  'PrimaryDark',
+const MaterialColor primaryColorDark = MaterialColor(
   _rawPrimary,
   {
-    10: Color(0xFFfbe9e9),
-    20: Color(0xFFf8d4d4),
-    30: Color(0xFFf5bfbf),
-    40: Color(0xFFf1aaaa),
     50: Color(0xFFee9595),
     100: Color(0xFFeb8080),
     200: Color(0xFFe76b6b),
@@ -74,79 +38,7 @@ const BloodColor _primaryColorDark = BloodColor(
   },
 );
 
-// --------------- Surface Color-----------------
 
-const BloodColor _surfaceColorLight = BloodColor(
-  'Surface Light',
-  _rawSurface,
-  {
-    5: Color(0xFFF4F4F4),
-    10: Color(0xFFe8e8e8),
-    20: Color(0xFFd1d1d1),
-    30: Color(0xFFbababa),
-    40: Color(0xFFa3a3a3),
-    50: Color(0xFF8c8c8c),
-    100: Color(0xFF757575),
-    200: Color(0xFF5e5e5e),
-    300: Color(0xFF474747),
-    400: Color(0xFF303030),
-    500: Color(_rawSurface),
-  },
-);
-
-const BloodColor _surfaceColorDark = BloodColor(
-  'Surface Dark',
-  _rawSurface,
-  {
-    5: Color(0xFFF4F4F4),
-    10: Color(0xFFe8e8e8),
-    20: Color(0xFFd1d1d1),
-    30: Color(0xFFbababa),
-    40: Color(0xFFa3a3a3),
-    50: Color(0xFF8c8c8c),
-    100: Color(0xFF757575),
-    200: Color(0xFF5e5e5e),
-    300: Color(0xFF474747),
-    400: Color(0xFF303030),
-    500: Color(_rawSurface),
-  },
-);
-
-class BloodColor extends MaterialColor {
-  // Just for debugging purpose.
-  final String tag;
-
-  const BloodColor(this.tag, int primary, Map<int, Color> swatch) : super(primary, swatch);
-
-  Color get shade5 => _color(5);
-  Color get shade10 => _color(10);
-  Color get shade20 => _color(20);
-  Color get shade30 => _color(30);
-  Color get shade40 => _color(40);
-  @override
-  Color get shade50 => _color(50);
-  @override
-  Color get shade100 => _color(100);
-  @override
-  Color get shade200 => _color(200);
-  @override
-  Color get shade300 => _color(300);
-  @override
-  Color get shade400 => _color(400);
-  @override
-  Color get shade600 => _color(600);
-  @override
-  Color get shade700 => _color(700);
-  @override
-  Color get shade800 => _color(800);
-  @override
-  Color get shade900 => _color(900);
-
-  Color _color(int shade) {
-    assert(this[shade] != null, 'Invalid shade:: $shade, on $tag');
-    return this[shade];
-  }
-}
 
 /*
 

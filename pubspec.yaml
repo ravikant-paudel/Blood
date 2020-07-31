@@ -18,7 +18,11 @@ dependencies:
   google_sign_in: ^4.5.1
   shimmer: ^1.1.1
   google_fonts: ^1.1.0
-  animations: ^1.1.1
+  shared_preferences: ^0.5.8
+  logger:
+    git: https://github.com/sarbagyastha/logger
+  pretty_dio_logger: ^1.1.1
+  connectivity: ^0.4.9
 
 dev_dependencies:
   flutter_test:

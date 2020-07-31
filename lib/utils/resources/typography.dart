@@ -12,7 +12,7 @@
 
 part  of 'theme.dart';
 
-TextTheme _bloodTextTheme = TextTheme(
+TextTheme bloodTextTheme = TextTheme(
   headline1: const TextStyle(
     fontSize: 96.0,
     height: 1.104,

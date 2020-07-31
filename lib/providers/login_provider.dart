@@ -1,4 +1,4 @@
-import 'package:blood/models/user.dart';
+import 'package:blood/models/user_model.dart';
 import 'package:blood/utils/failure.dart';
 import 'package:blood/utils/utilities.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -79,15 +79,14 @@ Future<FirebaseUser> signIn() async {
 Future<bool> authenticateUser(FirebaseUser user) async {
   final QuerySnapshot result = await _firestore.collection("users").where("email", isEqualTo: user.email).getDocuments();
   final List<DocumentSnapshot> docs = result.documents;
-
-  return docs.isEmpty ? true : false;
+  return docs.isEmpty;
 }
 
 Future<void> addDataToDb(FirebaseUser cUser) async {
   //user class
-  User user = User();
+  UserModel user = UserModel();
   final String userName = Utils.getUsername(cUser.email);
-  user = User(
+  user = UserModel(
     uid: cUser.uid,
     email: cUser.email,
     name: cUser.displayName,
