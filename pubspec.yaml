@@ -18,6 +18,7 @@ dependencies:
   google_sign_in: ^4.5.1
   shimmer: ^1.1.1
   google_fonts: ^1.1.0
+  animations: ^1.1.1
 
 dev_dependencies:
   flutter_test:

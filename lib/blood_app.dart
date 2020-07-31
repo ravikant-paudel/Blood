@@ -2,7 +2,6 @@ import 'package:blood/pages/login_page.dart';
 import 'package:blood/pages/main_page.dart';
 import 'package:blood/pages/splash_page.dart';
 import 'package:blood/providers/auth_provider.dart';
-import 'package:blood/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,8 +18,8 @@ class BloodApp extends StatelessWidget {
         primarySwatch: Colors.red,
         scaffoldBackgroundColor: Colors.white,
         iconTheme: IconThemeData(
-        color: Colors.black, //change your color here
-      ),
+          color: Colors.black, //change your color here
+        ),
       ),
       home: Consumer((context, read) {
         final authState = read(authProvider.state);

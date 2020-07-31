@@ -5,7 +5,10 @@ class RequestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: CustomAppBar(title :'Request'),
+    appBar: const CustomAppBar(title :'Request Blood'),
+      body: SingleChildScrollView(
+        child: Column(),
+      ),
     );
   }
 }

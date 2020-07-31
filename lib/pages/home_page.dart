@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                           color: currentTab == 0 ? Colors.red : Colors.grey,
                         ),
                         Text(
-                          'Home',
+                          'Dashboard',
                           style: TextStyle(
                             color: currentTab == 0 ? Colors.red : Colors.grey,
                           ),

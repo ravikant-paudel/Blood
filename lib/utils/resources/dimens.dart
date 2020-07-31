@@ -1,4 +1,4 @@
-// Copyright (c) 2020 The Khalti Authors. All rights reserved.
+// Copyright (c) 2020 The Blood Authors. All rights reserved.
 
 // Always Use camelCase for dimen resources, prefixed with 'd_'.
 
