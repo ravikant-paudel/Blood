@@ -29,31 +29,18 @@ class BloodTheme extends StateNotifier<ThemeData> {
   static final _darkTheme = ThemeData.from(
     colorScheme: ColorScheme.dark(
       primary: primaryColorDark,
-      background: Colors.black,
+//      background: Colors.black,
       secondary: Colors.black,
       onSecondary: Colors.white,
-//    onBackground: _primaryColorDark.shade10,
-//    primaryVariant: _primaryColorDark.shade700,
-//    onPrimary: _primaryColorDark.shade50,
-//    secondary: _primaryColorDark.shade200,
-//    secondaryVariant: _accentColorDark.shade200,
-//    error: _errorColor,
+
     ),
     textTheme: bloodTextTheme,
   );
 
   static final _lightTheme = ThemeData.from(
     colorScheme: const ColorScheme.light(
-      primary: primaryColorDark,
+      primary: primaryColorLight,
       secondary: Colors.white,
-      /*primarySwatch: Colors.teal,
-    primaryColor: Colors.teal[800],
-    indicatorColor: Colors.teal,
-    brightness: Brightness.light,
-    backgroundColor: const Color(0xFFE5E5E5),
-    accentColor: Colors.teal,
-    accentIconTheme: IconThemeData(color: Colors.tealAccent),
-    dividerColor: Colors.grey,*/
     ),
     textTheme: bloodTextTheme,
   );

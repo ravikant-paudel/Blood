@@ -3,9 +3,7 @@ import 'package:blood/pages/dashboard_page.dart';
 import 'package:blood/pages/donor_list_page.dart';
 import 'package:blood/pages/history_page.dart';
 import 'package:blood/pages/profile_page.dart';
-import 'package:blood/providers/login_provider.dart';
 import 'package:blood/utils/shortcuts.dart';
-import 'package:blood/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
- int currentTab = 0; // to keep track of active tab index
+  int currentTab = 0; // to keep track of active tab index
   final List<Widget> screens = [
     DashboardPage(),
     DonorListPage(),
@@ -35,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           navigator.push(Routes.requestPage);
         },
-        backgroundColor: UniversalVariables.primaryColor,
+        backgroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

@@ -4,7 +4,6 @@
  * Last modified on April 26, 2020 by ravikant
  */
 
-import 'package:blood/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -39,11 +38,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           centerTitle: centerTitle,
           title: Text(
             '$title',
+            style: Theme.of(context).textTheme.headline6.copyWith(fontStyle: FontStyle.italic),
           ),
         ),
         Divider(
           height: 0,
-          color: UniversalVariables.primaryColor,
+          color:Theme.of(context).primaryColor,
           thickness: 3,
         ),
       ],
