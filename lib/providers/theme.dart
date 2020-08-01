@@ -41,6 +41,7 @@ class BloodTheme extends StateNotifier<ThemeData> {
     colorScheme: const ColorScheme.light(
       primary: primaryColorLight,
       secondary: Colors.white,
+      onSecondary: Colors.white,
     ),
     textTheme: bloodTextTheme,
   );

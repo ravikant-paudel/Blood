@@ -23,6 +23,7 @@ dependencies:
     git: https://github.com/sarbagyastha/logger
   pretty_dio_logger: ^1.1.1
   connectivity: ^0.4.9
+  day_night_switch: ^0.0.2+1
 
 dev_dependencies:
   flutter_test:

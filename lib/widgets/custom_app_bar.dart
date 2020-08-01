@@ -43,7 +43,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         Divider(
           height: 0,
-          color:Theme.of(context).primaryColor,
+          color:Color(0xFFDE2C2C),
+//          color:Theme.of(context).primaryColor,
           thickness: 3,
         ),
       ],
