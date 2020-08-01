@@ -2,6 +2,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:blood/helper/router/router.gr.dart';
+import 'package:blood/providers/login_provider.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {

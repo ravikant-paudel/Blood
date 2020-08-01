@@ -8,7 +8,9 @@ class DashboardPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: 'Dashboard',
       ),
-      body: Container(),
+      body: Container(
+
+      ),
     );
   }
 }

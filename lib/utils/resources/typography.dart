@@ -10,7 +10,9 @@
 // 800: ExtraBold
 // 900: Black
 
-part  of 'theme.dart';
+
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 TextTheme bloodTextTheme = TextTheme(
   headline1: const TextStyle(

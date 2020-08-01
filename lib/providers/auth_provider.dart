@@ -1,19 +1,23 @@
+import 'package:blood/providers/theme.dart';
 import 'package:blood/utils/locator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final StateNotifierProvider<AuthProvider> authProvider = StateNotifierProvider((_) => AuthProvider());
+final StateNotifierProvider<AuthProvider> authProvider = StateNotifierProvider((ref) => AuthProvider(ref));
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 GoogleSignIn _googleSignIn = GoogleSignIn();
 
 class AuthProvider extends StateNotifier<AuthState> {
-  AuthProvider() : super(AuthState.isInitial);
+  final ProviderReference ref;
+
+  AuthProvider(this.ref) : super(AuthState.isInitial);
 
   Future<void> appStarted() async {
     await LocatorB.init();
+    ref.read(themeProvider).init();
     final FirebaseUser currentUser = await _auth.currentUser();
     if (currentUser != null) {
       state = AuthState.isAuthenticated;
@@ -29,6 +33,4 @@ class AuthProvider extends StateNotifier<AuthState> {
   }
 }
 
-enum AuthState{
-  isInitial, isAuthenticated, isUnAuthenticated
-}
+enum AuthState { isInitial, isAuthenticated, isUnAuthenticated }

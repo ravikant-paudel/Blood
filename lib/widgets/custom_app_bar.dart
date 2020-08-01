@@ -32,21 +32,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Column(
       children: <Widget>[
         AppBar(
-//    backgroundColor: context.color.accent,
-          backgroundColor: Colors.white,
-          elevation: elevation,
+          backgroundColor: Theme.of(context).accentColor,
+          elevation: 0,
           leading: leading,
           actions: actions,
           centerTitle: centerTitle,
-          iconTheme: IconThemeData(
-            color: Colors.black, //modify arrow color from here..
-          ),
           title: Text(
             '$title',
-            style: TextStyle(color: UniversalVariables.primaryBlack),
           ),
         ),
         Divider(
+          height: 0,
           color: UniversalVariables.primaryColor,
           thickness: 3,
         ),

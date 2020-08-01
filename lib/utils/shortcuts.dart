@@ -2,6 +2,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:blood/utils/locator.dart';
+import 'package:blood/utils/preference_util.dart';
 
 enum Developer {  ravi }
 
@@ -14,9 +15,9 @@ enum Developer {  ravi }
 /// Shortcut for [ExtendedNavigator].
 ExtendedNavigatorState get navigator => ExtendedNavigator.named('mainRouter');
 
-///// Shortcut for [PreferenceUtil].
-//PreferenceUtil get preference => Locator().preference;
-//
+/// Shortcut for [PreferenceUtil].
+PreferenceUtil get preference => LocatorB().preference;
+
 /// Info Logger
 void logThis(dynamic message, {Developer developer}) => LocatorB().logger.i(
       message,

@@ -1,6 +1,7 @@
 // Copyright (c) 2020 The Blood Authors. All rights reserved.
 
-part  of 'theme.dart';
+
+import 'package:flutter/material.dart';
 
 const int _rawPrimary = 0xFFDE2C2C;
 
