@@ -23,7 +23,7 @@ class DonorListPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
-                  decoration: BoxDecoration(color: Colors.red[100], shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
                   height: 80,
                   width: 80,
                   child: const Center(
@@ -31,7 +31,7 @@ class DonorListPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(color: Colors.red[100], shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
                   height: 80,
                   width: 80,
                   child: const Center(
@@ -45,7 +45,7 @@ class DonorListPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
-                  decoration: BoxDecoration(color: Colors.red[100], shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
                   height: 80,
                   width: 80,
                   child: const Center(
@@ -53,7 +53,7 @@ class DonorListPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(color: Colors.red[100], shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
                   height: 80,
                   width: 80,
                   child: const Center(
@@ -67,7 +67,7 @@ class DonorListPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
-                  decoration: BoxDecoration(color: Colors.red[100], shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
                   height: 80,
                   width: 80,
                   child: const Center(
@@ -75,7 +75,7 @@ class DonorListPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(color: Colors.red[100], shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
                   height: 80,
                   width: 80,
                   child: const Center(
@@ -89,7 +89,7 @@ class DonorListPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
-                  decoration: BoxDecoration(color: Colors.red[100], shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
                   height: 80,
                   width: 80,
                   child: const Center(
@@ -97,7 +97,7 @@ class DonorListPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(color: Colors.red[100], shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
                   height: 80,
                   width: 80,
                   child: const Center(

@@ -1,4 +1,4 @@
-import 'package:blood/providers/theme.dart';
+import 'package:blood/providers/theme_provider.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:day_night_switch/day_night_switch.dart';
 import 'package:flutter/material.dart';

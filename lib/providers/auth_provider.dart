@@ -1,4 +1,4 @@
-import 'package:blood/providers/theme.dart';
+import 'package:blood/providers/theme_provider.dart';
 import 'package:blood/utils/locator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
