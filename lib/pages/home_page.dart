@@ -1,6 +1,6 @@
 import 'package:blood/helper/router/router.gr.dart';
 import 'package:blood/pages/dashboard_page.dart';
-import 'package:blood/pages/donor_list_page.dart';
+import 'package:blood/pages/donor_page.dart';
 import 'package:blood/pages/history_page.dart';
 import 'package:blood/pages/profile_page.dart';
 import 'package:blood/utils/shortcuts.dart';
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
  int currentTab = 0; // to keep track of active tab index
   final List<Widget> screens = [
     DashboardPage(),
-    DonorListPage(),
+    DonorPage(),
     HistoryPage(),
     ProfilePage(),
   ]; // to store nested tabs
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () {
 //                        homePro.updateScreen(1);
                         setState(() {
-                          currentScreen = DonorListPage(); // if user taps on this dashboard tab will be active
+                          currentScreen = DonorPage(); // if user taps on this dashboard tab will be active
                           currentTab = 1;
                         });
                       },

@@ -1,4 +1,4 @@
-import 'package:blood/utils/resources/dimens.dart';
+import 'package:blood/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 enum _BloodButtonType {
@@ -6,6 +6,7 @@ enum _BloodButtonType {
   secondary,
   outline,
   flat,
+  text,
 }
 
 class BloodButton extends StatelessWidget {
@@ -15,18 +16,19 @@ class BloodButton extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final bool autoUnFocus;
   final Widget icon;
-  final Size minSize;
-  final bool capitalize;
+
+//  final double height;
+  final double minWidth;
 
   const BloodButton({
     Key key,
     @required this.buttonText,
     @required this.onPressed,
-    this.padding = EdgeInsets.zero,
+    this.padding = const EdgeInsets.symmetric(vertical: 14.0),
     this.autoUnFocus = true,
     this.icon,
-    this.minSize = const Size(double.maxFinite, d_buttonHeight),
-    this.capitalize = true,
+//    this.height = d_buttonHeight,
+    this.minWidth = double.infinity,
   })  : _buttonType = _BloodButtonType.primary,
         super(key: key);
 
@@ -34,11 +36,11 @@ class BloodButton extends StatelessWidget {
     Key key,
     @required this.buttonText,
     @required this.onPressed,
-    this.padding = EdgeInsets.zero,
+    this.padding = const EdgeInsets.symmetric(vertical: 14.0),
     this.autoUnFocus = true,
     this.icon,
-    this.minSize = const Size(double.maxFinite, d_buttonHeight),
-    this.capitalize = true,
+//    this.height = d_buttonHeight,
+    this.minWidth = double.infinity,
   })  : _buttonType = _BloodButtonType.secondary,
         super(key: key);
 
@@ -46,11 +48,11 @@ class BloodButton extends StatelessWidget {
     Key key,
     @required this.buttonText,
     @required this.onPressed,
-    this.padding = EdgeInsets.zero,
+    this.padding = const EdgeInsets.symmetric(vertical: 14.0),
     this.autoUnFocus = true,
     this.icon,
-    this.minSize = const Size(double.maxFinite, d_buttonHeight),
-    this.capitalize = true,
+//    this.height = d_buttonHeight,
+    this.minWidth = double.infinity,
   })  : _buttonType = _BloodButtonType.outline,
         super(key: key);
 
@@ -58,93 +60,88 @@ class BloodButton extends StatelessWidget {
     Key key,
     @required this.buttonText,
     @required this.onPressed,
-    this.padding = EdgeInsets.zero,
+    this.padding = const EdgeInsets.symmetric(vertical: 14.0),
     this.autoUnFocus = true,
     this.icon,
-    this.minSize = const Size(double.maxFinite, d_buttonHeight),
-    this.capitalize = true,
+//    this.height = d_buttonHeight,
+    this.minWidth = double.infinity,
   })  : _buttonType = _BloodButtonType.flat,
+        super(key: key);
+
+  const BloodButton.text({
+    Key key,
+    @required this.buttonText,
+    @required this.onPressed,
+    this.padding = EdgeInsets.zero,
+    this.autoUnFocus = false,
+    this.icon,
+//    this.height = d_buttonHeight,
+    this.minWidth = double.infinity,
+  })  : _buttonType = _BloodButtonType.text,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _text = capitalize ? buttonText.toUpperCase() : buttonText;
-    const textStyle = TextStyle(
-      fontSize: 16 ,
-      height: 1.5,
+    final child = BloodText(buttonText,
+        style: Theme.of(context).textTheme.button.copyWith(
+              color: Colors.white,
+            ));
+    final shape = RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(80),
     );
-   /* final textStyle = context.textTheme.button.copyWith(
-      fontSize: 16.sp,
-      height: 1.5,
-    );*/
-    final child = Text(
-      _text,
-//      style: context.textTheme.button.copyWith(color: context.color.primary),
-    );
-    final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(d_buttonRadius));
-    return Builder(
-      builder: (context) {
-        switch (_buttonType) {
-          case _BloodButtonType.primary:
-            return ElevatedButton(
-              onPressed: onPressed == null ? null : () => _onPressed(context),
-              style: ElevatedButton.styleFrom(
-                textStyle: textStyle,
-                onPrimary: Colors.white,
+    return ButtonTheme(
+//      height: height,
+      minWidth: minWidth,
+      padding: padding,
+      child: Builder(
+        builder: (context) {
+          switch (_buttonType) {
+            case _BloodButtonType.primary:
+              return MaterialButton(
+                onPressed: () => _onPressed(context),
+                textColor: Colors.white,
+                color: Theme.of(context).primaryColor,
                 shape: shape,
-                primary: Colors.red,
-//                primary: context.color.primary,
-//                shadowColor: context.color.surface.withOpacity(0.24),
-                padding: padding,
-                minimumSize: minSize,
-              ),
-              child: Text(_text),
-            );
-          case _BloodButtonType.secondary:
-            return ElevatedButton(
-              onPressed: onPressed == null ? null : () => _onPressed(context),
-              style: ElevatedButton.styleFrom(
-                textStyle: textStyle,
-                onPrimary: Colors.red ,
-                primary:  Colors.red ,
-//                onPrimary: context.color.surface.shade100,
-//                primary: context.color.surface.shade10,
+                child: BloodText(buttonText),
+              );
+            case _BloodButtonType.secondary:
+              return MaterialButton(
+                onPressed: () => _onPressed(context),
+                textColor: Colors.white,
+                color: Theme.of(context).primaryColor,
                 shape: shape,
-//                shadowColor: context.color.surface.withOpacity(0.24),
-                padding: padding,
-                minimumSize: minSize,
-              ),
-              child: Text(_text),
-            );
-          case _BloodButtonType.outline:
-            return OutlinedButton(
-              onPressed: onPressed == null ? null : () => _onPressed(context),
-              style: OutlinedButton.styleFrom(
-//                textStyle: textStyle.copyWith(color: context.color.primary),
-                side: BorderSide(color: Colors.red),
-//                side: BorderSide(color: context.color.primary),
+                child: BloodText(buttonText),
+              );
+            case _BloodButtonType.outline:
+              return OutlineButton(
+                onPressed: () => _onPressed(context),
+                borderSide: BorderSide(color: Colors.white),
                 shape: shape,
-                padding: padding,
-                minimumSize: minSize,
-              ),
-              child: child,
-            );
-          case _BloodButtonType.flat:
-            return TextButtonTheme(
-              data: TextButtonThemeData(
-                style: TextButton.styleFrom(
-//                  textStyle: context.textTheme.button.copyWith(color: context.color.primary),
+                child: child,
+              );
+            case _BloodButtonType.flat:
+              return icon == null
+                  ? FlatButton(
+                      onPressed: () => _onPressed(context),
+                      child: child,
+                    )
+                  : FlatButton.icon(
+                      onPressed: () => _onPressed(context),
+                      icon: icon,
+                      label: child,
+                    );
+            case _BloodButtonType.text:
+              return GestureDetector(
+                onTap: () => _onPressed(context),
+                child: Padding(
                   padding: padding,
-                  minimumSize: minSize,
+                  child: child,
                 ),
-              ),
-              child: icon == null
-                  ? TextButton(onPressed: onPressed == null ? null : () => _onPressed(context), child: child)
-                  : TextButton.icon(onPressed: onPressed == null ? null : () => _onPressed(context), icon: icon, label: child),
-            );
-        }
-        return const SizedBox();
-      },
+              );
+          }
+          return const SizedBox();
+        },
+      ),
     );
   }
 
@@ -163,24 +160,6 @@ class BloodAction extends StatelessWidget {
     @required this.onPressed,
     @required this.text,
   }) : super(key: key);
-
-  const BloodAction.ok({
-    Key key,
-    @required this.onPressed,
-  })  : text = 's_ok',
-        super(key: key);
-
-  const BloodAction.goBack({
-    Key key,
-    @required this.onPressed,
-  })  : text = 's_goBack',
-        super(key: key);
-
-  const BloodAction.cancel({
-    Key key,
-    @required this.onPressed,
-  })  : text = 's_cancel',
-        super(key: key);
 
   @override
   Widget build(BuildContext context) {

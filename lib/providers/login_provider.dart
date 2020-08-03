@@ -1,5 +1,7 @@
 import 'package:blood/models/user_model.dart';
 import 'package:blood/utils/failure.dart';
+import 'package:blood/utils/preference_util.dart';
+import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/utils/utilities.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,6 +20,7 @@ class LoginProvider extends StateNotifier<LoginState> {
       signIn().then((FirebaseUser user) {
         if (user != null) {
           authenticateUser(user).then((isNewUser) {
+            preference.set(PreferenceKey.USER_ID, user.uid);
             if (isNewUser) {
               addDataToDb(user).then((value) {
                 state = state.copyWith(isLoading: false, isLoaded: true);

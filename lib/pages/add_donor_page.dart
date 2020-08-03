@@ -31,7 +31,7 @@ class AddDonorPage extends StatelessWidget {
                   children: <Widget>[
                     TextFormField(
                         onChanged: addDProvider.updateName,
-                        validator: (value) => RegExp(r'\w{10,}').hasMatch(value) ? null : 'At least 10 character',
+                        validator: (value) => RegExp(r'\w{6,}').hasMatch(value) ? null : 'At least 6 character',
                         decoration: const InputDecoration(
                           hintText: 'Donor name',
                         )),

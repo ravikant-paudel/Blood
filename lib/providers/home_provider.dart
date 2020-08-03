@@ -1,5 +1,5 @@
 import 'package:blood/pages/dashboard_page.dart';
-import 'package:blood/pages/donor_list_page.dart';
+import 'package:blood/pages/donor_page.dart';
 import 'package:blood/pages/history_page.dart';
 import 'package:blood/pages/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class HomeProvider extends StateNotifier<HomeState> {
       case 0:
         return DashboardPage();
       case 1:
-        return DonorListPage();
+        return DonorPage();
       case 2:
         return HistoryPage();
       case 3:
