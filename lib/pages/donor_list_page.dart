@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DonorListPage extends StatelessWidget {
   final String bloodGroup;
+
   const DonorListPage(this.bloodGroup);
 
   @override
@@ -30,26 +31,26 @@ class DonorListPage extends StatelessWidget {
               child: BloodText('No donor found'),
             );
           }
-          return ListView(padding: const EdgeInsets.symmetric(vertical: 16), children: [
+          return ListView(children: [
             ListView.builder(
                 shrinkWrap: true,
                 itemCount: donors.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Column(
-                          children: <Widget>[
-                            BloodText(
-                              donors[index].donorName.toString(),
-                            ),
-                            BloodText(
-                              donors[index].donorNumber.toString(),
-                            ),
-                          ],
+                  return InkWell(
+                    onTap: () {},
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          title: BloodText(
+                            donors[index].donorName.toString(),
+                          ),
+                          subtitle: BloodText(
+                            donors[index].donorNumber.toString(),
+                          ),
                         ),
-                      ));
+                      ],
+                    ),
+                  );
                 })
           ]);
         }));

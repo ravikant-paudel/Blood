@@ -20,67 +20,65 @@ class AddDonorPage extends StatelessWidget {
       appBar: const CustomAppBar(
         title: 'AddDonorPage',
       ),
-      body: Consumer((context, read){
-        var state = read(addDonorProvider.state);
-        if (state.isLoading) {
+      body: Consumer((context, read) {
+        var addDonorState = read(addDonorProvider.state);
+        if (addDonorState.isLoading) {
           return Center(child: CircularProgressIndicator());
-        } if (state.isSuccess) {
+        }
+        if (addDonorState.isSuccess) {
           navigator.pop(context);
         }
         return ListView(
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Consumer((context, read) {
-                final addDonorState = read(addDonorProvider.state);
-                return Form(
-                  key: formKey,
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                          onChanged: addDProvider.updateName,
-                          validator: (value) => RegExp(r'\w{6,}').hasMatch(value) ? null : 'At least 6 character',
-                          decoration: const InputDecoration(
-                            hintText: 'Donor name',
-                          )),
-                      const VerticalGap(),
-                      TextFormField(
-                          onChanged: addDProvider.updateNumber,
-                          validator: (value) => value.isNotEmpty ? null : 'error',
-                          style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 16),
-                          keyboardType: TextInputType.phone,
-                          decoration: const InputDecoration(
-                            hintText: 'Donor Number',
-                          )),
-                      const VerticalGap(),
-                      DropdownButtonFormField<String>(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                        onChanged: addDProvider.updateName,
+                        validator: (value) => RegExp(r'\w{6,}').hasMatch(value) ? null : 'At least 6 character',
+                        decoration: const InputDecoration(
+                          hintText: 'Donor name',
+                        )),
+                    const VerticalGap(),
+                    TextFormField(
+                        onChanged: addDProvider.updateNumber,
                         validator: (value) => value.isNotEmpty ? null : 'error',
-                        isExpanded: true,
+                        style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 16),
+                        keyboardType: TextInputType.phone,
+                        decoration: const InputDecoration(
+                          hintText: 'Donor Number',
+                        )),
+                    const VerticalGap(),
+                    DropdownButtonFormField<String>(
+                      validator: (value) => value == null ? 'Please select blood group' : null,
+                      isExpanded: true,
 //              isDense: true,
-                        hint: const Text('-- Select Group --'),
-                        items: _dropdownItems.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        value: addDonorState.bloodDonor,
-                        onChanged: addDProvider.updateBloodGroup,
-                      ),
-                      const VerticalGap(d_margin6),
-                      BloodButton(
-                        buttonText: 'Add Donor',
-                        onPressed: () {
-                          if (formKey.currentState.validate()) {
-                            //call provider
-                            addDProvider.submitDonorName();
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              }),
+                      hint: const Text('-- Select Group --'),
+                      items: _dropdownItems.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      value: addDonorState.bloodDonor,
+                      onChanged: addDProvider.updateBloodGroup,
+                    ),
+                    const VerticalGap(d_margin6),
+                    BloodButton(
+                      buttonText: 'Add Donor',
+                      onPressed: () {
+                        if (formKey.currentState.validate()) {
+                          //call provider
+                          addDProvider.submitDonorName();
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         );

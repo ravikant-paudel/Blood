@@ -2,15 +2,15 @@ class AddDonorModel {
   String donorName;
   String donorNumber;
   String donorBloodGroup;
-  String addedBy;
-  int timestamp;
+  String submittedBy;
+  int createdAt;
 
   AddDonorModel({
     this.donorName,
     this.donorNumber,
     this.donorBloodGroup,
-    this.addedBy,
-    this.timestamp,
+    this.submittedBy,
+    this.createdAt,
   });
 
   Map<String, dynamic> toMap(AddDonorModel user) {
@@ -19,8 +19,8 @@ class AddDonorModel {
     data['donorName'] = user.donorName;
     data['donorNumber'] = user.donorNumber;
     data['donorBloodGroup'] = user.donorBloodGroup;
-    data['addedBy'] = user.addedBy;
-    data['timestamp'] = user.timestamp;
+    data['submittedBy'] = user.submittedBy;
+    data['createdAt'] = user.createdAt;
     return data;
   }
 
@@ -29,8 +29,8 @@ class AddDonorModel {
     donorName = mapData['donorName'] as String;
     donorNumber = mapData['donorNumber'] as String;
     donorBloodGroup = mapData['donorBloodGroup'] as String;
-    addedBy = mapData['addedBy'] as String;
-    timestamp = mapData['timestamp'] as int;
+    submittedBy = mapData['submittedBy'] as String;
+    createdAt = mapData['createdAt'] as int;
   }
 
 }

@@ -8,7 +8,7 @@ import 'package:state_notifier/state_notifier.dart';
 final StateNotifierProvider<AddDonorProvider> addDonorProvider = StateNotifierProvider((_) => AddDonorProvider());
 
 class AddDonorProvider extends StateNotifier<AddDonorState> {
-  AddDonorProvider() : super(AddDonorState(isLoading: false, isSuccess : false));
+  AddDonorProvider() : super(AddDonorState(isLoading: false, isSuccess: false));
 
   void submitDonorName() {
     state = state.copyWith(isLoading: true);
@@ -42,16 +42,17 @@ class AddDonorState {
     this.bloodDonor,
   });
 
-  AddDonorState copyWith({bool isLoading ,bool isSuccess ,String nameDonor, String numberDonor, String bloodDonor}) => AddDonorState(
+  AddDonorState copyWith({bool isLoading, bool isSuccess, String nameDonor, String numberDonor, String bloodDonor}) => AddDonorState(
         isLoading: isLoading ?? this.isLoading,
-    isSuccess: isSuccess ?? this.isSuccess,
+        isSuccess: isSuccess ?? this.isSuccess,
         nameDonor: nameDonor ?? this.nameDonor,
         numberDonor: numberDonor ?? this.numberDonor,
         bloodDonor: bloodDonor ?? this.bloodDonor,
       );
 
   @override
-  String toString() => 'AddDonorState(isLoading: $isLoading,isSuccess: $isSuccess, nameDonor: $nameDonor,numberDonor: $numberDonor,bloodDonor: $bloodDonor)';
+  String toString() =>
+      'AddDonorState(isLoading: $isLoading,isSuccess: $isSuccess, nameDonor: $nameDonor,numberDonor: $numberDonor,bloodDonor: $bloodDonor)';
 }
 
 final Firestore _firestore = Firestore.instance;
@@ -64,8 +65,8 @@ Future<void> addDataToDb(AddDonorState state) async {
       donorName: state.nameDonor,
       donorNumber: state.numberDonor,
       donorBloodGroup: state.bloodDonor,
-      addedBy: uId,
-      timestamp: DateTime.now().toUtc().millisecondsSinceEpoch);
+      submittedBy: uId,
+      createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
 
   _firestore.collection("donors").add(addDonor.toMap(addDonor));
 }
