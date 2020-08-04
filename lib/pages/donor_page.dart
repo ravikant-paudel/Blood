@@ -13,7 +13,7 @@ class DonorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
-        title: 'Donor List',
+        title: 'Donors',
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
@@ -24,8 +24,7 @@ class DonorPage extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-//navigator.push(Routes.)
-                    logThis('message presse A+ ');
+                    navigator.push(Routes.donorListPage);
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
