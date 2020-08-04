@@ -24,7 +24,7 @@ class DonorPage extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    navigator.push(Routes.donorListPage);
+                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'A+'));
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
@@ -35,12 +35,17 @@ class DonorPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
-                  height: 80,
-                  width: 80,
-                  child: const Center(
-                    child: BloodText('A-', style: TextStyle(fontSize: 28)),
+                InkWell(
+                  onTap: () {
+                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'A-'));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
+                    height: 80,
+                    width: 80,
+                    child: const Center(
+                      child: BloodText('A-', style: TextStyle(fontSize: 28)),
+                    ),
                   ),
                 ),
               ],
@@ -49,42 +54,30 @@ class DonorPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
-                  height: 80,
-                  width: 80,
-                  child: const Center(
-                    child: BloodText('B+', style: TextStyle(fontSize: 28)),
+                InkWell(
+                  onTap: () {
+                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'B+'));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
+                    height: 80,
+                    width: 80,
+                    child: const Center(
+                      child: BloodText('B+', style: TextStyle(fontSize: 28)),
+                    ),
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
-                  height: 80,
-                  width: 80,
-                  child: const Center(
-                    child: BloodText('B-', style: TextStyle(fontSize: 28)),
-                  ),
-                ),
-              ],
-            ),
-            const VerticalGap(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
-                  height: 80,
-                  width: 80,
-                  child: const Center(
-                    child: BloodText('AB+', style: TextStyle(fontSize: 28)),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
-                  height: 80,
-                  width: 80,
-                  child: const Center(
-                    child: BloodText('AB-', style: TextStyle(fontSize: 28)),
+                InkWell(
+                  onTap: () {
+                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'B-'));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
+                    height: 80,
+                    width: 80,
+                    child: const Center(
+                      child: BloodText('B-', style: TextStyle(fontSize: 28)),
+                    ),
                   ),
                 ),
               ],
@@ -93,20 +86,62 @@ class DonorPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
-                  height: 80,
-                  width: 80,
-                  child: const Center(
-                    child: BloodText('O+', style: TextStyle(fontSize: 28)),
+                InkWell(
+                  onTap: () {
+                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'AB+'));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
+                    height: 80,
+                    width: 80,
+                    child: const Center(
+                      child: BloodText('AB+', style: TextStyle(fontSize: 28)),
+                    ),
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
-                  height: 80,
-                  width: 80,
-                  child: const Center(
-                    child: BloodText('O-', style: TextStyle(fontSize: 28)),
+                InkWell(
+                  onTap: () {
+                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'AB-'));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
+                    height: 80,
+                    width: 80,
+                    child: const Center(
+                      child: BloodText('AB-', style: TextStyle(fontSize: 28)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const VerticalGap(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                InkWell(
+                  onTap: () {
+                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'O+'));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
+                    height: 80,
+                    width: 80,
+                    child: const Center(
+                      child: BloodText('O+', style: TextStyle(fontSize: 28)),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'O-'));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
+                    height: 80,
+                    width: 80,
+                    child: const Center(
+                      child: BloodText('O-', style: TextStyle(fontSize: 28)),
+                    ),
                   ),
                 ),
               ],

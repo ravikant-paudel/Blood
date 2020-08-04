@@ -2,6 +2,7 @@ import 'package:blood/component/button.dart';
 import 'package:blood/component/gaps.dart';
 import 'package:blood/providers/add_donor_provider.dart';
 import 'package:blood/utils/resources/dimens.dart';
+import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +22,11 @@ class AddDonorPage extends StatelessWidget {
       ),
       body: Consumer((context, read){
         var state = read(addDonorProvider.state);
+        if (state.isLoading) {
+          return Center(child: CircularProgressIndicator());
+        } if (state.isSuccess) {
+          navigator.pop(context);
+        }
         return ListView(
           children: [
             Padding(

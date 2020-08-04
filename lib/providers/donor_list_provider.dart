@@ -9,7 +9,7 @@ import 'package:state_notifier/state_notifier.dart';
 final StateNotifierProvider<DonorListProvider> donorListProvider = StateNotifierProvider((_) => DonorListProvider());
 
 class DonorListProvider extends StateNotifier<DonorListState> {
-  DonorListProvider() : super(DonorListState(isLoading: false, donors: []));
+  DonorListProvider() : super(DonorListState(isLoading: true, donors: []));
 
   Future<void> obtainDb(String bloodGroup) async{
     state = state.copyWith(isLoading: true);
@@ -43,7 +43,9 @@ Future<List<AddDonorModel>> obtainDataFrmDb(String bloodGroup) async {
 
   HashMap<String, AddDonorModel> eventsHashMap = new HashMap<String, AddDonorModel>();
 
+  logThis('eventsQuery.documents ======>>>>> ' +eventsQuery.documents.length.toString());
   eventsQuery.documents.forEach((document) {
+
     eventsHashMap.putIfAbsent(
       document['id'],
       () => new AddDonorModel(
@@ -53,6 +55,5 @@ Future<List<AddDonorModel>> obtainDataFrmDb(String bloodGroup) async {
     );
   });
   logThis('The valu is thisss ======>>>>> ' + eventsHashMap.values.toList().length.toString());
-  logThis('The valu is thisss ======>>>>> ' + eventsHashMap.values.toList().toString());
   return eventsHashMap.values.toList();
 }

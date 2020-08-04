@@ -6,10 +6,13 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DonorListPage extends StatelessWidget {
+  final String bloodGroup;
+  const DonorListPage(this.bloodGroup);
+
   @override
   Widget build(BuildContext context) {
     onReady((_) {
-      donorListProvider.read(context).obtainDb('B-');
+      donorListProvider.read(context).obtainDb(bloodGroup);
     });
     return Scaffold(
         appBar: CustomAppBar(
