@@ -1,7 +1,4 @@
-import 'dart:collection';
-
 import 'package:blood/models/add_donor_model.dart';
-import 'package:blood/utils/shortcuts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -11,7 +8,7 @@ final StateNotifierProvider<DonorListProvider> donorListProvider = StateNotifier
 class DonorListProvider extends StateNotifier<DonorListState> {
   DonorListProvider() : super(DonorListState(isLoading: true, donors: []));
 
-  Future<void> obtainDb(String bloodGroup) async{
+  Future<void> obtainDb(String bloodGroup) async {
     state = state.copyWith(isLoading: true);
     final _donors = await obtainDataFrmDb(bloodGroup);
     state = state.copyWith(isLoading: false, donors: _donors);
@@ -36,24 +33,18 @@ class DonorListState {
   String toString() => 'DonorListState(isLoading: $isLoading,donors: $donors)';
 }
 
-final Firestore _firestore = Firestore.instance;
-
 Future<List<AddDonorModel>> obtainDataFrmDb(String bloodGroup) async {
-  QuerySnapshot eventsQuery = await _firestore.collection("donors").where('donorBloodGroup', isEqualTo: bloodGroup).getDocuments();
+  QuerySnapshot snapshot = await Firestore.instance
+      .collection('donors')
+      .where('donorBloodGroup', isEqualTo: bloodGroup)
+//      .orderBy("createdAt", descending: true)
+      .getDocuments();
 
-  HashMap<String, AddDonorModel> eventsHashMap = new HashMap<String, AddDonorModel>();
+  List<AddDonorModel> _donorList = [];
 
-  logThis('eventsQuery.documents ======>>>>> ' +eventsQuery.documents.length.toString());
-  eventsQuery.documents.forEach((document) {
-
-    eventsHashMap.putIfAbsent(
-      document['id'],
-      () => new AddDonorModel(
-        donorName: document['donorName'],
-        donorNumber: document['donorNumber'],
-      ),
-    );
+  snapshot.documents.forEach((document) {
+    AddDonorModel food = AddDonorModel.fromMap(document.data);
+    _donorList.add(food);
   });
-  logThis('The valu is thisss ======>>>>> ' + eventsHashMap.values.toList().length.toString());
-  return eventsHashMap.values.toList();
+  return _donorList;
 }

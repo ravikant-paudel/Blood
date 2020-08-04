@@ -44,5 +44,7 @@ class BloodTheme extends StateNotifier<ThemeData> {
       onSecondary: Colors.white,
     ),
     textTheme: bloodTextTheme,
+  ).copyWith(
+    scaffoldBackgroundColor: const Color(0xFFE4E4E4),
   );
 }
