@@ -12,8 +12,6 @@ import 'package:state_notifier/state_notifier.dart';
 
 final StateNotifierProvider<BloodTheme> themeProvider = StateNotifierProvider((_) => BloodTheme());
 
-//final FutureProvider<SharedPreferences> preferenceProvider = FutureProvider((ref) => SharedPreferences.getInstance());
-
 class BloodTheme extends StateNotifier<ThemeData> {
   BloodTheme() : super(_lightTheme);
 
@@ -32,7 +30,6 @@ class BloodTheme extends StateNotifier<ThemeData> {
 //      background: Colors.black,
       secondary: Colors.black,
       onSecondary: Colors.white,
-
     ),
     textTheme: bloodTextTheme,
   );
@@ -46,5 +43,6 @@ class BloodTheme extends StateNotifier<ThemeData> {
     textTheme: bloodTextTheme,
   ).copyWith(
     scaffoldBackgroundColor: const Color(0xFFE4E4E4),
+    indicatorColor: Colors.black,
   );
 }

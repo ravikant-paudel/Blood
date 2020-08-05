@@ -4,6 +4,8 @@
  * Last modified on April 26, 2020 by ravikant
  */
 
+import 'package:blood/utils/preference_util.dart';
+import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -39,6 +41,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           title: Text(
             '$title',
             style: Theme.of(context).textTheme.headline6.copyWith(fontStyle: FontStyle.italic),
+          ),
+          iconTheme: IconThemeData(
+            color:  preference.get(PreferenceKey.THEME_MODE) ? Colors.white : Colors.black,
           ),
         ),
         Divider(

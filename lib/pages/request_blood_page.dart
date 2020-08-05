@@ -10,7 +10,11 @@ import 'package:flutter_riverpod/src/framework.dart';
 
 class RequestBloodPage extends StatelessWidget {
   final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
-  final List<String> _dropdownDistrict = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
+  final List<String> _dropdownDistrict = ['Achham', 'Arghakhanchi', 'Baglung', 'Baitadi','Bajhang','Bajura','Banke','Bara','Bardiya','Bhaktapur',
+  'Bhojpur','Chitwan','Dadeldhura','Dailekh','Dang Deukhuri','Darchula','Dhading','Dhankuta','Dhanusha','Dolakha','Dolpa','Doti','Gorkha','Gulmi','Humla',
+  'Ilam','Jajarkot','Jhapa','Jumla','Kailali','Kalikot','Kanchanpur','Kapilvastu','Kaski','Kathmandu','Kavrepalanchok','Khotang','Lalitpur','Lamjung',
+  'Mahottari','Makwanpur','Manang','Morang', 'Mugu','Mustang','Myagdi','Nawalparasi','Nuwakot','Okhaldhunga','Palpa','Panchthar','Parbat','Parsa','Pyuthan',
+  'Ramechhap'];
 
   final GlobalKey<FormState> requestFormKey = GlobalKey();
 
@@ -45,8 +49,7 @@ class RequestBloodPage extends StatelessWidget {
                         )),
                     const VerticalGap(),
                     DropdownButtonFormField<String>(
-                      validator: (value) => value == null
-                          ? 'Please select blood group': null,
+                      validator: (value) => value == null ? 'Please select blood group' : null,
                       isExpanded: true,
                       hint: const Text('-- Select Group --'),
                       items: _dropdownItems.map((String value) {
@@ -83,8 +86,7 @@ class RequestBloodPage extends StatelessWidget {
                         )),
                     const VerticalGap(),
                     DropdownButtonFormField<String>(
-                      validator: (value) => value == null
-                          ? 'Please select district': null,
+                      validator: (value) => value == null ? 'Please select district' : null,
                       isExpanded: true,
                       hint: const Text('-- Select District --'),
                       items: _dropdownDistrict.map((String value) {
