@@ -29,17 +29,18 @@ class _HomePageState extends State<HomePage> {
 ////        homeProvider.read(context);
 //      final homePro = homeProvider.readOwner(ProviderStateOwnerScope.of(context, listen: false));
       return Scaffold(
-        body: PageStorage(
+        body: screens[currentTab],
+        /*body: PageStorage(
           bucket: bucket,
 //          child: homePro.updateScreen(homeState.currentTab),
         child: currentScreen,
-        ),
+        ),*/
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             navigator.push(Routes.requestBloodPage);
           },
           backgroundColor: Theme.of(context).primaryColor,
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                             color: currentTab == 1 ? Colors.red : Colors.grey,
                           ),
                           Text(
-                            'Donor List',
+                            'List',
                             style: TextStyle(
                               color: currentTab == 1 ? Colors.red : Colors.grey,
                             ),
