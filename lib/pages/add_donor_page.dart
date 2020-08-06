@@ -23,7 +23,7 @@ class AddDonorPage extends StatelessWidget {
       body: Consumer((context, read) {
         var addDonorState = read(addDonorProvider.state);
         if (addDonorState.isLoading) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (addDonorState.isSuccess) {
           navigator.pop(context);

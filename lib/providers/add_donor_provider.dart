@@ -65,7 +65,7 @@ Future<void> addDataToDb(AddDonorState state) async {
       donorName: state.nameDonor,
       donorNumber: state.numberDonor,
       donorBloodGroup: state.bloodDonor,
-      submittedBy: uId,
+      submittedBy: uId.toString(),
       createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
 
   _firestore.collection("donors").add(addDonor.toMap(addDonor));

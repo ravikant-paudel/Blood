@@ -1,4 +1,3 @@
-import 'package:blood/pages/main_page.dart';
 import 'package:blood/providers/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,9 +14,6 @@ class LoginPage extends StatelessWidget {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          }
-          if (loginState.isLoaded== true) {
-            return MainPage();
           }
           final failed = loginState.isFailed;
           if (failed != null) {

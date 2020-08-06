@@ -1,4 +1,5 @@
 import 'package:blood/models/user_model.dart';
+import 'package:blood/providers/auth_provider.dart';
 import 'package:blood/utils/failure.dart';
 import 'package:blood/utils/preference_util.dart';
 import 'package:blood/utils/shortcuts.dart';
@@ -9,10 +10,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final StateNotifierProvider<LoginProvider> loginProvider = StateNotifierProvider((_) => LoginProvider());
+final StateNotifierProvider<LoginProvider> loginProvider = StateNotifierProvider((ref) => LoginProvider(ref));
 
 class LoginProvider extends StateNotifier<LoginState> {
-  LoginProvider() : super(LoginState(isLoading: false, isLoaded: false));
+  ProviderReference pRef;
+
+  LoginProvider(this.pRef) : super(LoginState(isLoading: false));
 
   Future<void> fetchGoogleLogin() async {
     state = state.copyWith(isLoading: true);
@@ -23,18 +26,20 @@ class LoginProvider extends StateNotifier<LoginState> {
             preference.set(PreferenceKey.USER_ID, user.uid);
             if (isNewUser) {
               addDataToDb(user).then((value) {
-                state = state.copyWith(isLoading: false, isLoaded: true);
+                pRef.read(authProvider).loggedIn();
+                state = state.copyWith(isLoading: false);
               });
             } else {
-              state = state.copyWith(isLoading: false, isLoaded: true);
+              pRef.read(authProvider).loggedIn();
+              state = state.copyWith(isLoading: false);
             }
           });
         } else {
-          state = state.copyWith(isLoading: false, isLoaded: true, isFailed: Failure('User is null'));
-        }
+          state = state.copyWith(isLoading: false, isFailed: Failure('User is null'));
+      }
       });
     } on Failure catch (e) {
-      state = state.copyWith(isLoading: false, isLoaded: false, isFailed: Failure(e.message));
+      state = state.copyWith(isLoading: false, isFailed: Failure(e.message));
     }
   }
 
@@ -43,23 +48,21 @@ class LoginProvider extends StateNotifier<LoginState> {
 
 class LoginState {
   final bool isLoading;
-  final bool isLoaded;
   final Failure isFailed;
 
   LoginState({
     this.isLoading,
-    this.isLoaded,
     this.isFailed,
   });
 
-  LoginState copyWith({bool isLoading, bool isLoaded, Failure isFailed}) => LoginState(
+  LoginState copyWith({bool isLoading, Failure isFailed}) =>
+      LoginState(
         isLoading: isLoading ?? this.isLoading,
-        isLoaded: isLoaded ?? this.isLoaded,
         isFailed: isFailed ?? this.isFailed,
       );
 
   @override
-  String toString() => 'LoginState(isLoading: $isLoading,isLoaded: $isLoaded,isFailed: $isFailed)';
+  String toString() => 'LoginState(isLoading: $isLoading,isFailed: $isFailed)';
 }
 
 final FirebaseAuth _auth = FirebaseAuth.instance;

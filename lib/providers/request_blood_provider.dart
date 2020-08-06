@@ -92,7 +92,7 @@ Future<void> addBloodRequestToDb(RequestBloodState state) async {
       contactNumber: state.contactNumber,
       patientAge: state.patientAge,
       district: state.district,
-      submittedBy: uId,
+      submittedBy: uId.toString(),
       createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
 
   _firestore.collection("request").add(requestBlood.toMap(requestBlood));

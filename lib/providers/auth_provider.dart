@@ -31,6 +31,10 @@ class AuthProvider extends StateNotifier<AuthState> {
     await _googleSignIn.signOut();
     return _auth.signOut();
   }
+
+  void loggedIn() {
+     state = AuthState.isAuthenticated;
+  }
 }
 
 enum AuthState { isInitial, isAuthenticated, isUnAuthenticated }

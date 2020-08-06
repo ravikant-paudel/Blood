@@ -39,14 +39,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           actions: actions,
           centerTitle: centerTitle,
           title: Text(
-            '$title',
+            title,
             style: Theme.of(context).textTheme.headline6.copyWith(fontStyle: FontStyle.italic),
           ),
           iconTheme: IconThemeData(
-            color:  preference.get(PreferenceKey.THEME_MODE) ? Colors.white : Colors.black,
+            color:  preference.get(PreferenceKey.THEME_MODE) != null ? Colors.white : Colors.black,
           ),
         ),
-        Divider(
+        const Divider(
           height: 0,
           color:Color(0xFFDE2C2C),
 //          color:Theme.of(context).primaryColor,

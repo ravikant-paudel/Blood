@@ -115,7 +115,7 @@ class BloodButton extends StatelessWidget {
             case _BloodButtonType.outline:
               return OutlineButton(
                 onPressed: () => _onPressed(context),
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: const BorderSide(color: Colors.white),
                 shape: shape,
                 child: child,
               );
