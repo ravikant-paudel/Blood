@@ -1,3 +1,22 @@
+
+
+/*import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'add_donor_model.freezed.dart';
+
+
+@freezed
+abstract class AddDonorModel with _$AddDonorModel {
+  const factory AddDonorModel({
+    String donorName,
+    String donorNumber,
+    String donorBloodGroup,
+    String submittedBy,
+    int createdAt,
+  }) = _AddDonorModel;
+}*/
+
+
 class AddDonorModel {
   String donorName;
   String donorNumber;
@@ -15,7 +34,6 @@ class AddDonorModel {
 
   Map<String, dynamic> toMap(AddDonorModel user) {
     final data = <String, dynamic>{};
-//    data['aDid'] = user.aDid;
     data['donorName'] = user.donorName;
     data['donorNumber'] = user.donorNumber;
     data['donorBloodGroup'] = user.donorBloodGroup;
@@ -25,7 +43,6 @@ class AddDonorModel {
   }
 
   AddDonorModel.fromMap(Map<String, dynamic> mapData) {
-//    aDid = mapData['aDid'] as String;
     donorName = mapData['donorName'] as String;
     donorNumber = mapData['donorNumber'] as String;
     donorBloodGroup = mapData['donorBloodGroup'] as String;

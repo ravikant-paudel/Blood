@@ -12,18 +12,18 @@ class DashboardPage extends StatelessWidget {
       dashboardProvider.read(context).obtainRequestDb();
     });
     return Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           title: 'Donor List',
         ),
         body: Consumer((context, read) {
           final donorListState = read(dashboardProvider.state);
 //       final provider = addDonorProvider.read(context);
           if (donorListState.isLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           final donors = donorListState.request;
-          if (donors.length == 0) {
-            return Center(
+          if (donors.isEmpty) {
+            return const Center(
               child: BloodText('No donor found'),
             );
           }
@@ -38,10 +38,10 @@ class DashboardPage extends StatelessWidget {
                       children: <Widget>[
                         ListTile(
                           leading: CircleAvatar(
+                            backgroundColor: Theme.of(context).primaryColor,
                             child: Text(
                               donors[index].bloodGroup,
                             ),
-                            backgroundColor: Theme.of(context).primaryColor,
                           ),
                           title: BloodText(
                             donors[index].patientName.toString(),
