@@ -10,6 +10,7 @@ import 'empty_util.dart';
 enum PreferenceKey {
   USER_ID,
   THEME_MODE,
+  NOTIFICATION_TOKEN,
 }
 
 extension RawPrefenceKey on PreferenceKey {

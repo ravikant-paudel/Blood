@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _getToken();
     _firebaseMessaging.configure(
       onMessage: (msg) async {
         logThis('This is onMessage $msg');
@@ -41,12 +42,17 @@ class _HomePageState extends State<HomePage> {
       onResume: (msg) async {
         logThis('This is onResume $msg');
         logThis('This is onResume==> ${msg['data']['title']}');
-        logThis('This is onResume===-> ${msg['data']['body']}');
       },
       /*onBackgroundMessage: (msg) async {
         logThis('This is onBackgroundMessage $msg');
       },*/
     );
+  }
+
+  _getToken() {
+    _firebaseMessaging.getToken().then((deviceToken) {
+      logThis('Device TOken : $deviceToken');
+    });
   }
 
   @override

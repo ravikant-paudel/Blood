@@ -3,8 +3,7 @@ class UserModel {
   String name;
   String email;
   String username;
-  String status;
-  int state;
+  String notificationToken;
   String profilePhoto;
 
   UserModel({
@@ -12,8 +11,7 @@ class UserModel {
     this.name,
     this.email,
     this.username,
-    this.status,
-    this.state,
+    this.notificationToken,
     this.profilePhoto,
   });
 
@@ -23,6 +21,7 @@ class UserModel {
     data['name'] = user.name;
     data['email'] = user.email;
     data['username'] = user.username;
+    data['notificationToken'] = user.notificationToken;
     data['profile_photo'] = user.profilePhoto;
     return data;
   }
@@ -32,6 +31,7 @@ class UserModel {
     name = mapData['name'] as String;
     email = mapData['email'] as String;
     username = mapData['username'] as String;
+    notificationToken = mapData['notificationToken'] as String;
     profilePhoto = mapData['profile_photo'] as String;
   }
 }
