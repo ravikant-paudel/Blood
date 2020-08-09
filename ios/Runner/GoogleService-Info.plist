@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>243440890133-km4l73n0j40jk53liui0rtso7obkipn8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.243440890133-km4l73n0j40jk53liui0rtso7obkipn8</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>243440890133-d93ldj6ubnnom4e5s8fnpkln90fsvfu1.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAHMn87dTg7I_ynzphzMaQ8V9NbR0SPNqU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>243440890133</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.catchsquare.blood</string>
+	<key>PROJECT_ID</key>
+	<string>blood-b007</string>
+	<key>STORAGE_BUCKET</key>
+	<string>blood-b007.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:243440890133:ios:9db288743e88c20dd0391c</string>
+	<key>DATABASE_URL</key>
+	<string>https://blood-b007.firebaseio.com</string>
+</dict>
+</plist>
