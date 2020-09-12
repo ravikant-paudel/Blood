@@ -6,7 +6,6 @@ import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/src/framework.dart';
 
 class RequestBloodPage extends StatelessWidget {
   final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
@@ -20,15 +19,16 @@ class RequestBloodPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reqBloodProvider = requestBloodProvider.readOwner(ProviderStateOwnerScope.of(context, listen: false));
+
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Request Blood',
       ),
-      body: Consumer((context, read) {
+      body: Consumer(builder:(context, read, child) {
         var state = read(requestBloodProvider.state);
+        var reqBloodProvider = read(requestBloodProvider);
         if (state.isLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child: const CircularProgressIndicator());
         }
         if (state.isSuccess) {
           navigator.pop(context);

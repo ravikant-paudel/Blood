@@ -7,20 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BloodApp extends StatelessWidget {
-
+class BloodApp extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     onReady((_) {
-      authProvider.read(context).appStarted();
+      context.read(authProvider).appStarted();
     });
-    return Consumer((context, read) {
-      final theme = read(themeProvider.state);
+    // return Consumer(builder: (context, watch, child) {
+      final theme = watch(themeProvider.state);
       return MaterialApp(
         title: 'Blood',
         theme: theme,
-        home: Consumer((context, read) {
-          final authState = read(authProvider.state);
+        home: Consumer(builder: (context, watch, child) {
+          final authState = watch(authProvider.state);
           switch (authState) {
             case AuthState.isInitial:
               return SplashPage();
@@ -32,13 +31,12 @@ class BloodApp extends StatelessWidget {
           return SplashPage();
         }),
       );
-    }
-    );
+    // });
   }
 }
 
 void onReady(void Function(Duration) callback) {
 //  if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
-    SchedulerBinding.instance.addPostFrameCallback(callback);
+  SchedulerBinding.instance.addPostFrameCallback(callback);
 //  }
 }

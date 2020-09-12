@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_riverpod: ^0.5.1
+  flutter_riverpod: ^0.9.1
   cloud_firestore: ^0.13.7
 #  permission_handler: ^5.0.1+1
   firebase_messaging: ^6.0.16

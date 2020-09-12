@@ -9,15 +9,14 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     onReady((_) {
-      dashboardProvider.read(context).obtainRequestDb();
+      context.read(dashboardProvider).obtainRequestDb();
     });
     return Scaffold(
         appBar: const CustomAppBar(
           title: 'Donor List',
         ),
-        body: Consumer((context, read) {
-          final donorListState = read(dashboardProvider.state);
-//       final provider = addDonorProvider.read(context);
+        body: Consumer(builder: (context, watch, child) {
+          final donorListState = watch(dashboardProvider.state);
           if (donorListState.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -61,7 +60,5 @@ class DashboardPage extends StatelessWidget {
 }
 
 void onReady(void Function(Duration) callback) {
-//  if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
   SchedulerBinding.instance.addPostFrameCallback(callback);
-//  }
 }

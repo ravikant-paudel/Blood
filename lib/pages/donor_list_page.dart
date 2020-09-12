@@ -13,21 +13,20 @@ class DonorListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     onReady((_) {
-      donorListProvider.read(context).obtainDb(bloodGroup);
+      context.read(donorListProvider).obtainDb(bloodGroup);
     });
     return Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           title: 'Donor List',
         ),
-        body: Consumer((context, read) {
-          final donorListState = read(donorListProvider.state);
-//       final provider = addDonorProvider.read(context);
+        body: Consumer(builder: (context, watch, child) {
+          final donorListState = watch(donorListProvider.state);
           if (donorListState.isLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           final donors = donorListState.donors;
-          if (donors.length == 0) {
-            return Center(
+          if (donors.isEmpty) {
+            return const Center(
               child: BloodText('No donor found'),
             );
           }
@@ -58,7 +57,5 @@ class DonorListPage extends StatelessWidget {
 }
 
 void onReady(void Function(Duration) callback) {
-//  if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
   SchedulerBinding.instance.addPostFrameCallback(callback);
-//  }
 }
