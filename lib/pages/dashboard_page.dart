@@ -1,4 +1,5 @@
 import 'package:blood/providers/dashboard_provider.dart';
+import 'package:blood/widgets/blood_list_tile.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:blood/widgets/text.dart';
 import 'package:flutter/material.dart';
@@ -26,35 +27,39 @@ class DashboardPage extends StatelessWidget {
               child: BloodText('No donor found'),
             );
           }
-          return ListView(children: [
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: donors.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {},
-                    child: Column(
-                      children: <Widget>[
-                        ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: Theme.of(context).primaryColor,
-                            child: Text(
-                              donors[index].bloodGroup,
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView(children: [
+              ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: donors.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {},
+                      child: Column(
+                        children: <Widget>[
+                          BloodListTile(),
+                          ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              child: Text(
+                                donors[index].bloodGroup,
+                              ),
                             ),
-                          ),
-                          title: BloodText(
-                            donors[index].patientName.toString(),
-                          ),
-                          subtitle: BloodText(
-                            donors[index].contactNumber.toString(),
-                          ),
+                            title: BloodText(
+                              donors[index].patientName.toString(),
+                            ),
+                            subtitle: BloodText(
+                              donors[index].contactNumber.toString(),
+                            ),
 //                          trailing: ,
-                        ),
-                      ],
-                    ),
-                  );
-                })
-          ]);
+                          ),
+                        ],
+                      ),
+                    );
+                  })
+            ]),
+          );
         }));
   }
 }

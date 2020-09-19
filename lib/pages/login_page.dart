@@ -10,6 +10,7 @@ class LoginPage extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 16, top: 30, left: 16, right: 16),
         child: Consumer(builder: (context, watch, child) {
           final loginState = watch(loginProvider.state);
+          final loginProv = watch(loginProvider);
           if (loginState.isLoading) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -27,7 +28,7 @@ class LoginPage extends StatelessWidget {
                 Center(
                   child: RaisedButton(
                     onPressed: () {
-                      watch(loginProvider).fetchGoogleLogin();
+                      loginProv.fetchGoogleLogin();
                     },
                     child: const Text('Google Login'),
                   ),
