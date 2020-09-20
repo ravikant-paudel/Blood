@@ -21,44 +21,21 @@ class DashboardPage extends StatelessWidget {
           if (donorListState.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          final donors = donorListState.request;
+          final donors = donorListState.requests;
           if (donors.isEmpty) {
             return const Center(
               child: BloodText('No donor found'),
             );
           }
           return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ListView(children: [
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: donors.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {},
-                      child: Column(
-                        children: <Widget>[
-                          BloodListTile(requestBlood: donors[index]),
-//                           ListTile(
-//                             leading: CircleAvatar(
-//                               backgroundColor: Theme.of(context).primaryColor,
-//                               child: Text(
-//                                 donors[index].bloodGroup,
-//                               ),
-//                             ),
-//                             title: BloodText(
-//                               donors[index].patientName.toString(),
-//                             ),
-//                             subtitle: BloodText(
-//                               donors[index].contactNumber.toString(),
-//                             ),
-// //                          trailing: ,
-//                           ),
-                        ],
-                      ),
-                    );
-                  })
-            ]),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ListView(
+              children: donors
+                  .map((donor) => BloodListTile(
+                        requestBlood: donor,
+                      ))
+                  .toList(),
+            ),
           );
         }));
   }

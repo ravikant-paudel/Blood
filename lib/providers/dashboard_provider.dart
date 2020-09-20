@@ -1,36 +1,48 @@
-import 'package:blood/models/request_blood_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:blood/models/request_blood/request_blood_model.dart';
+import 'package:blood/utils/constants.dart';
+import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 final StateNotifierProvider<DashboardProvider> dashboardProvider = StateNotifierProvider((_) => DashboardProvider());
 
 class DashboardProvider extends StateNotifier<DashboardState> {
-  DashboardProvider() : super(DashboardState(isLoading: true, request: []));
+  DashboardProvider() : super(DashboardState(isLoading: true, requests: []));
 
   Future<void> obtainRequestDb() async {
     state = state.copyWith(isLoading: true);
-    // final _request = await obtainDataFrmDb();
-    // state = state.copyWith(isLoading: false, request: _request);
-  }
+    obtainDataFrmDb().listen((requests) {
+      logThis('The req is ============<><<><<>');
+      state = state.copyWith(isLoading: false,  requests: requests);
+    });
 }
+  }
 
 class DashboardState {
   final bool isLoading;
-  final List<RequestBloodModel> request;
+  final List<RequestBloodModel> requests;
 
   DashboardState({
     this.isLoading,
-    this.request,
+    this.requests,
   });
 
-  DashboardState copyWith({bool isLoading, List<RequestBloodModel> request}) => DashboardState(
+  DashboardState copyWith({bool isLoading, List<RequestBloodModel> requests}) => DashboardState(
         isLoading: isLoading ?? this.isLoading,
-        request: request ?? this.request,
+        requests: requests ?? this.requests,
       );
 
   @override
-  String toString() => 'DashboardState(isLoading: $isLoading,request: $request)';
+  String toString() => 'DashboardState(isLoading: $isLoading,request: $requests)';
+}
+
+
+Stream<List<RequestBloodModel>> obtainDataFrmDb() {
+  return fbWrapper.getStreamListFrmDb<RequestBloodModel>(
+      Constants.request_collection,
+          (document) => RequestBloodModel.fromJson(
+        document.data(),
+      ));
 }
 
 // Future<List<RequestBloodModel>> obtainDataFrmDb() async {

@@ -1,4 +1,4 @@
-import 'package:blood/models/request_blood_model.dart';
+import 'package:blood/models/request_blood/request_blood_model.dart';
 import 'package:blood/utils/preference_util.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

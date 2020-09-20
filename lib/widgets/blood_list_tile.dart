@@ -1,5 +1,5 @@
 import 'package:blood/component/gaps.dart';
-import 'package:blood/models/request_blood_model.dart';
+import 'package:blood/models/request_blood/request_blood_model.dart';
 import 'package:blood/utils/resources/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -34,7 +34,7 @@ class BloodListTile extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      requestBlood.bloodGroup,
+                      requestBlood.bloodGroup ?? '',
                       style: Theme.of(context).textTheme.headline6.copyWith(
                         color: Colors.white
                       ),
@@ -69,7 +69,7 @@ class BloodListTile extends StatelessWidget {
                                 ),
                                 const HorizontalGap(d_margin05),
                                 Text(
-                                  requestBlood.patientName,
+                                  requestBlood.patientName ?? '',
                                   style: Theme.of(context).textTheme.overline.copyWith(fontWeight: FontWeight.bold),
                                 ),
                               ],
@@ -78,7 +78,7 @@ class BloodListTile extends StatelessWidget {
                         ),
                         const Spacer(),
                         Text(
-                          requestBlood.bloodGroup,
+                          requestBlood.bloodGroup ?? '',
                           style: Theme.of(context).textTheme.headline3,
                         ),
                       ],
@@ -95,7 +95,7 @@ class BloodListTile extends StatelessWidget {
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
-                          requestBlood.contactNumber,
+                          requestBlood.contactNumber ?? '',
                           style: Theme.of(context).textTheme.overline,
                         ),
                         const HorizontalGap(d_margin4),
@@ -107,7 +107,7 @@ class BloodListTile extends StatelessWidget {
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
-                          requestBlood.createdAt.toString(),
+                          requestBlood.createdAt.toString() ?? '',
                           style: Theme.of(context).textTheme.overline,
                         ),
                       ],
