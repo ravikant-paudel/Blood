@@ -7,6 +7,7 @@
 import 'package:blood/utils/preference_util.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -33,24 +34,27 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Column(
       children: <Widget>[
         AppBar(
-          backgroundColor: Theme.of(context).accentColor,
+          backgroundColor: Theme.of(context).primaryColor,
           elevation: 0,
           leading: leading,
           actions: actions,
-          centerTitle: centerTitle,
           title: Text(
             title,
-            style: Theme.of(context).textTheme.headline6.copyWith(fontStyle: FontStyle.italic),
+            style: Theme.of(context).textTheme.headline6.copyWith(
+                  // fontStyle: FontStyle.italic,
+                  color: Colors.white,
+                ),
           ),
           iconTheme: IconThemeData(
-            color:  preference.get(PreferenceKey.THEME_MODE) != null ? Colors.white : Colors.black,
+            color: preference.get(PreferenceKey.THEME_MODE) != null ? Colors.white : Colors.black,
           ),
         ),
-        const Divider(
-          height: 0,
-          color:Color(0xFFDE2C2C),
-//          color:Theme.of(context).primaryColor,
-          thickness: 3,
+        Expanded(
+          child: SvgPicture.asset(
+            'assets/appbar.svg',
+            width: MediaQuery.of(context).size.width,
+            color: Colors.red,
+          ),
         ),
       ],
     );

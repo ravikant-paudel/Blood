@@ -38,22 +38,22 @@ class DashboardPage extends StatelessWidget {
                       onTap: () {},
                       child: Column(
                         children: <Widget>[
-                          BloodListTile(),
-                          ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              child: Text(
-                                donors[index].bloodGroup,
-                              ),
-                            ),
-                            title: BloodText(
-                              donors[index].patientName.toString(),
-                            ),
-                            subtitle: BloodText(
-                              donors[index].contactNumber.toString(),
-                            ),
-//                          trailing: ,
-                          ),
+                          BloodListTile(requestBlood: donors[index]),
+//                           ListTile(
+//                             leading: CircleAvatar(
+//                               backgroundColor: Theme.of(context).primaryColor,
+//                               child: Text(
+//                                 donors[index].bloodGroup,
+//                               ),
+//                             ),
+//                             title: BloodText(
+//                               donors[index].patientName.toString(),
+//                             ),
+//                             subtitle: BloodText(
+//                               donors[index].contactNumber.toString(),
+//                             ),
+// //                          trailing: ,
+//                           ),
                         ],
                       ),
                     );
