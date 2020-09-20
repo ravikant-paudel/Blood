@@ -4,7 +4,6 @@ import 'package:blood/pages/donor_page.dart';
 import 'package:blood/pages/history_page.dart';
 import 'package:blood/pages/profile_page.dart';
 import 'package:blood/utils/shortcuts.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,12 +21,14 @@ class _HomePageState extends State<HomePage> {
   ]; // to store nested tabs
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = DashboardPage(); // Our first view in viewport
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
+/*
   @override
   void initState() {
     super.initState();
-    _getToken();
+   */
+/* _getToken();
     _firebaseMessaging.configure(
       onMessage: (msg) async {
         logThis('This is onMessage $msg');
@@ -43,10 +44,15 @@ class _HomePageState extends State<HomePage> {
         logThis('This is onResume $msg');
         logThis('This is onResume==> ${msg['data']['title']}');
       },
-      /*onBackgroundMessage: (msg) async {
+      *//*
+*/
+/*onBackgroundMessage: (msg) async {
         logThis('This is onBackgroundMessage $msg');
-      },*/
-    );
+      },*//*
+*/
+/*
+    );*//*
+
   }
 
   _getToken() {
@@ -54,6 +60,7 @@ class _HomePageState extends State<HomePage> {
       logThis('Device TOken : $deviceToken');
     });
   }
+*/
 
   @override
   Widget build(BuildContext context) {

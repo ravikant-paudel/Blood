@@ -12,7 +12,7 @@ class RequestBloodProvider extends StateNotifier<RequestBloodState> {
 
   void submitBloodRequest() {
     state = state.copyWith(isLoading: true);
-    addBloodRequestToDb(state);
+    // addBloodRequestToDb(state);
     state = state.copyWith(isLoading: false, isSuccess: true);
   }
 
@@ -80,20 +80,20 @@ class RequestBloodState {
       'contactNumber: $contactNumber, patientAge: $patientAge,district: $district)';
 }
 
-final Firestore _firestore = Firestore.instance;
-
-Future<void> addBloodRequestToDb(RequestBloodState state) async {
-  RequestBloodModel requestBlood = RequestBloodModel();
-  final uId = preference.get(PreferenceKey.USER_ID);
-  requestBlood = RequestBloodModel(
-      patientName: state.patientName,
-      bloodGroup: state.bloodGroup,
-      patientLocation: state.patientLocation,
-      contactNumber: state.contactNumber,
-      patientAge: state.patientAge,
-      district: state.district,
-      submittedBy: uId.toString(),
-      createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
-
-  _firestore.collection("request").add(requestBlood.toMap(requestBlood));
-}
+// final Firestore _firestore = Firestore.instance;
+//
+// Future<void> addBloodRequestToDb(RequestBloodState state) async {
+//   RequestBloodModel requestBlood = RequestBloodModel();
+//   final uId = preference.get(PreferenceKey.USER_ID);
+//   requestBlood = RequestBloodModel(
+//       patientName: state.patientName,
+//       bloodGroup: state.bloodGroup,
+//       patientLocation: state.patientLocation,
+//       contactNumber: state.contactNumber,
+//       patientAge: state.patientAge,
+//       district: state.district,
+//       submittedBy: uId.toString(),
+//       createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
+//
+//   _firestore.collection("request").add(requestBlood.toMap(requestBlood));
+// }

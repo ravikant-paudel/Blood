@@ -3,6 +3,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:blood/utils/locator.dart';
 import 'package:blood/utils/preference_util.dart';
+import 'package:blood/widgets/firebase_wrapper.dart';
 
 enum Developer {  ravi }
 
@@ -11,6 +12,10 @@ enum Developer {  ravi }
 
 ///// Shortcut for [DialogUtil].
 //DialogUtil get dialog => Locator().dialog;
+
+
+/// Shortcut for [FirebaseWrapper].
+FirebaseWrapper get fbWrapper => LocatorB().fbWrapper;
 
 /// Shortcut for [ExtendedNavigator].
 ExtendedNavigatorState get navigator => ExtendedNavigator.named('mainRouter');

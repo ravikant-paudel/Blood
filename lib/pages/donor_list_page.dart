@@ -13,46 +13,47 @@ class DonorListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     onReady((_) {
-      context.read(donorListProvider).obtainDb(bloodGroup);
+      // context.read(donorListProvider).obtainDb(bloodGroup);
     });
-    return Scaffold(
-        appBar: const CustomAppBar(
-          title: 'Donor List',
-        ),
-        body: Consumer(builder: (context, watch, child) {
-          final donorListState = watch(donorListProvider.state);
-          if (donorListState.isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          final donors = donorListState.donors;
-          if (donors.isEmpty) {
-            return const Center(
-              child: BloodText('No donor found'),
-            );
-          }
-          return ListView(children: [
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: donors.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {},
-                    child: Column(
-                      children: <Widget>[
-                        ListTile(
-                          title: BloodText(
-                            donors[index].donorName.toString(),
-                          ),
-                          subtitle: BloodText(
-                            donors[index].donorNumber.toString(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                })
-          ]);
-        }));
+    return Container();
+    // return Scaffold(
+    //     appBar: const CustomAppBar(
+    //       title: 'Donor List',
+    //     ),
+    //     body: Consumer(builder: (context, watch, child) {
+    //       final donorListState = watch(donorListProvider.state);
+    //       if (donorListState.isLoading) {
+    //         return const Center(child: CircularProgressIndicator());
+    //       }
+    //       final donors = donorListState.donors;
+    //       if (donors.isEmpty) {
+    //         return const Center(
+    //           child: BloodText('No donor found'),
+    //         );
+    //       }
+    //       return ListView(children: [
+    //         ListView.builder(
+    //             shrinkWrap: true,
+    //             itemCount: donors.length,
+    //             itemBuilder: (context, index) {
+    //               return InkWell(
+    //                 onTap: () {},
+    //                 child: Column(
+    //                   children: <Widget>[
+    //                     ListTile(
+    //                       title: BloodText(
+    //                         donors[index].donorName.toString(),
+    //                       ),
+    //                       subtitle: BloodText(
+    //                         donors[index].donorNumber.toString(),
+    //                       ),
+    //                     ),
+    //                   ],
+    //                 ),
+    //               );
+    //             })
+    //       ]);
+    //     }));
   }
 }
 

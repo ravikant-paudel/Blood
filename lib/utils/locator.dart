@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:blood/utils/log_util.dart';
 import 'package:blood/utils/network_util.dart';
 import 'package:blood/utils/preference_util.dart';
+import 'package:blood/widgets/firebase_wrapper.dart';
 import 'package:logger/logger.dart';
 
 
@@ -46,6 +47,7 @@ class LocatorB {
   // ********************** Locator Members ***********************
   // Don't forgot to initialize if asynchronous setup is required.
 //  KhaltiDatabase khaltiDb = KhaltiDatabase();
+  FirebaseWrapper fbWrapper = FirebaseWrapper();
   PreferenceUtil preference = PreferenceUtil();
 //  DeviceUtil deviceInfo = DeviceUtil();
 //  PackageUtil packageInfo = PackageUtil();

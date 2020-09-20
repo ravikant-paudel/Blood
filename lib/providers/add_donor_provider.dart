@@ -1,4 +1,5 @@
-import 'package:blood/models/add_donor_model.dart';
+import 'package:blood/models/add_donor/add_donor_model.dart';
+import 'package:blood/utils/constants.dart';
 import 'package:blood/utils/preference_util.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,7 +13,7 @@ class AddDonorProvider extends StateNotifier<AddDonorState> {
 
   void submitDonorName() {
     state = state.copyWith(isLoading: true);
-    addDataToDb(state);
+    // addDataToDb(state);
     state = state.copyWith(isLoading: false, isSuccess: true);
   }
 
@@ -55,18 +56,21 @@ class AddDonorState {
       'AddDonorState(isLoading: $isLoading,isSuccess: $isSuccess, nameDonor: $nameDonor,numberDonor: $numberDonor,bloodDonor: $bloodDonor)';
 }
 
-final Firestore _firestore = Firestore.instance;
-
-Future<void> addDataToDb(AddDonorState state) async {
-  //FirebaseUser cUser
-  AddDonorModel addDonor = AddDonorModel();
-  final uId = preference.get(PreferenceKey.USER_ID);
-  addDonor = AddDonorModel(
-      donorName: state.nameDonor,
-      donorNumber: state.numberDonor,
-      donorBloodGroup: state.bloodDonor,
-      submittedBy: uId.toString(),
-      createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
-
-  _firestore.collection("donors").add(addDonor.toMap(addDonor));
-}
+// Future<void> addDataToDb(AddDonorState state) async {
+//   //FirebaseUser cUser
+//   // AddDonorModel addDonor = AddDonorModel();
+//   final uId = preference.get(PreferenceKey.USER_ID);
+//   final addDonor = AddDonorModel(
+//       donorName: state.nameDonor,
+//       donorNumber: state.numberDonor,
+//       donorBloodGroup: state.bloodDonor,
+//       submittedBy: uId.toString(),
+//       createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
+//
+//   // _firestore.collection("donors").add(addDonor.toMap(addDonor));
+//   fbWrapper.insertToDb(
+//     Constants.donor_collection,
+//     null,
+//     addDonor.toJson(),
+//   );
+// }

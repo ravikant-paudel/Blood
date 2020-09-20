@@ -10,8 +10,8 @@ class DashboardProvider extends StateNotifier<DashboardState> {
 
   Future<void> obtainRequestDb() async {
     state = state.copyWith(isLoading: true);
-    final _request = await obtainDataFrmDb();
-    state = state.copyWith(isLoading: false, request: _request);
+    // final _request = await obtainDataFrmDb();
+    // state = state.copyWith(isLoading: false, request: _request);
   }
 }
 
@@ -33,14 +33,14 @@ class DashboardState {
   String toString() => 'DashboardState(isLoading: $isLoading,request: $request)';
 }
 
-Future<List<RequestBloodModel>> obtainDataFrmDb() async {
-  QuerySnapshot snapshot = await Firestore.instance.collection('request').orderBy("createdAt", descending: true).getDocuments();
-
-  List<RequestBloodModel> _dashboardList = [];
-
-  snapshot.documents.forEach((document) {
-    RequestBloodModel request = RequestBloodModel.fromMap(document.data);
-    _dashboardList.add(request);
-  });
-  return _dashboardList;
-}
+// Future<List<RequestBloodModel>> obtainDataFrmDb() async {
+//   QuerySnapshot snapshot = await Firestore.instance.collection('request').orderBy("createdAt", descending: true).getDocuments();
+//
+//   List<RequestBloodModel> _dashboardList = [];
+//
+//   snapshot.documents.forEach((document) {
+//     RequestBloodModel request = RequestBloodModel.fromMap(document.data);
+//     _dashboardList.add(request);
+//   });
+//   return _dashboardList;
+// }
