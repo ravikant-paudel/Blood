@@ -28,13 +28,16 @@ class BloodListTile extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12.0),
+                      bottomRight: Radius.circular(80.0),
                     ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       requestBlood.bloodGroup,
-                      style: Theme.of(context).textTheme.headline6,
+                      style: Theme.of(context).textTheme.headline6.copyWith(
+                        color: Colors.white
+                      ),
                     ),
                   ),
                 ),

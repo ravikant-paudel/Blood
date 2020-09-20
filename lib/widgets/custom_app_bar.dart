@@ -49,13 +49,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: preference.get(PreferenceKey.THEME_MODE) != null ? Colors.white : Colors.black,
           ),
         ),
-        Expanded(
-          child: SvgPicture.asset(
-            'assets/appbar.svg',
-            width: MediaQuery.of(context).size.width,
-            color: Colors.red,
-          ),
-        ),
+        // Expanded(
+        //   child: SvgPicture.asset(
+        //     'assets/appbar.svg',
+        //     width: MediaQuery.of(context).size.width,
+        //     color: Colors.red,
+        //   ),
+        // ),
       ],
     );
   }

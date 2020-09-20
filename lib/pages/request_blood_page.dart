@@ -28,7 +28,7 @@ class RequestBloodPage extends StatelessWidget {
         var state = read(requestBloodProvider.state);
         var reqBloodProvider = read(requestBloodProvider);
         if (state.isLoading) {
-          return Center(child: const CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (state.isSuccess) {
           navigator.pop(context);
