@@ -1,6 +1,5 @@
 import 'package:blood/providers/theme_provider.dart';
 import 'package:blood/utils/locator.dart';
-import 'package:blood/utils/shortcuts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -20,9 +19,9 @@ class AuthProvider extends StateNotifier<AuthState> {
     final User currentUser = _auth.currentUser;
     if (currentUser != null) {
       state = AuthState.isAuthenticated;
-      logThis('NOT ==============  here isr= equal');
+      // logThis('NOT ==============  here isr= equal');
     } else {
-      logThis('ELSE here isr= equal');
+      // logThis('ELSE here isr= equal');
       state = AuthState.isUnAuthenticated;
     }
   }

@@ -42,71 +42,71 @@ class RequestBloodPage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
-                        onChanged: reqBloodProvider.updatePatientName,
-                        validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
+                        // onChanged: reqBloodProvider.updatePatientName,
+                        // validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
                         decoration: const InputDecoration(
                           hintText: 'Patient name',
                         )),
                     const VerticalGap(),
-                    DropdownButtonFormField<String>(
-                      validator: (value) => value == null ? 'Please select blood group' : null,
-                      isExpanded: true,
-                      hint: const Text('-- Select Group --'),
-                      items: _dropdownItems.map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      value: state.bloodGroup,
-                      onChanged: reqBloodProvider.updateBloodGroup,
-                    ),
-                    const VerticalGap(),
-                    TextFormField(
-                        onChanged: reqBloodProvider.updateContactNumber,
-                        validator: (value) => value.isNotEmpty ? null : 'error',
-                        keyboardType: TextInputType.phone,
-                        decoration: const InputDecoration(
-                          hintText: 'Contact Number',
-                        )),
-                    const VerticalGap(),
-                    TextFormField(
-                        onChanged: reqBloodProvider.updatePatientAge,
-                        validator: (value) => value.isNotEmpty ? null : 'error',
-                        keyboardType: TextInputType.phone,
-                        decoration: const InputDecoration(
-                          hintText: 'Patient Age',
-                        )),
-                    const VerticalGap(),
-                    TextFormField(
-                        onChanged: reqBloodProvider.updatePatientLocation,
-                        validator: (value) => value.isNotEmpty ? null : 'error',
-                        decoration: const InputDecoration(
-                          hintText: 'Location',
-                        )),
-                    const VerticalGap(),
-                    DropdownButtonFormField<String>(
-                      validator: (value) => value == null ? 'Please select district' : null,
-                      isExpanded: true,
-                      hint: const Text('-- Select District --'),
-                      items: _dropdownDistrict.map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      value: state.district,
-                      onChanged: reqBloodProvider.updateDistrict,
-                    ),
-                    const VerticalGap(d_margin6),
-                    BloodButton(
-                      buttonText: 'Add Donor',
-                      onPressed: () {
-                        if (requestFormKey.currentState.validate()) {
-                          reqBloodProvider.submitBloodRequest();
-                        }
-                      },
-                    ),
+                    // DropdownButtonFormField<String>(
+                    //   validator: (value) => value == null ? 'Please select blood group' : null,
+                    //   isExpanded: true,
+                    //   hint: const Text('-- Select Group --'),
+                    //   items: _dropdownItems.map((String value) {
+                    //     return DropdownMenuItem<String>(
+                    //       value: value,
+                    //       child: Text(value),
+                    //     );
+                    //   }).toList(),
+                    //   value: state.bloodGroup,
+                    //   onChanged: reqBloodProvider.updateBloodGroup,
+                    // ),
+                    // const VerticalGap(),
+                    // TextFormField(
+                    //     onChanged: reqBloodProvider.updateContactNumber,
+                    //     validator: (value) => value.isNotEmpty ? null : 'error',
+                    //     keyboardType: TextInputType.phone,
+                    //     decoration: const InputDecoration(
+                    //       hintText: 'Contact Number',
+                    //     )),
+                    // const VerticalGap(),
+                    // TextFormField(
+                    //     onChanged: reqBloodProvider.updatePatientAge,
+                    //     validator: (value) => value.isNotEmpty ? null : 'error',
+                    //     keyboardType: TextInputType.phone,
+                    //     decoration: const InputDecoration(
+                    //       hintText: 'Patient Age',
+                    //     )),
+                    // const VerticalGap(),
+                    // TextFormField(
+                    //     onChanged: reqBloodProvider.updatePatientLocation,
+                    //     validator: (value) => value.isNotEmpty ? null : 'error',
+                    //     decoration: const InputDecoration(
+                    //       hintText: 'Location',
+                    //     )),
+                    // const VerticalGap(),
+                    // DropdownButtonFormField<String>(
+                    //   validator: (value) => value == null ? 'Please select district' : null,
+                    //   isExpanded: true,
+                    //   hint: const Text('-- Select District --'),
+                    //   items: _dropdownDistrict.map((String value) {
+                    //     return DropdownMenuItem<String>(
+                    //       value: value,
+                    //       child: Text(value),
+                    //     );
+                    //   }).toList(),
+                    //   value: state.district,
+                    //   onChanged: reqBloodProvider.updateDistrict,
+                    // ),
+                    // const VerticalGap(d_margin6),
+                    // BloodButton(
+                    //   buttonText: 'Add Donor',
+                    //   onPressed: () {
+                    //     if (requestFormKey.currentState.validate()) {
+                    //       reqBloodProvider.submitBloodRequest();
+                    //     }
+                    //   },
+                    // ),
                   ],
                 ),
               ),
