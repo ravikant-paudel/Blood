@@ -32,6 +32,9 @@ class BloodTheme extends StateNotifier<ThemeData> {
       onSecondary: Colors.white,
     ),
     textTheme: GoogleFonts.poppinsTextTheme(),
+  ).copyWith(
+    indicatorColor: Colors.white,
+    accentColor:accentColorLight,
   );
 
   static final _lightTheme = ThemeData.from(
@@ -44,5 +47,6 @@ class BloodTheme extends StateNotifier<ThemeData> {
   ).copyWith(
     scaffoldBackgroundColor: const Color(0xFFE4E4E4),
     indicatorColor: Colors.black,
+    accentColor:accentColorDark,
   );
 }

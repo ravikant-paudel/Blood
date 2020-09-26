@@ -3,7 +3,8 @@
 
 import 'package:flutter/material.dart';
 
-const int _rawPrimary = 0xFFDE2C2C;
+const int _rawPrimary = 0xFFCA2B28;
+const int _rawAccent  = 0xFFFFFFFF;
 
 // --------------- Primary Color-----------------
 
@@ -39,6 +40,27 @@ const MaterialColor primaryColorDark = MaterialColor(
   },
 );
 
+
+// --------------- Accent Color-----------------
+
+const MaterialColor accentColorLight = MaterialColor(
+  _rawAccent,
+  {
+    500: Color(_rawAccent),
+  },
+);
+
+const MaterialColor accentColorDark = MaterialColor(
+  _rawAccent,
+  {
+    500: Color(_rawAccent),
+  },
+);
+
+const Color primaryTextDark = Color(0xFF3B3B3B);
+const Color secondaryTextDark = Color(0xFF5E5E5E);
+const Color bloodGroupColor = Color(0xFFd4d4d4);
+const Color buttonColor = Color(0xFF11A407);
 
 
 /*

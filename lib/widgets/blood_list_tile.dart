@@ -1,6 +1,8 @@
 import 'package:blood/component/gaps.dart';
 import 'package:blood/models/request_blood/request_blood_model.dart';
+import 'package:blood/utils/resources/colors.dart';
 import 'package:blood/utils/resources/dimens.dart';
+import 'package:blood/widgets/blood_group_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,6 +26,8 @@ class BloodListTile extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: Container(
+                  width: 40,
+                  height: 40,
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                     borderRadius: const BorderRadius.only(
@@ -33,17 +37,23 @@ class BloodListTile extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      requestBlood.bloodGroup ?? '',
-                      style: Theme.of(context).textTheme.headline6.copyWith(
-                        color: Colors.white
-                      ),
+                    child: BloodGroupLabel(
+                      bloodGroup: requestBlood.bloodGroup,
+                      firstTextStyle: Theme.of(context).textTheme.subtitle1.copyWith(
+                            color: Theme.of(context).accentColor,
+                            fontWeight: FontWeight.w900,
+                            height: 1.3,
+                          ),
+                      secTextStyle: Theme.of(context).textTheme.bodyText2.copyWith(
+                            color: Theme.of(context).accentColor,
+                            height: 1,
+                          ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: Column(
                   children: [
                     Row(
@@ -52,12 +62,17 @@ class BloodListTile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 50.0),
+                              padding: const EdgeInsets.only(left: 30.0),
                               child: Text(
                                 'Request Blood',
-                                style: Theme.of(context).textTheme.headline6.copyWith(fontWeight: FontWeight.bold),
+                                style: Theme.of(context).textTheme.headline6.copyWith(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w900,
+                                      color: primaryTextDark,
+                                    ),
                               ),
                             ),
+                            const VerticalGap(d_margin05),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -65,25 +80,27 @@ class BloodListTile extends StatelessWidget {
                                   'assets/person.svg',
                                   height: 10,
                                   width: 10,
-                                  color: Colors.red,
+                                  color: secondaryTextDark,
                                 ),
                                 const HorizontalGap(d_margin05),
                                 Text(
                                   requestBlood.patientName ?? '',
-                                  style: Theme.of(context).textTheme.overline.copyWith(fontWeight: FontWeight.bold),
+                                  style: Theme.of(context).textTheme.overline.copyWith(
+                                        fontWeight: FontWeight.w900,
+                                        color: primaryTextDark,
+                                      ),
                                 ),
                               ],
                             ),
                           ],
                         ),
                         const Spacer(),
-                        Text(
-                          requestBlood.bloodGroup ?? '',
-                          style: Theme.of(context).textTheme.headline3,
+                        BloodGroupLabel(
+                          bloodGroup: requestBlood.bloodGroup,
                         ),
                       ],
                     ),
-                    const VerticalGap(d_margin1),
+                    const VerticalGap(d_margin105),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -91,36 +108,40 @@ class BloodListTile extends StatelessWidget {
                           'assets/contact.svg',
                           height: 10,
                           width: 10,
-                          color: Colors.red,
+                          color: secondaryTextDark,
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
                           requestBlood.contactNumber ?? '',
-                          style: Theme.of(context).textTheme.overline,
+                          style: Theme.of(context).textTheme.overline.copyWith(
+                                color: secondaryTextDark,
+                              ),
                         ),
                         const HorizontalGap(d_margin4),
                         SvgPicture.asset(
                           'assets/calender.svg',
                           height: 10,
                           width: 10,
-                          color: Colors.red,
+                          color: secondaryTextDark,
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
                           requestBlood.createdAt.toString() ?? '',
-                          style: Theme.of(context).textTheme.overline,
+                          style: Theme.of(context).textTheme.overline.copyWith(
+                                color: secondaryTextDark,
+                              ),
                         ),
                       ],
                     ),
-                    const VerticalGap(d_margin2),
+                    const VerticalGap(d_margin1),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
                       child: Container(
-                        height: 1.0,
-                        color: Colors.red,
+                        height: 0.5,
+                        color: secondaryTextDark,
                       ),
                     ),
-                    const VerticalGap(d_margin2),
+                    const VerticalGap(d_margin105),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -128,26 +149,48 @@ class BloodListTile extends StatelessWidget {
                           'assets/pin.svg',
                           height: 10,
                           width: 10,
-                          color: Colors.red,
+                          color: secondaryTextDark,
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
                           requestBlood.patientLocation ?? 'n/a',
-                          style: Theme.of(context).textTheme.overline,
+                          style: Theme.of(context).textTheme.overline.copyWith(
+                                color: secondaryTextDark,
+                              ),
                         ),
-                        Spacer(),
-                        SvgPicture.asset(
-                          'assets/share.svg',
-                          height: 20,
-                          width: 20,
-                          color: Colors.black87,
+                        const Spacer(),
+                        Container(
+                          height: 25,
+                          width: 25,
+                          decoration: BoxDecoration(
+                              color: bloodGroupColor,
+                            borderRadius: BorderRadius.circular(6)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: SvgPicture.asset(
+                              'assets/share.svg',
+                              height: 20,
+                              width: 20,
+                              color: Colors.black87,
+                            ),
+                          ),
                         ),
                         const HorizontalGap(),
-                        SvgPicture.asset(
-                          'assets/phone.svg',
-                          height: 20,
-                          width: 20,
-                          color: Colors.green,
+                        Container(
+                          height: 25,
+                          width: 25,
+                          decoration: BoxDecoration(
+                              color: buttonColor,
+                              borderRadius: BorderRadius.circular(6)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: SvgPicture.asset(
+                              'assets/phone.svg',
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ],
                     ),

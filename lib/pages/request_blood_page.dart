@@ -15,7 +15,7 @@ class RequestBloodPage extends StatelessWidget {
   'Mahottari','Makwanpur','Manang','Morang', 'Mugu','Mustang','Myagdi','Nawalparasi','Nuwakot','Okhaldhunga','Palpa','Panchthar','Parbat','Parsa','Pyuthan',
   'Ramechhap'];
 
-  final GlobalKey<FormState> requestFormKey = GlobalKey();
+  final GlobalKey<FormState> requestFormKey1 = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +27,27 @@ class RequestBloodPage extends StatelessWidget {
       body: Consumer(builder:(context, read, child) {
         var state = read(requestBloodProvider.state);
         var reqBloodProvider = read(requestBloodProvider);
-        if (state.isLoading) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (state.isSuccess) {
-          navigator.pop(context);
-        }
+        // if (state.isLoading) {
+        //   return const Center(child: CircularProgressIndicator());
+        // }
+        // if (state.isSuccess) {
+        //   navigator.pop(context);
+        // }
         return ListView(
           children: [
+            // Form(
+            //   key: requestFormKey1,
+            //   child: TextFormField(
+            //     // onChanged: reqBloodProvider.updatePatientName,
+            //     // validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
+            //       decoration: const InputDecoration(
+            //         hintText: 'Test name',
+            //       )),
+            // ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Form(
-                key: requestFormKey,
+                // key: requestFormKey1,
                 child: Column(
                   children: <Widget>[
                     TextFormField(
@@ -48,65 +57,65 @@ class RequestBloodPage extends StatelessWidget {
                           hintText: 'Patient name',
                         )),
                     const VerticalGap(),
-                    // DropdownButtonFormField<String>(
-                    //   validator: (value) => value == null ? 'Please select blood group' : null,
-                    //   isExpanded: true,
-                    //   hint: const Text('-- Select Group --'),
-                    //   items: _dropdownItems.map((String value) {
-                    //     return DropdownMenuItem<String>(
-                    //       value: value,
-                    //       child: Text(value),
-                    //     );
-                    //   }).toList(),
-                    //   value: state.bloodGroup,
-                    //   onChanged: reqBloodProvider.updateBloodGroup,
-                    // ),
-                    // const VerticalGap(),
-                    // TextFormField(
-                    //     onChanged: reqBloodProvider.updateContactNumber,
-                    //     validator: (value) => value.isNotEmpty ? null : 'error',
-                    //     keyboardType: TextInputType.phone,
-                    //     decoration: const InputDecoration(
-                    //       hintText: 'Contact Number',
-                    //     )),
-                    // const VerticalGap(),
-                    // TextFormField(
-                    //     onChanged: reqBloodProvider.updatePatientAge,
-                    //     validator: (value) => value.isNotEmpty ? null : 'error',
-                    //     keyboardType: TextInputType.phone,
-                    //     decoration: const InputDecoration(
-                    //       hintText: 'Patient Age',
-                    //     )),
-                    // const VerticalGap(),
-                    // TextFormField(
-                    //     onChanged: reqBloodProvider.updatePatientLocation,
-                    //     validator: (value) => value.isNotEmpty ? null : 'error',
-                    //     decoration: const InputDecoration(
-                    //       hintText: 'Location',
-                    //     )),
-                    // const VerticalGap(),
-                    // DropdownButtonFormField<String>(
-                    //   validator: (value) => value == null ? 'Please select district' : null,
-                    //   isExpanded: true,
-                    //   hint: const Text('-- Select District --'),
-                    //   items: _dropdownDistrict.map((String value) {
-                    //     return DropdownMenuItem<String>(
-                    //       value: value,
-                    //       child: Text(value),
-                    //     );
-                    //   }).toList(),
-                    //   value: state.district,
-                    //   onChanged: reqBloodProvider.updateDistrict,
-                    // ),
-                    // const VerticalGap(d_margin6),
-                    // BloodButton(
-                    //   buttonText: 'Add Donor',
-                    //   onPressed: () {
-                    //     if (requestFormKey.currentState.validate()) {
-                    //       reqBloodProvider.submitBloodRequest();
-                    //     }
-                    //   },
-                    // ),
+                    DropdownButtonFormField<String>(
+                      validator: (value) => value == null ? 'Please select blood group' : null,
+                      isExpanded: true,
+                      hint: const Text('-- Select Group --'),
+                      items: _dropdownItems.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      value: state.bloodGroup,
+                      onChanged: reqBloodProvider.updateBloodGroup,
+                    ),
+                    const VerticalGap(),
+                    TextFormField(
+                        onChanged: reqBloodProvider.updateContactNumber,
+                        validator: (value) => value.isNotEmpty ? null : 'error',
+                        keyboardType: TextInputType.phone,
+                        decoration: const InputDecoration(
+                          hintText: 'Contact Number',
+                        )),
+                    const VerticalGap(),
+                    TextFormField(
+                        onChanged: reqBloodProvider.updatePatientAge,
+                        validator: (value) => value.isNotEmpty ? null : 'error',
+                        keyboardType: TextInputType.phone,
+                        decoration: const InputDecoration(
+                          hintText: 'Patient Age',
+                        )),
+                    const VerticalGap(),
+                    TextFormField(
+                        onChanged: reqBloodProvider.updatePatientLocation,
+                        validator: (value) => value.isNotEmpty ? null : 'error',
+                        decoration: const InputDecoration(
+                          hintText: 'Location',
+                        )),
+                    const VerticalGap(),
+                    DropdownButtonFormField<String>(
+                      validator: (value) => value == null ? 'Please select district' : null,
+                      isExpanded: true,
+                      hint: const Text('-- Select District --'),
+                      items: _dropdownDistrict.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      value: state.district,
+                      onChanged: reqBloodProvider.updateDistrict,
+                    ),
+                    const VerticalGap(d_margin6),
+                    BloodButton(
+                      buttonText: 'Add Donor',
+                      onPressed: () {
+                        // if (requestFormKey.currentState.validate()) {
+                        //   reqBloodProvider.submitBloodRequest();
+                        // }
+                      },
+                    ),
                   ],
                 ),
               ),

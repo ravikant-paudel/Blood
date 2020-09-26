@@ -16,6 +16,12 @@ class ProfilePage extends StatelessWidget {
           final themePro = watch(themeProvider);
           return ListView(
             children: [
+              TextFormField(
+                // onChanged: reqBloodProvider.updatePatientName,
+                // validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
+                  decoration: const InputDecoration(
+                    hintText: 'Patient name',
+                  )),
               ListTile(
                 title: Text('Dark Theme'),
                 contentPadding: const EdgeInsets.only(left: 16.0),

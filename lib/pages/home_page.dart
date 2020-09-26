@@ -21,53 +21,9 @@ class _HomePageState extends State<HomePage> {
   ]; // to store nested tabs
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = DashboardPage(); // Our first view in viewport
-  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-
-/*
-  @override
-  void initState() {
-    super.initState();
-   */
-/* _getToken();
-    _firebaseMessaging.configure(
-      onMessage: (msg) async {
-        logThis('This is onMessage $msg');
-        logThis('This is onMessage==> ${msg['notification']['title']}');
-        logThis('This is onMessage===> ${msg['notification']['body']}');
-      },
-      onLaunch: (msg) async {
-        logThis('This is onLaunch $msg');
-        logThis('This is onLaunch==>   ${msg['notification']['title']}');
-        logThis('This is onLaunch==>   ${msg['notification']['body']}');
-      },
-      onResume: (msg) async {
-        logThis('This is onResume $msg');
-        logThis('This is onResume==> ${msg['data']['title']}');
-      },
-      *//*
-*/
-/*onBackgroundMessage: (msg) async {
-        logThis('This is onBackgroundMessage $msg');
-      },*//*
-*/
-/*
-    );*//*
-
-  }
-
-  _getToken() {
-    _firebaseMessaging.getToken().then((deviceToken) {
-      logThis('Device TOken : $deviceToken');
-    });
-  }
-*/
 
   @override
   Widget build(BuildContext context) {
-//    return Consumer((context, read) {
-//      final homeState = read(homeProvider.state);
-////        homeProvider.read(context);
-//      final homePro = homeProvider.readOwner(ProviderStateOwnerScope.of(context, listen: false));
     return Scaffold(
       body: screens[currentTab],
       /*body: PageStorage(
