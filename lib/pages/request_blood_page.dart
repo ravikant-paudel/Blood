@@ -15,7 +15,7 @@ class RequestBloodPage extends StatelessWidget {
   'Mahottari','Makwanpur','Manang','Morang', 'Mugu','Mustang','Myagdi','Nawalparasi','Nuwakot','Okhaldhunga','Palpa','Panchthar','Parbat','Parsa','Pyuthan',
   'Ramechhap'];
 
-  final GlobalKey<FormState> requestFormKey1 = GlobalKey();
+  final GlobalKey<FormState> requestFormKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class RequestBloodPage extends StatelessWidget {
         title: 'Request Blood',
       ),
       body: Consumer(builder:(context, read, child) {
-        var state = read(requestBloodProvider.state);
-        var reqBloodProvider = read(requestBloodProvider);
+        final state = read(requestBloodProvider.state);
+        final reqBloodProvider = read(requestBloodProvider);
         // if (state.isLoading) {
         //   return const Center(child: CircularProgressIndicator());
         // }
@@ -35,24 +35,16 @@ class RequestBloodPage extends StatelessWidget {
         // }
         return ListView(
           children: [
-            // Form(
-            //   key: requestFormKey1,
-            //   child: TextFormField(
-            //     // onChanged: reqBloodProvider.updatePatientName,
-            //     // validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
-            //       decoration: const InputDecoration(
-            //         hintText: 'Test name',
-            //       )),
-            // ),
+
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Form(
-                // key: requestFormKey1,
+                // key: requestFormKey,
                 child: Column(
                   children: <Widget>[
                     TextFormField(
-                        // onChanged: reqBloodProvider.updatePatientName,
-                        // validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
+                        onChanged: reqBloodProvider.updatePatientName,
+                        validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
                         decoration: const InputDecoration(
                           hintText: 'Patient name',
                         )),
@@ -111,9 +103,9 @@ class RequestBloodPage extends StatelessWidget {
                     BloodButton(
                       buttonText: 'Add Donor',
                       onPressed: () {
-                        // if (requestFormKey.currentState.validate()) {
-                        //   reqBloodProvider.submitBloodRequest();
-                        // }
+                        if (requestFormKey.currentState.validate()) {
+                          reqBloodProvider.submitBloodRequest();
+                        }
                       },
                     ),
                   ],

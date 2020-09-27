@@ -2,6 +2,7 @@ import 'package:blood/component/gaps.dart';
 import 'package:blood/models/request_blood/request_blood_model.dart';
 import 'package:blood/utils/resources/colors.dart';
 import 'package:blood/utils/resources/dimens.dart';
+import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/widgets/blood_group_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -74,7 +75,8 @@ class BloodListTile extends StatelessWidget {
                             ),
                             const VerticalGap(d_margin05),
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              // crossAxisAlignment: CrossAxisAlignment.,
                               children: [
                                 SvgPicture.asset(
                                   'assets/person.svg',
@@ -84,11 +86,33 @@ class BloodListTile extends StatelessWidget {
                                 ),
                                 const HorizontalGap(d_margin05),
                                 Text(
-                                  requestBlood.patientName ?? '',
+                                  requestBlood.patientName ??
+                                      'RaviKant Paudel',
                                   style: Theme.of(context).textTheme.overline.copyWith(
                                         fontWeight: FontWeight.w900,
                                         color: primaryTextDark,
                                       ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const HorizontalGap(d_margin05),
+                                // const Spacer(),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: Theme.of(context).primaryColor,
+                                      borderRadius: BorderRadius.circular(6)
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                                    child: Text(
+                                      // requestBlood.patientName ??
+                                      'M|Age: 30',
+                                      style: Theme.of(context).textTheme.overline.copyWith(
+                                        fontWeight: FontWeight.w900,
+                                        color:Colors.white,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -159,36 +183,46 @@ class BloodListTile extends StatelessWidget {
                               ),
                         ),
                         const Spacer(),
-                        Container(
-                          height: 25,
-                          width: 25,
-                          decoration: BoxDecoration(
-                              color: bloodGroupColor,
-                            borderRadius: BorderRadius.circular(6)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: SvgPicture.asset(
-                              'assets/share.svg',
-                              height: 20,
-                              width: 20,
-                              color: Colors.black87,
+                        InkWell(
+                          onTap: () {
+                            logThis('message when share click');
+                          },
+                          child: Container(
+                            height: 25,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                color: bloodGroupColor,
+                              borderRadius: BorderRadius.circular(6)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: SvgPicture.asset(
+                                'assets/share.svg',
+                                height: 20,
+                                width: 20,
+                                color: Colors.black87,
+                              ),
                             ),
                           ),
                         ),
                         const HorizontalGap(),
-                        Container(
-                          height: 25,
-                          width: 25,
-                          decoration: BoxDecoration(
-                              color: buttonColor,
-                              borderRadius: BorderRadius.circular(6)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: SvgPicture.asset(
-                              'assets/phone.svg',
-                              color: Colors.white,
+                        InkWell(
+                          onTap: () {
+                            logThis('message when phone click');
+                          },
+                          child: Container(
+                            height: 25,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                color: buttonColor,
+                                borderRadius: BorderRadius.circular(6)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: SvgPicture.asset(
+                                'assets/phone.svg',
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
