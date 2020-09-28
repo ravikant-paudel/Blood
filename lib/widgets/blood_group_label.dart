@@ -6,20 +6,22 @@ class BloodGroupLabel extends StatelessWidget {
   final TextStyle secTextStyle;
   final String bloodGroup;
 
-  const BloodGroupLabel({
+  const BloodGroupLabel(
+    this.bloodGroup, {
     Key key,
     this.firstTextStyle,
     this.secTextStyle,
-    @required this.bloodGroup,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final bgRegex = RegExp(r'(A|B|O|AB)([+-])');
+    final bloodGroupMatch =bgRegex.firstMatch(bloodGroup);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          bloodGroup?.substring(0, 1) ?? ' ',
+          bloodGroupMatch.group(1) ?? ' ',
           style: firstTextStyle ??
               Theme.of(context).textTheme.headline3.copyWith(
                     color: bloodGroupColor,
@@ -28,7 +30,7 @@ class BloodGroupLabel extends StatelessWidget {
                   ),
         ),
         Text(
-          bloodGroup?.substring(1, 2)?.toUpperCase() ?? ' ',
+          bloodGroupMatch.group(2) ?? ' ',
           style: secTextStyle ??
               Theme.of(context).textTheme.headline5.copyWith(
                     color: bloodGroupColor,

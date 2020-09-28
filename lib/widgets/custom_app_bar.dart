@@ -31,35 +31,40 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
+      // crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          elevation: 0,
-          leading: leading,
-          actions: actions,
-          title: Text(
-            title,
-            style: Theme.of(context).textTheme.headline6.copyWith(
-                  // fontStyle: FontStyle.italic,
-                  color: Colors.white,
-                ),
-          ),
-          iconTheme: IconThemeData(
-            color: preference.get(PreferenceKey.THEME_MODE) != null ? Colors.white : Colors.black,
+        Positioned(
+          top: 100,
+          child: SvgPicture.asset(
+            'assets/appbar.svg',
+            fit: BoxFit.fitWidth,
+            // width: MediaQuery.of(context).size.width,
           ),
         ),
-        // Expanded(
-        //   child: SvgPicture.asset(
-        //     'assets/appbar.svg',
-        //     width: MediaQuery.of(context).size.width,
-        //     color: Colors.red,
-        //   ),
-        // ),
+        SizedBox(
+          height: kToolbarHeight + MediaQuery.of(context).padding.top,
+          child: AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
+            elevation: 0,
+            leading: leading,
+            actions: actions,
+            title: Text(
+              title,
+              style: Theme.of(context).textTheme.headline6.copyWith(
+                    // fontStyle: FontStyle.italic,
+                    color: Colors.white,
+                  ),
+            ),
+            iconTheme: IconThemeData(
+              color: preference.get(PreferenceKey.THEME_MODE) != null ? Colors.white : Colors.black,
+            ),
+          ),
+        ),
       ],
     );
   }
 
   @override
-  final Size preferredSize = const Size.fromHeight(kToolbarHeight + 18);
+  final Size preferredSize = const Size.fromHeight(kToolbarHeight + 10);
 }

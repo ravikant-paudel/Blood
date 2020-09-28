@@ -39,7 +39,7 @@ class BloodListTile extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: BloodGroupLabel(
-                      bloodGroup: requestBlood.bloodGroup,
+                      requestBlood.bloodGroup,
                       firstTextStyle: Theme.of(context).textTheme.subtitle1.copyWith(
                             color: Theme.of(context).accentColor,
                             fontWeight: FontWeight.w900,
@@ -59,68 +59,67 @@ class BloodListTile extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 30.0),
-                              child: Text(
-                                'Request Blood',
-                                style: Theme.of(context).textTheme.headline6.copyWith(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w900,
-                                      color: primaryTextDark,
-                                    ),
-                              ),
-                            ),
-                            const VerticalGap(d_margin05),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              // crossAxisAlignment: CrossAxisAlignment.,
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/person.svg',
-                                  height: 10,
-                                  width: 10,
-                                  color: secondaryTextDark,
-                                ),
-                                const HorizontalGap(d_margin05),
-                                Text(
-                                  requestBlood.patientName ??
-                                      'RaviKant Paudel',
-                                  style: Theme.of(context).textTheme.overline.copyWith(
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 30.0),
+                                child: Text(
+                                  'Request Blood',
+                                  style: Theme.of(context).textTheme.headline6.copyWith(
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w900,
                                         color: primaryTextDark,
                                       ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                const HorizontalGap(d_margin05),
-                                // const Spacer(),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: Theme.of(context).primaryColor,
-                                      borderRadius: BorderRadius.circular(6)
+                              ),
+                              const VerticalGap(d_margin05),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                // crossAxisAlignment: CrossAxisAlignment.,
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/person.svg',
+                                    height: 10,
+                                    width: 10,
+                                    color: secondaryTextDark,
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                                  const HorizontalGap(d_margin05),
+                                  Expanded(
                                     child: Text(
-                                      // requestBlood.patientName ??
-                                      'M|Age: 30',
+                                      requestBlood.patientName ?? '',
                                       style: Theme.of(context).textTheme.overline.copyWith(
-                                        fontWeight: FontWeight.w900,
-                                        color:Colors.white,
+                                            fontWeight: FontWeight.w900,
+                                            color: primaryTextDark,
+                                          ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  const HorizontalGap(d_margin05),
+                                  Container(
+                                    decoration:
+                                        BoxDecoration(color: Theme.of(context).primaryColor, borderRadius: BorderRadius.circular(6)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                                      child: Text(
+                                        // requestBlood.patientName ??
+                                        'M|Age: 30',
+                                        style: Theme.of(context).textTheme.overline.copyWith(
+                                              fontWeight: FontWeight.w900,
+                                              color: Colors.white,
+                                            ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                        const Spacer(),
                         BloodGroupLabel(
-                          bloodGroup: requestBlood.bloodGroup,
+                          requestBlood.bloodGroup,
                         ),
                       ],
                     ),
@@ -190,10 +189,7 @@ class BloodListTile extends StatelessWidget {
                           child: Container(
                             height: 25,
                             width: 25,
-                            decoration: BoxDecoration(
-                                color: bloodGroupColor,
-                              borderRadius: BorderRadius.circular(6)
-                            ),
+                            decoration: BoxDecoration(color: bloodGroupColor, borderRadius: BorderRadius.circular(6)),
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: SvgPicture.asset(
@@ -213,10 +209,7 @@ class BloodListTile extends StatelessWidget {
                           child: Container(
                             height: 25,
                             width: 25,
-                            decoration: BoxDecoration(
-                                color: buttonColor,
-                                borderRadius: BorderRadius.circular(6)
-                            ),
+                            decoration: BoxDecoration(color: buttonColor, borderRadius: BorderRadius.circular(6)),
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: SvgPicture.asset(

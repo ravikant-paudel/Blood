@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BloodApp extends ConsumerWidget {
+class BloodApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     onReady((_) {
       context.read(authProvider).appStarted();
     });
-    // return Consumer(builder: (context, watch, child) {
+    return Consumer(builder: (context, watch, child) {
       final theme = watch(themeProvider.state);
       return MaterialApp(
         title: 'Blood',
@@ -31,7 +31,7 @@ class BloodApp extends ConsumerWidget {
           return SplashPage();
         }),
       );
-    // });
+    });
   }
 }
 

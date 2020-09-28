@@ -1,7 +1,4 @@
-import 'package:blood/models/request_blood/request_blood_model.dart';
-import 'package:blood/utils/preference_util.dart';
-import 'package:blood/utils/shortcuts.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -9,6 +6,66 @@ final StateNotifierProvider<RequestBloodProvider> requestBloodProvider = StateNo
 
 class RequestBloodProvider extends StateNotifier<RequestBloodState> {
   RequestBloodProvider() : super(RequestBloodState(isLoading: false, isSuccess: false));
+
+  final GlobalKey<FormState> requestFormKey = GlobalKey();
+
+  final List<String> dropdownDistrict = [
+    'Achham',
+    'Arghakhanchi',
+    'Baglung',
+    'Baitadi',
+    'Bajhang',
+    'Bajura',
+    'Banke',
+    'Bara',
+    'Bardiya',
+    'Bhaktapur',
+    'Bhojpur',
+    'Chitwan',
+    'Dadeldhura',
+    'Dailekh',
+    'Dang Deukhuri',
+    'Darchula',
+    'Dhading',
+    'Dhankuta',
+    'Dhanusha',
+    'Dolakha',
+    'Dolpa',
+    'Doti',
+    'Gorkha',
+    'Gulmi',
+    'Humla',
+    'Ilam',
+    'Jajarkot',
+    'Jhapa',
+    'Jumla',
+    'Kailali',
+    'Kalikot',
+    'Kanchanpur',
+    'Kapilvastu',
+    'Kaski',
+    'Kathmandu',
+    'Kavrepalanchok',
+    'Khotang',
+    'Lalitpur',
+    'Lamjung',
+    'Mahottari',
+    'Makwanpur',
+    'Manang',
+    'Morang',
+    'Mugu',
+    'Mustang',
+    'Myagdi',
+    'Nawalparasi',
+    'Nuwakot',
+    'Okhaldhunga',
+    'Palpa',
+    'Panchthar',
+    'Parbat',
+    'Parsa',
+    'Pyuthan',
+    'Ramechhap'
+  ];
 
   void submitBloodRequest() {
     state = state.copyWith(isLoading: true);
@@ -18,20 +75,24 @@ class RequestBloodProvider extends StateNotifier<RequestBloodState> {
 
   void updatePatientName(String name) {
     state = state.copyWith(patientName: name);
-
   }
+
   void updateBloodGroup(String blood) {
     state = state.copyWith(bloodGroup: blood);
   }
+
   void updatePatientLocation(String location) {
     state = state.copyWith(patientLocation: location);
   }
+
   void updateContactNumber(String number) {
     state = state.copyWith(contactNumber: number);
   }
+
   void updatePatientAge(String age) {
     state = state.copyWith(patientAge: age);
   }
+
   void updateDistrict(String district) {
     state = state.copyWith(district: district);
   }
@@ -61,8 +122,7 @@ class RequestBloodState {
           String bloodGroup,
           String contactNumber,
           String patientAge,
-          String district
-          }) =>
+          String district}) =>
       RequestBloodState(
         isLoading: isLoading ?? this.isLoading,
         isSuccess: isSuccess ?? this.isSuccess,

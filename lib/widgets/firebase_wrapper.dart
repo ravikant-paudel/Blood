@@ -18,30 +18,24 @@ class FirebaseWrapper {
 
   Future<bool> signIn() async {
     try {
-      final GoogleSignInAccount _signInAccount = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication _signInAuthentication = await _signInAccount.authentication;
+    final GoogleSignInAccount _signInAccount = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication _signInAuthentication = await _signInAccount.authentication;
 
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: _signInAuthentication.accessToken,
-        idToken: _signInAuthentication.idToken,
-      );
-      final result = await _auth.signInWithCredential(credential);
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: _signInAuthentication.accessToken,
+      idToken: _signInAuthentication.idToken,
+    );
+    final result = await _auth.signInWithCredential(credential);
 
-      final signInUser = result.user;
-      if (signInUser != null) {
-        authenticateUser(signInUser).then((isNewUser) {
-          preference.set(PreferenceKey.USER_ID, signInUser.uid);
-          if (isNewUser) {
-            addDataToDb(signInUser).then((_) {
-              return true;
-            });
-          } else {
-            return true;
-          }
-        });
-      } else {
-        return false;
-      }
+    final signInUser = result.user;
+    if (signInUser != null) {
+      final isNewUser = await authenticateUser(signInUser);
+      preference.set(PreferenceKey.USER_ID, signInUser.uid);
+      if (isNewUser) await addDataToDb(signInUser);
+      return true;
+    } else {
+      return false;
+    }
     } on Failure catch (e) {
       return false;
     }
@@ -99,9 +93,8 @@ class FirebaseWrapper {
     }
   }
 
-  Future<User> checkCurrentUser() async {
-    final User currentUser = await _auth.currentUser;
-    return currentUser;
+  User checkCurrentUser() {
+    return _auth.currentUser;
   }
 
   Future<void> loginOut() async {
