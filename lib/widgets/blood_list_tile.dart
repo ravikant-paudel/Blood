@@ -104,8 +104,8 @@ class BloodListTile extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 4),
                                       child: Text(
-                                        // requestBlood.patientName ??
-                                        'M|Age: 30',
+                                       'Age: ${ requestBlood.patientAge}' ?? '',
+                                        // 'M|Age: 30',
                                         style: Theme.of(context).textTheme.overline.copyWith(
                                               fontWeight: FontWeight.w900,
                                               color: Colors.white,
@@ -113,6 +113,7 @@ class BloodListTile extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                  const HorizontalGap(d_margin1),
                                 ],
                               ),
                             ],
@@ -175,13 +176,17 @@ class BloodListTile extends StatelessWidget {
                           color: secondaryTextDark,
                         ),
                         const HorizontalGap(d_margin05),
-                        Text(
-                          requestBlood.patientLocation ?? 'n/a',
-                          style: Theme.of(context).textTheme.overline.copyWith(
-                                color: secondaryTextDark,
-                              ),
+                        Expanded(
+                          child: Text(
+                            requestBlood.patientLocation ?? 'n/a',
+                            style: Theme.of(context).textTheme.overline.copyWith(
+                                  color: secondaryTextDark,
+                                ),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        const Spacer(),
+                        const HorizontalGap(d_margin1),
                         InkWell(
                           onTap: () {
                             logThis('message when share click');
