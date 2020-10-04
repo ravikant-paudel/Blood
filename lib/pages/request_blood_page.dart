@@ -6,6 +6,7 @@ import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/widgets/blood_group_label.dart';
 import 'package:blood/widgets/blood_text_form.dart';
+import 'package:blood/widgets/choose_blood_group_component.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:blood/widgets/text.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ class RequestBloodPage extends StatelessWidget {
                 key: reqBloodProvider.requestFormKey,
                 child: Column(
                   children: <Widget>[
+                    ChooseBloodGroupComponent(),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientName,
                       labelText: 'Patient Name',

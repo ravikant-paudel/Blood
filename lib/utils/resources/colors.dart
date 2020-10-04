@@ -57,8 +57,12 @@ const MaterialColor accentColorDark = MaterialColor(
   },
 );
 
-const Color primaryTextDark = Color(0xFF3B3B3B);
-const Color secondaryTextDark = Color(0xFF5E5E5E);
+const Color primaryTextLight = Color(0xFF3B3B3B);
+const Color secondaryTextLight = Color(0xFF5E5E5E);
+
+const Color primaryTextDark = Color(0xFFFBFBFB);
+const Color secondaryTextDark = Color(0xFFFEFEFE);
+
 const Color bloodGroupColor = Color(0xFFd4d4d4);
 const Color buttonColor = Color(0xFF11A407);
 

@@ -30,7 +30,7 @@ class BloodListTile extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12.0),
                       bottomRight: Radius.circular(80.0),
@@ -40,9 +40,10 @@ class BloodListTile extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: BloodGroupLabel(
                       requestBlood.bloodGroup,
-                      firstTextStyle: Theme.of(context).textTheme.subtitle1.copyWith(
+                      firstTextStyle: Theme.of(context).textTheme.headline6.copyWith(
                             color: Theme.of(context).accentColor,
                             fontWeight: FontWeight.w900,
+                            fontSize: 14,
                             height: 1.3,
                           ),
                       secTextStyle: Theme.of(context).textTheme.bodyText2.copyWith(
@@ -69,8 +70,7 @@ class BloodListTile extends StatelessWidget {
                                   'Request Blood',
                                   style: Theme.of(context).textTheme.headline6.copyWith(
                                         fontSize: 18,
-                                        fontWeight: FontWeight.w900,
-                                        color: primaryTextDark,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                 ),
                               ),
@@ -83,15 +83,14 @@ class BloodListTile extends StatelessWidget {
                                     'assets/person.svg',
                                     height: 10,
                                     width: 10,
-                                    color: secondaryTextDark,
                                   ),
                                   const HorizontalGap(d_margin05),
                                   Expanded(
                                     child: Text(
                                       requestBlood.patientName ?? '',
-                                      style: Theme.of(context).textTheme.overline.copyWith(
-                                            fontWeight: FontWeight.w900,
-                                            color: primaryTextDark,
+                                      style: Theme.of(context).textTheme.headline6.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                        fontSize: 12,
                                           ),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
@@ -100,9 +99,9 @@ class BloodListTile extends StatelessWidget {
                                   const HorizontalGap(d_margin05),
                                   Container(
                                     decoration:
-                                        BoxDecoration(color: Theme.of(context).primaryColor, borderRadius: BorderRadius.circular(6)),
+                                        BoxDecoration(color: Theme.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(6)),
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                                      padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 1           ),
                                       child: Text(
                                        'Age: ${ requestBlood.patientAge}' ?? '',
                                         // 'M|Age: 30',
@@ -132,13 +131,12 @@ class BloodListTile extends StatelessWidget {
                           'assets/contact.svg',
                           height: 10,
                           width: 10,
-                          color: secondaryTextDark,
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
                           requestBlood.contactNumber ?? '',
-                          style: Theme.of(context).textTheme.overline.copyWith(
-                                color: secondaryTextDark,
+                          style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            fontSize: 10,
                               ),
                         ),
                         const HorizontalGap(d_margin4),
@@ -146,13 +144,12 @@ class BloodListTile extends StatelessWidget {
                           'assets/calender.svg',
                           height: 10,
                           width: 10,
-                          color: secondaryTextDark,
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
                           requestBlood.createdAt.toString() ?? '',
-                          style: Theme.of(context).textTheme.overline.copyWith(
-                                color: secondaryTextDark,
+                          style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            fontSize: 10
                               ),
                         ),
                       ],
@@ -161,8 +158,8 @@ class BloodListTile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6.0),
                       child: Container(
+                        color: Theme.of(context).textTheme.bodyText2.color,
                         height: 0.5,
-                        color: secondaryTextDark,
                       ),
                     ),
                     const VerticalGap(d_margin105),
@@ -173,15 +170,14 @@ class BloodListTile extends StatelessWidget {
                           'assets/pin.svg',
                           height: 10,
                           width: 10,
-                          color: secondaryTextDark,
                         ),
                         const HorizontalGap(d_margin05),
                         Expanded(
                           child: Text(
                             requestBlood.patientLocation ?? 'n/a',
-                            style: Theme.of(context).textTheme.overline.copyWith(
-                                  color: secondaryTextDark,
-                                ),
+                            style: Theme.of(context).textTheme.bodyText2.copyWith(
+                                fontSize: 12
+                            ),
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                           ),

@@ -23,18 +23,20 @@ class BloodGroupLabel extends StatelessWidget {
         Text(
           bloodGroupMatch.group(1) ?? ' ',
           style: firstTextStyle ??
-              Theme.of(context).textTheme.headline3.copyWith(
-                    color: bloodGroupColor,
+              Theme.of(context).textTheme.headline5.copyWith(
                     fontWeight: FontWeight.w900,
+                    fontSize: 48,
                     height: 1,
+                color: const Color(0xFFebebeb),
                   ),
         ),
         Text(
           bloodGroupMatch.group(2) ?? ' ',
           style: secTextStyle ??
               Theme.of(context).textTheme.headline5.copyWith(
-                    color: bloodGroupColor,
                     height: 1,
+                fontWeight: FontWeight.normal,
+                color: const Color(0xFFebebeb),
                   ),
         ),
       ],

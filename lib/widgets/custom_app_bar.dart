@@ -35,15 +35,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
           leading: leading,
           actions: actions,
           title: Text(
             title,
             style: Theme.of(context).textTheme.headline6.copyWith(
-                  // fontStyle: FontStyle.italic,
-                  color: Colors.white,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
                 ),
           ),
           iconTheme: IconThemeData(
