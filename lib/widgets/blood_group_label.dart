@@ -43,3 +43,11 @@ class BloodGroupLabel extends StatelessWidget {
     );
   }
 }
+
+/*firstTextStyle: Theme.of(context).textTheme.headline6.copyWith(
+                    fontWeight: FontWeight.w900,
+                    height: 1.3,
+                  ),
+              secTextStyle: Theme.of(context).textTheme.bodyText2.copyWith(
+                    height: 1,
+                  ),*/

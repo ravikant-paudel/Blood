@@ -15,7 +15,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class RequestBloodPage extends StatelessWidget {
   final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
 
-
   // final GlobalKey<FormState> requestFormKey = GlobalKey();
 
   @override
@@ -41,45 +40,52 @@ class RequestBloodPage extends StatelessWidget {
                 key: reqBloodProvider.requestFormKey,
                 child: Column(
                   children: <Widget>[
-                    ChooseBloodGroupComponent(),
+                    // ChooseBloodGroupComponent(),
+                    const VerticalGap(d_margin2),
+                    BloodTextForm(
+                      onChanged: reqBloodProvider.updatePatientLocation,
+                      validator: (value) => value.isNotEmpty ? null : 'error',
+                      labelText: 'Location',
+                      hintText: 'Enter your location',
+                    ),
+                    const VerticalGap(d_margin05),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientName,
                       labelText: 'Patient Name',
-                      validator: (value) =>  RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
+                      validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
                     ),
-                    const VerticalGap(d_margin1),
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 16, top: 0, right: 16, left: 16),
-                        child: DropdownButtonFormField<String>(
-                          validator: (value) => value == null ? 'Please select blood group' : null,
-                          isExpanded: true,
-                          hint: const Text('-- Select Group --'),
-                          items: _dropdownItems.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          value: state.bloodGroup,
-                          onChanged: reqBloodProvider.updateBloodGroup,
-                        ),
-                      ),
-                    ),
-                    const VerticalGap(d_margin1),
+                    const VerticalGap(d_margin05),
+                    // Card(
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(bottom: 16, top: 0, right: 16, left: 16),
+                    //     child: DropdownButtonFormField<String>(
+                    //       validator: (value) => value == null ? 'Please select blood group' : null,
+                    //       isExpanded: true,
+                    //       hint: const Text('-- Select Group --'),
+                    //       items: _dropdownItems.map((String value) {
+                    //         return DropdownMenuItem<String>(
+                    //           value: value,
+                    //           child: Text(value),
+                    //         );
+                    //       }).toList(),
+                    //       value: state.bloodGroup,
+                    //       onChanged: reqBloodProvider.updateBloodGroup,
+                    //     ),
+                    //   ),
+                    // ),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updateContactNumber,
                       validator: (value) => value.isNotEmpty ? null : 'error',
                       keyboardType: TextInputType.phone,
                       labelText: 'Contact Number',
                     ),
-                    const VerticalGap(d_margin1),
+                    const VerticalGap(d_margin05),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientLocation,
                       validator: (value) => value.isNotEmpty ? null : 'error',
                       labelText: 'Address / Location',
                     ),
-                    const VerticalGap(d_margin1),
+                    const VerticalGap(d_margin05),
                     Card(
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 16, top: 0, right: 16, left: 16),

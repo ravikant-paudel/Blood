@@ -5,6 +5,7 @@ class BloodTextForm extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final FormFieldValidator<String> validator;
   final String labelText;
+  final String hintText;
   final TextInputType keyboardType;
 
   const BloodTextForm({
@@ -12,6 +13,7 @@ class BloodTextForm extends StatelessWidget {
     this.onChanged,
     this.validator,
     this.labelText,
+    this.hintText,
     this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
@@ -26,8 +28,9 @@ class BloodTextForm extends StatelessWidget {
           keyboardType: keyboardType,
           decoration: InputDecoration(
             labelText: labelText,
+            hintText: hintText,
             labelStyle: Theme.of(context).textTheme.subtitle2.copyWith(
-              color: secondaryTextDark,
+              color: secondaryTextLight,
             ),
           ),
         ),
