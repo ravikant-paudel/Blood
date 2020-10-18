@@ -8,7 +8,9 @@ import 'package:blood/widgets/blood_group_label.dart';
 import 'package:blood/widgets/blood_text_form.dart';
 import 'package:blood/widgets/choose_blood_group_component.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
+import 'package:nepali_date_picker/nepali_date_picker.dart' as picker;
 import 'package:blood/widgets/text.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -73,6 +75,28 @@ class RequestBloodPage extends StatelessWidget {
                     //     ),
                     //   ),
                     // ),
+                    InkWell(
+                      onTap: () {
+                        NepaliDateTime _selectedDateTime = await picker.showMaterialDatePicker(
+                          context: context,
+                          initialDate: NepaliDateTime.now(),
+                          firstDate: NepaliDateTime(2000),
+                          lastDate: NepaliDateTime(2090),
+                          initialDatePickerMode: DatePickerMode.day,
+                        );
+
+                        print(_selectedDateTime);
+
+                      },
+                      child: Card(
+                        child: Column(
+                          children: [
+                            const Text('Date'),
+                            const Text('Choose date'),
+                          ],
+                        ),
+                      ),
+                    ),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updateContactNumber,
                       validator: (value) => value.isNotEmpty ? null : 'error',
@@ -84,49 +108,6 @@ class RequestBloodPage extends StatelessWidget {
                       onChanged: reqBloodProvider.updatePatientLocation,
                       validator: (value) => value.isNotEmpty ? null : 'error',
                       labelText: 'Address / Location',
-                    ),
-                    const VerticalGap(d_margin05),
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 16, top: 0, right: 16, left: 16),
-                        child: DropdownButtonFormField<String>(
-                          validator: (value) => value == null ? 'Please select district' : null,
-                          isExpanded: true,
-                          hint: const Text('-- District / State --'),
-                          items: reqBloodProvider.dropdownDistrict.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          value: state.district,
-                          onChanged: reqBloodProvider.updateDistrict,
-                        ),
-                      ),
-                    ),
-                    BloodTextForm(
-                      onChanged: reqBloodProvider.updatePatientAge,
-                      validator: (value) => value.isNotEmpty ? null : 'error',
-                      keyboardType: TextInputType.phone,
-                      labelText: 'Patient Age',
-                    ),
-                    const VerticalGap(d_margin1),
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const BloodText('Your Blood Group'),
-                            const VerticalGap(d_margin1),
-                            Row(
-                              children: [
-                                bloodCard(context, 'AB+'),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
                     ),
                     const VerticalGap(d_margin6),
                     BloodButton(
