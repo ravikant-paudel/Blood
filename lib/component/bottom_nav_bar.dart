@@ -8,7 +8,7 @@ class BloodBottomNavBar extends StatefulWidget {
 }
 
 class _BloodBottomNavBarState extends State<BloodBottomNavBar> {
-  int _selectedIndex = 0;
+  // final int _selectedIndex = 0;
 
   /* final _navItems = [
     _NavItem(a_home, 'Home'),

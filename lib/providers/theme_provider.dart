@@ -8,7 +8,6 @@ import 'package:blood/utils/resources/typography.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 final StateNotifierProvider<BloodTheme> themeProvider = StateNotifierProvider((_) => BloodTheme());
@@ -35,7 +34,7 @@ class BloodTheme extends StateNotifier<ThemeData> {
     textTheme: bloodTextThemeDark,
   ).copyWith(
     indicatorColor: Colors.white,
-    accentColor:accentColorLight,
+    accentColor: accentColorLight,
   );
 
   static final _lightTheme = ThemeData.from(
@@ -48,6 +47,6 @@ class BloodTheme extends StateNotifier<ThemeData> {
   ).copyWith(
     scaffoldBackgroundColor: const Color(0xFFE4E4E4),
     indicatorColor: Colors.black,
-    accentColor:accentColorDark,
+    accentColor: accentColorDark,
   );
 }
