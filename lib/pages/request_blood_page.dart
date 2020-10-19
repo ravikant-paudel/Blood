@@ -11,10 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RequestBloodPage extends StatelessWidget {
-  final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
-
-  // final GlobalKey<FormState> requestFormKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,9 +81,9 @@ class RequestBloodPage extends StatelessWidget {
                       },
                       child: Card(
                         child: Column(
-                          children: [
-                            const Text('Date'),
-                            const Text('Choose date'),
+                          children: const [
+                             Text('Date'),
+                             Text('Choose date'),
                           ],
                         ),
                       ),

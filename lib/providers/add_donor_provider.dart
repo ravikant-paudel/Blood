@@ -1,8 +1,3 @@
-import 'package:blood/models/add_donor/add_donor_model.dart';
-import 'package:blood/utils/constants.dart';
-import 'package:blood/utils/preference_util.dart';
-import 'package:blood/utils/shortcuts.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 

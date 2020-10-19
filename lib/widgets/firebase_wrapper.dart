@@ -37,6 +37,7 @@ class FirebaseWrapper {
       return false;
     }
     } on Failure catch (e) {
+      logThis(' error is $e');
       return false;
     }
   }

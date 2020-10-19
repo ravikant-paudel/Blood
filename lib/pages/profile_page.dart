@@ -23,13 +23,13 @@ class ProfilePage extends StatelessWidget {
                     hintText: 'Patient name',
                   )),
               ListTile(
-                title: Text('Dark Theme'),
+                title: const Text('Dark Theme'),
                 contentPadding: const EdgeInsets.only(left: 16.0),
                 trailing: Transform.scale(
                     scale: 0.4,
                     child: DayNightSwitch(
                       value: themeState.brightness == Brightness.dark,
-                      onChanged: themePro.onThemeChange,
+                      onChanged : themePro.onThemeChange,
                     )),
               ),
             ],

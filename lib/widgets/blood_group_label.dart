@@ -1,4 +1,3 @@
-import 'package:blood/utils/resources/colors.dart';
 import 'package:flutter/material.dart';
 
 class BloodGroupLabel extends StatelessWidget {
@@ -16,7 +15,7 @@ class BloodGroupLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bgRegex = RegExp(r'(A|B|O|AB)([+-])');
-    final bloodGroupMatch =bgRegex.firstMatch(bloodGroup);
+    final bloodGroupMatch = bgRegex.firstMatch(bloodGroup);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,7 +26,7 @@ class BloodGroupLabel extends StatelessWidget {
                     fontWeight: FontWeight.w900,
                     fontSize: 48,
                     height: 1,
-                color: const Color(0xFFebebeb),
+                    color: const Color(0xFFebebeb),
                   ),
         ),
         Text(
@@ -35,8 +34,8 @@ class BloodGroupLabel extends StatelessWidget {
           style: secTextStyle ??
               Theme.of(context).textTheme.headline5.copyWith(
                     height: 1,
-                fontWeight: FontWeight.normal,
-                color: const Color(0xFFebebeb),
+                    fontWeight: FontWeight.normal,
+                    color: const Color(0xFFebebeb),
                   ),
         ),
       ],
