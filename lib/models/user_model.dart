@@ -1,18 +1,18 @@
 class UserModel {
   String uid;
   String name;
-  String email;
-  String username;
-  String notificationToken;
-  String profilePhoto;
+  String? email;
+  String? username;
+  String? notificationToken;
+  String? profilePhoto;
 
   UserModel({
-    this.uid,
-    this.name,
-    this.email,
-    this.username,
-    this.notificationToken,
-    this.profilePhoto,
+    required this.uid,
+    required this.name,
+    required this.email,
+    required this.username,
+    required this.notificationToken,
+    required this.profilePhoto,
   });
 
   Map<String, dynamic> toMap(UserModel user) {

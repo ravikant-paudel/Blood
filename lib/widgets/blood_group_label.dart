@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class BloodGroupLabel extends StatelessWidget {
-  final TextStyle firstTextStyle;
-  final TextStyle secTextStyle;
+  final TextStyle? firstTextStyle;
+  final TextStyle? secTextStyle;
   final String bloodGroup;
 
   const BloodGroupLabel(
     this.bloodGroup, {
-    Key key,
+    Key? key,
     this.firstTextStyle,
     this.secTextStyle,
   }) : super(key: key);
@@ -20,9 +20,9 @@ class BloodGroupLabel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          bloodGroupMatch.group(1) ?? ' ',
+          bloodGroupMatch?.group(1) ?? ' ',
           style: firstTextStyle ??
-              Theme.of(context).textTheme.headline5.copyWith(
+              Theme.of(context).textTheme.headline5!.copyWith(
                     fontWeight: FontWeight.w900,
                     fontSize: 48,
                     height: 1,
@@ -30,9 +30,9 @@ class BloodGroupLabel extends StatelessWidget {
                   ),
         ),
         Text(
-          bloodGroupMatch.group(2) ?? ' ',
+          bloodGroupMatch?.group(2) ?? ' ',
           style: secTextStyle ??
-              Theme.of(context).textTheme.headline5.copyWith(
+              Theme.of(context).textTheme.headline5!.copyWith(
                     height: 1,
                     fontWeight: FontWeight.normal,
                     color: const Color(0xFFebebeb),

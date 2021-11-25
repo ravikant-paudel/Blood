@@ -12,14 +12,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final String subtitle;
-  final List<Widget> actions;
-  final Widget leading;
+  final List<Widget>? actions;
+  final Widget? leading;
   final bool centerTitle;
-  final bool toolbarOnly;
+  final bool? toolbarOnly;
   final double elevation;
 
   const CustomAppBar({
-    Key key,
+    Key? key,
     this.title = '',
     this.subtitle = '',
     this.actions,
@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           actions: actions,
           title: Text(
             title,
-            style: Theme.of(context).textTheme.headline6.copyWith(
+            style: Theme.of(context).textTheme.headline6!.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
                 ),

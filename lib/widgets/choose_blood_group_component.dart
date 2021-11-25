@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 class ChooseBloodGroupComponent extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,7 +17,7 @@ class ChooseBloodGroupComponent extends StatelessWidget {
           children: [
             BloodText(
               'Choose Blood Group',
-              style: Theme.of(context).textTheme.headline6.copyWith(
+              style: Theme.of(context).textTheme.headline6!.copyWith(
                     fontSize: 14,
                   ),
             ),
@@ -31,11 +30,11 @@ class ChooseBloodGroupComponent extends StatelessWidget {
                     padding: const EdgeInsets.all(4.0),
                     child: BloodGroupLabel(
                       'AB+',
-                      firstTextStyle: Theme.of(context).textTheme.headline6.copyWith(
+                      firstTextStyle: Theme.of(context).textTheme.headline6!.copyWith(
                             fontWeight: FontWeight.w900,
                             height: 1.3,
                           ),
-                      secTextStyle: Theme.of(context).textTheme.bodyText2.copyWith(
+                      secTextStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
                             height: 1,
                           ),
                     ),
@@ -46,11 +45,11 @@ class ChooseBloodGroupComponent extends StatelessWidget {
                     padding: const EdgeInsets.all(4.0),
                     child: BloodGroupLabel(
                       'AB+',
-                      firstTextStyle: Theme.of(context).textTheme.headline6.copyWith(
+                      firstTextStyle: Theme.of(context).textTheme.headline6!.copyWith(
                             fontWeight: FontWeight.w900,
                             height: 1.3,
                           ),
-                      secTextStyle: Theme.of(context).textTheme.bodyText2.copyWith(
+                      secTextStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
                             height: 1,
                           ),
                     ),
@@ -61,11 +60,11 @@ class ChooseBloodGroupComponent extends StatelessWidget {
                     padding: const EdgeInsets.all(4.0),
                     child: BloodGroupLabel(
                       'AB+',
-                      firstTextStyle: Theme.of(context).textTheme.headline6.copyWith(
+                      firstTextStyle: Theme.of(context).textTheme.headline6!.copyWith(
                             fontWeight: FontWeight.w900,
                             height: 1.3,
                           ),
-                      secTextStyle: Theme.of(context).textTheme.bodyText2.copyWith(
+                      secTextStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
                             height: 1,
                           ),
                     ),
@@ -76,11 +75,11 @@ class ChooseBloodGroupComponent extends StatelessWidget {
                     padding: const EdgeInsets.all(4.0),
                     child: BloodGroupLabel(
                       'AB+',
-                      firstTextStyle: Theme.of(context).textTheme.headline6.copyWith(
+                      firstTextStyle: Theme.of(context).textTheme.headline6!.copyWith(
                             fontWeight: FontWeight.w900,
                             height: 1.3,
                           ),
-                      secTextStyle: Theme.of(context).textTheme.bodyText2.copyWith(
+                      secTextStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
                             height: 1,
                           ),
                     ),

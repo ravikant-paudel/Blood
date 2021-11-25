@@ -1,3 +1,4 @@
+import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/widgets/text.dart';
 import 'package:flutter/material.dart';
 
@@ -11,19 +12,19 @@ enum _BloodButtonType {
 
 class BloodButton extends StatelessWidget {
   final String buttonText;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final _BloodButtonType _buttonType;
   final EdgeInsetsGeometry padding;
   final bool autoUnFocus;
-  final Widget icon;
+  final Widget? icon;
 
 //  final double height;
   final double minWidth;
 
   const BloodButton({
-    Key key,
-    @required this.buttonText,
-    @required this.onPressed,
+    Key? key,
+    required this.buttonText,
+    required this.onPressed,
     this.padding = const EdgeInsets.symmetric(vertical: 14.0),
     this.autoUnFocus = true,
     this.icon,
@@ -33,9 +34,9 @@ class BloodButton extends StatelessWidget {
         super(key: key);
 
   const BloodButton.secondary({
-    Key key,
-    @required this.buttonText,
-    @required this.onPressed,
+    Key? key,
+    required this.buttonText,
+    required this.onPressed,
     this.padding = const EdgeInsets.symmetric(vertical: 14.0),
     this.autoUnFocus = true,
     this.icon,
@@ -45,9 +46,9 @@ class BloodButton extends StatelessWidget {
         super(key: key);
 
   const BloodButton.outline({
-    Key key,
-    @required this.buttonText,
-    @required this.onPressed,
+    Key? key,
+    required this.buttonText,
+    required this.onPressed,
     this.padding = const EdgeInsets.symmetric(vertical: 14.0),
     this.autoUnFocus = true,
     this.icon,
@@ -57,9 +58,9 @@ class BloodButton extends StatelessWidget {
         super(key: key);
 
   const BloodButton.flat({
-    Key key,
-    @required this.buttonText,
-    @required this.onPressed,
+    Key? key,
+    required this.buttonText,
+    required this.onPressed,
     this.padding = const EdgeInsets.symmetric(vertical: 14.0),
     this.autoUnFocus = true,
     this.icon,
@@ -69,9 +70,9 @@ class BloodButton extends StatelessWidget {
         super(key: key);
 
   const BloodButton.text({
-    Key key,
-    @required this.buttonText,
-    @required this.onPressed,
+    Key? key,
+    required this.buttonText,
+    required this.onPressed,
     this.padding = EdgeInsets.zero,
     this.autoUnFocus = false,
     this.icon,
@@ -82,10 +83,12 @@ class BloodButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final child = BloodText(buttonText,
-        style: Theme.of(context).textTheme.button.copyWith(
-              color: Colors.white,
-            ));
+    final child = BloodText(
+      buttonText,
+      style: Theme.of(context).textTheme.button!.copyWith(
+            color: Colors.white,
+          ),
+    );
     final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(80),
     );
@@ -127,7 +130,7 @@ class BloodButton extends StatelessWidget {
                     )
                   : FlatButton.icon(
                       onPressed: () => _onPressed(context),
-                      icon: icon,
+                      icon: ConstrainedBox(constraints: const BoxConstraints(maxWidth: d_iconMedium), child: icon!),
                       label: child,
                     );
             case _BloodButtonType.text:
@@ -147,7 +150,7 @@ class BloodButton extends StatelessWidget {
 
   void _onPressed(BuildContext context) {
     if (autoUnFocus) FocusScope.of(context).unfocus();
-    onPressed();
+    onPressed!();
   }
 }
 
@@ -156,9 +159,9 @@ class BloodAction extends StatelessWidget {
   final String text;
 
   const BloodAction({
-    Key key,
-    @required this.onPressed,
-    @required this.text,
+    Key? key,
+    required this.onPressed,
+    required this.text,
   }) : super(key: key);
 
   @override
