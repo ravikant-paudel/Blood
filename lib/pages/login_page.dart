@@ -8,17 +8,16 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(bottom: 16, top: 30, left: 16, right: 16),
-        child: Consumer(builder: (context, watch, child) {
-          final loginState = watch(loginProvider.state);
-          final loginProv = watch(loginProvider);
+        child: Consumer(builder: (context, ref, child) {
+          final loginState = ref.watch(loginProvider);
+          final loginProv = ref.watch(loginProvider.notifier);
           if (loginState.isLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
           final failed = loginState.isFailed;
-          if (failed != null) {
-          }
+          if (failed != null) {}
           return SingleChildScrollView(
             child: Column(
               children: [

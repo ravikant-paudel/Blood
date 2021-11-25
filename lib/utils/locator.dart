@@ -8,9 +8,8 @@ import 'package:blood/utils/preference_util.dart';
 import 'package:blood/widgets/firebase_wrapper.dart';
 import 'package:logger/logger.dart';
 
-
 class LocatorB {
-  static LocatorB _instance;
+  static LocatorB? _instance;
   static final _isInit = Completer<void>();
   static bool _isTest = true;
 
@@ -34,7 +33,6 @@ class LocatorB {
 
   // ******************** Instantiate Locator ********************
   Future<void> _init() async {
-
     // Plugins Here
 //    await deviceInfo.init();
 //    await packageInfo.init();

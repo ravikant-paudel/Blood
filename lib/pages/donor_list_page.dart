@@ -54,5 +54,5 @@ class DonorListPage extends StatelessWidget {
 }
 
 void onReady(void Function(Duration) callback) {
-  SchedulerBinding.instance.addPostFrameCallback(callback);
+  SchedulerBinding.instance!.addPostFrameCallback(callback);
 }

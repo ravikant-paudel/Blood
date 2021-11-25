@@ -18,24 +18,24 @@ class FirebaseWrapper {
 
   Future<bool> signIn() async {
     try {
-    final GoogleSignInAccount _signInAccount = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication _signInAuthentication = await _signInAccount.authentication;
+      final GoogleSignInAccount? _signInAccount = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication? _signInAuthentication = await _signInAccount?.authentication;
 
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: _signInAuthentication.accessToken,
-      idToken: _signInAuthentication.idToken,
-    );
-    final result = await _auth.signInWithCredential(credential);
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: _signInAuthentication?.accessToken,
+        idToken: _signInAuthentication?.idToken,
+      );
+      final result = await _auth.signInWithCredential(credential);
 
-    final signInUser = result.user;
-    if (signInUser != null) {
-      final isNewUser = await authenticateUser(signInUser);
-      preference.set(PreferenceKey.USER_ID, signInUser.uid);
-      if (isNewUser) await addDataToDb(signInUser);
-      return true;
-    } else {
-      return false;
-    }
+      final signInUser = result.user;
+      if (signInUser != null) {
+        final isNewUser = await authenticateUser(signInUser);
+        preference.set(PreferenceKey.USER_ID, signInUser.uid);
+        if (isNewUser) await addDataToDb(signInUser);
+        return true;
+      } else {
+        return false;
+      }
     } on Failure catch (e) {
       logThis(' error is $e');
       return false;
@@ -56,13 +56,12 @@ class FirebaseWrapper {
 
   Future<void> addDataToDb(User cUser) async {
     //user class
-    UserModel user = UserModel();
-    final String userName = Utils.getUsername(cUser.email);
+    final String userName = Utils.getUsername(cUser.email ?? '');
     final String notiToken = preference.get(PreferenceKey.NOTIFICATION_TOKEN);
-    user = UserModel(
+    final UserModel user = UserModel(
       uid: cUser.uid,
       email: cUser.email,
-      name: cUser.displayName,
+      name: cUser.displayName ?? '',
       profilePhoto: cUser.photoURL,
       username: userName,
       notificationToken: notiToken,
@@ -82,7 +81,11 @@ class FirebaseWrapper {
     return _firestore.collection(tableName).doc().id;
   }
 
-  Stream<List<T>> getStreamListFrmDb<T>(String tableName, T Function(DocumentSnapshot) funQuery, {Query Function(Query) query}) {
+  Stream<List<T>> getStreamListFrmDb<T>(
+    String tableName,
+    T Function(DocumentSnapshot<Map<String, dynamic>>) funQuery, {
+    MapQuery Function(MapQuery)? query,
+  }) {
     if (query != null) {
       return query(_firestore.collection(tableName)).snapshots().map(
             (snapShot) => snapShot.docs.map(funQuery).toList(),
@@ -94,7 +97,7 @@ class FirebaseWrapper {
     }
   }
 
-  User checkCurrentUser() {
+  User? checkCurrentUser() {
     return _auth.currentUser;
   }
 
@@ -104,3 +107,5 @@ class FirebaseWrapper {
     return _auth.signOut();
   }
 }
+
+typedef MapQuery = Query<Map<String, dynamic>>;

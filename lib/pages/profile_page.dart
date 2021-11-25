@@ -11,17 +11,17 @@ class ProfilePage extends StatelessWidget {
         appBar: const CustomAppBar(
           title: 'Profile',
         ),
-        body: Consumer(builder: (context, watch, child) {
-          final themeState = watch(themeProvider.state);
-          final themePro = watch(themeProvider);
+        body: Consumer(builder: (context, ref, child) {
+          final themeState = ref.watch(themeProvider);
+          final themePro = ref.watch(themeProvider.notifier);
           return ListView(
             children: [
               TextFormField(
-                // onChanged: reqBloodProvider.updatePatientName,
-                // validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
+                  // onChanged: reqBloodProvider.updatePatientName,
+                  // validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
                   decoration: const InputDecoration(
-                    hintText: 'Patient name',
-                  )),
+                hintText: 'Patient name',
+              )),
               ListTile(
                 title: const Text('Dark Theme'),
                 contentPadding: const EdgeInsets.only(left: 16.0),
@@ -29,7 +29,7 @@ class ProfilePage extends StatelessWidget {
                     scale: 0.4,
                     child: DayNightSwitch(
                       value: themeState.brightness == Brightness.dark,
-                      onChanged : themePro.onThemeChange,
+                      onChanged: themePro.onThemeChange,
                     )),
               ),
             ],

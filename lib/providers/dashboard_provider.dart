@@ -4,7 +4,7 @@ import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final StateNotifierProvider<DashboardProvider> dashboardProvider = StateNotifierProvider((_) => DashboardProvider());
+final StateNotifierProvider<DashboardProvider, DashboardState> dashboardProvider = StateNotifierProvider((_) => DashboardProvider());
 
 class DashboardProvider extends StateNotifier<DashboardState> {
   DashboardProvider() : super(DashboardState(isLoading: true, requests: []));
@@ -13,21 +13,21 @@ class DashboardProvider extends StateNotifier<DashboardState> {
     state = state.copyWith(isLoading: true);
     obtainDataFrmDb().listen((requests) {
       logThis('The req is ============<><<><<>');
-      state = state.copyWith(isLoading: false,  requests: requests);
+      state = state.copyWith(isLoading: false, requests: requests);
     });
-}
   }
+}
 
 class DashboardState {
   final bool isLoading;
-  final List<RequestBloodModel> requests;
+  final List<RequestBloodModel>? requests;
 
   DashboardState({
-    this.isLoading,
+    this.isLoading = false,
     this.requests,
   });
 
-  DashboardState copyWith({bool isLoading, List<RequestBloodModel> requests}) => DashboardState(
+  DashboardState copyWith({bool? isLoading, List<RequestBloodModel>? requests}) => DashboardState(
         isLoading: isLoading ?? this.isLoading,
         requests: requests ?? this.requests,
       );
@@ -36,13 +36,15 @@ class DashboardState {
   String toString() => 'DashboardState(isLoading: $isLoading,request: $requests)';
 }
 
-
 Stream<List<RequestBloodModel>> obtainDataFrmDb() {
-  return fbWrapper.getStreamListFrmDb<RequestBloodModel>(
-      Constants.request_collection,
-          (document) => RequestBloodModel.fromJson(
-        document.data(),
-      ));
+  return fbWrapper.getStreamListFrmDb(
+    Constants.request_collection,
+    (document) {
+      final data = document.data();
+      if (data == null) return RequestBloodModel.fromJson(const {});
+      return RequestBloodModel.fromJson(data);
+    },
+  );
 }
 
 // Future<List<RequestBloodModel>> obtainDataFrmDb() async {

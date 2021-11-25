@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final StateNotifierProvider<RequestBloodProvider> requestBloodProvider = StateNotifierProvider((_) => RequestBloodProvider());
+final StateNotifierProvider<RequestBloodProvider, RequestBloodState> requestBloodProvider =
+    StateNotifierProvider((_) => RequestBloodProvider());
 
 class RequestBloodProvider extends StateNotifier<RequestBloodState> {
-  RequestBloodProvider() : super(RequestBloodState(isLoading: false, isSuccess: false));
+  RequestBloodProvider() : super(RequestBloodState.initial());
 
   final GlobalKey<FormState> requestFormKey = GlobalKey();
 
@@ -104,25 +105,36 @@ class RequestBloodState {
   final String patientName, bloodGroup, patientLocation, contactNumber, patientAge, district;
 
   RequestBloodState({
-    this.isLoading,
-    this.isSuccess,
-    this.patientName,
-    this.patientLocation,
-    this.bloodGroup,
-    this.contactNumber,
-    this.patientAge,
-    this.district,
+    this.isLoading = false,
+    this.isSuccess = false,
+    required this.patientName,
+    required this.patientLocation,
+    required this.bloodGroup,
+    required this.contactNumber,
+    required this.patientAge,
+    required this.district,
   });
 
+  factory RequestBloodState.initial() {
+    return RequestBloodState(
+      patientName: '',
+      patientLocation: '',
+      bloodGroup: '',
+      contactNumber: '',
+      patientAge: '',
+      district: '',
+    );
+  }
+
   RequestBloodState copyWith(
-          {bool isLoading,
-          bool isSuccess,
-          String patientName,
-          String patientLocation,
-          String bloodGroup,
-          String contactNumber,
-          String patientAge,
-          String district}) =>
+          {bool? isLoading,
+          bool? isSuccess,
+          String? patientName,
+          String? patientLocation,
+          String? bloodGroup,
+          String? contactNumber,
+          String? patientAge,
+          String? district}) =>
       RequestBloodState(
         isLoading: isLoading ?? this.isLoading,
         isSuccess: isSuccess ?? this.isSuccess,

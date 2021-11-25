@@ -20,7 +20,7 @@ class DialogUtil {
   /// If a dialog is already open, replaces the older one.
   ///
   /// Defaults: [barrierDismissible] is false and [backButtonPop] is true.
- /* Future<T> show<T>({
+  /* Future<T> show<T>({
     @required Widget child,
     bool barrierDismissible = false,
     bool backButtonPop = true,
@@ -49,10 +49,10 @@ class DialogUtil {
   /// Hides open dialog, if any present.
   ///
   /// Optionally, a [value] can be passed, which is returned through [show].
-  void hide<T>([T value]) {
-    if (_isDialogOpen) {
-      Navigator.pop(navigatorKey.currentState.overlay.context, value);
-      _isDialogOpen = false;
-    }
-  }
+  // void hide<T>([T value]) {
+  //   if (_isDialogOpen) {
+  //     Navigator.pop(navigatorKey.currentState.overlay.context, value);
+  //     _isDialogOpen = false;
+  //   }
+  // }
 }

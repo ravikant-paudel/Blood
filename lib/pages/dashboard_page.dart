@@ -1,4 +1,5 @@
 import 'package:blood/providers/dashboard_provider.dart';
+import 'package:blood/utils/empty_util.dart';
 import 'package:blood/widgets/blood_list_tile.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:blood/widgets/text.dart';
@@ -10,19 +11,20 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     onReady((_) {
-      context.read(dashboardProvider).obtainRequestDb();
+      (context as WidgetRef).read(dashboardProvider.notifier).obtainRequestDb();
     });
     return Scaffold(
-        appBar: const CustomAppBar(
-          title: 'Donor List',
-        ),
-        body: Consumer(builder: (context, watch, child) {
-          final donorListState = watch(dashboardProvider.state);
+      appBar: const CustomAppBar(
+        title: 'Donor List',
+      ),
+      body: Consumer(
+        builder: (context, ref, child) {
+          final donorListState = ref.watch(dashboardProvider);
           if (donorListState.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
           final donors = donorListState.requests;
-          if (donors.isEmpty) {
+          if (donors?.isNullOrEmpty ?? true) {
             return const Center(
               child: BloodText('No donor found'),
             );
@@ -30,17 +32,19 @@ class DashboardPage extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ListView(
-              children: donors
+              children: donors!
                   .map((donor) => BloodListTile(
                         requestBlood: donor,
                       ))
                   .toList(),
             ),
           );
-        }));
+        },
+      ),
+    );
   }
 }
 
 void onReady(void Function(Duration) callback) {
-  SchedulerBinding.instance.addPostFrameCallback(callback);
+  SchedulerBinding.instance!.addPostFrameCallback(callback);
 }

@@ -1,4 +1,4 @@
-extension EmptyUtil on Object {
+extension EmptyUtil on Object? {
   /// Returns true is [Object] is null.
   bool get isNull => this == null;
 

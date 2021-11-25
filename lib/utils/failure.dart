@@ -2,10 +2,9 @@ class Failure {
   final String message;
   final int code;
   final FailureType type;
-  final StackTrace stackTrace;
+  final StackTrace? stackTrace;
 
-  Failure(this.message,
-      {this.type = FailureType.error, this.code = 0, this.stackTrace});
+  Failure(this.message, {this.type = FailureType.error, this.code = 0, this.stackTrace});
 
   @override
   String toString() {

@@ -17,14 +17,14 @@ class RequestBloodPage extends StatelessWidget {
       appBar: const CustomAppBar(
         title: 'Request Blood',
       ),
-      body: Consumer(builder: (context, read, child) {
-        final state = read(requestBloodProvider.state);
-        final reqBloodProvider = read(requestBloodProvider);
+      body: Consumer(builder: (context, ref, child) {
+        final state = ref.read(requestBloodProvider);
+        final reqBloodProvider = ref.read(requestBloodProvider.notifier);
         if (state.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
         if (state.isSuccess) {
-          navigator.pop(context);
+          router.pop(context);
         }
         return ListView(
           children: [
@@ -38,7 +38,7 @@ class RequestBloodPage extends StatelessWidget {
                     const VerticalGap(d_margin2),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientLocation,
-                      validator: (value) => value.isNotEmpty ? null : 'error',
+                      validator: (value) => value,
                       labelText: 'Location',
                       hintText: 'Enter your location',
                     ),
@@ -46,7 +46,7 @@ class RequestBloodPage extends StatelessWidget {
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientName,
                       labelText: 'Patient Name',
-                      validator: (value) => RegExp(r'\w{4,}').hasMatch(value) ? null : 'At least 4 character',
+                      validator: (value) => RegExp(r'\w{4,}').hasMatch(value ?? '') ? null : 'At least 4 character',
                     ),
                     const VerticalGap(d_margin05),
                     // Card(
@@ -82,29 +82,29 @@ class RequestBloodPage extends StatelessWidget {
                       child: Card(
                         child: Column(
                           children: const [
-                             Text('Date'),
-                             Text('Choose date'),
+                            Text('Date'),
+                            Text('Choose date'),
                           ],
                         ),
                       ),
                     ),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updateContactNumber,
-                      validator: (value) => value.isNotEmpty ? null : 'error',
+                      validator: (value) => value,
                       keyboardType: TextInputType.phone,
                       labelText: 'Contact Number',
                     ),
                     const VerticalGap(d_margin05),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientLocation,
-                      validator: (value) => value.isNotEmpty ? null : 'error',
+                      validator: (value) => value,
                       labelText: 'Address / Location',
                     ),
                     const VerticalGap(d_margin6),
                     BloodButton(
                       buttonText: 'Add Donor',
                       onPressed: () {
-                        if (reqBloodProvider.requestFormKey.currentState.validate()) {
+                        if (reqBloodProvider.requestFormKey.currentState?.validate() ?? false) {
                           reqBloodProvider.submitBloodRequest();
                         }
                       },
@@ -127,12 +127,12 @@ class RequestBloodPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: BloodGroupLabel(
           bloodGroup ?? '',
-          firstTextStyle: Theme.of(context).textTheme.headline6.copyWith(
+          firstTextStyle: Theme.of(context).textTheme.headline6!.copyWith(
                 color: primaryTextDark,
                 fontWeight: FontWeight.w900,
                 height: 1.3,
               ),
-          secTextStyle: Theme.of(context).textTheme.bodyText2.copyWith(
+          secTextStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
                 color: primaryTextDark,
                 height: 1,
               ),

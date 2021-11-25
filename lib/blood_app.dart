@@ -11,15 +11,15 @@ class BloodApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     onReady((_) {
-      context.read(authProvider).appStarted();
+      (context as WidgetRef).read(authProvider.notifier).appStarted();
     });
-    return Consumer(builder: (context, watch, child) {
-      final theme = watch(themeProvider.state);
+    return Consumer(builder: (context, ref, child) {
+      final theme = ref.watch(themeProvider);
       return MaterialApp(
         title: 'Blood',
         theme: theme,
         home: Consumer(builder: (context, watch, child) {
-          final authState = watch(authProvider.state);
+          final authState = ref.watch(authProvider);
           switch (authState) {
             case AuthState.isInitial:
               return SplashPage();
@@ -37,6 +37,6 @@ class BloodApp extends StatelessWidget {
 
 void onReady(void Function(Duration) callback) {
 //  if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
-  SchedulerBinding.instance.addPostFrameCallback(callback);
+  SchedulerBinding.instance!.addPostFrameCallback(callback);
 //  }
 }

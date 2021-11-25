@@ -8,29 +8,29 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 /// Logs provided message
 /// Default level is [Level.verbose]
 class LogUtil {
-  Logger _logger;
-  Logger _loggerNoStack;
+  late Logger _logger;
+  late Logger _loggerNoStack;
 
   LogUtil(Level level) {
     Logger.level = level;
-    _logger = Logger(printer: PrettyPrinter(colors: false, prefix: true, lineLength: _getConsoleColumns()));
-    _loggerNoStack = Logger(printer: PrettyPrinter(methodCount: 0, colors: false, prefix: true, lineLength: _getConsoleColumns()));
+    _logger = Logger(printer: PrettyPrinter(colors: false, lineLength: _getConsoleColumns()));
+    _loggerNoStack = Logger(printer: PrettyPrinter(methodCount: 0, colors: false, lineLength: _getConsoleColumns()));
   }
 
   /// Verbose Logger
-  void v(dynamic message, {dynamic detail, StackTrace stackTrace}) => _logger.v(message, detail, stackTrace);
+  void v(dynamic message, {dynamic detail, StackTrace? stackTrace}) => _logger.v(message, detail, stackTrace);
 
   /// Debug Logger
-  void d(dynamic message, {dynamic detail, StackTrace stackTrace}) => _loggerNoStack.d(message, detail, stackTrace);
+  void d(dynamic message, {dynamic detail, StackTrace? stackTrace}) => _loggerNoStack.d(message, detail, stackTrace);
 
   /// Info Logger
-  void i(dynamic message, {dynamic detail, StackTrace stackTrace}) => _loggerNoStack.i(message, detail, stackTrace);
+  void i(dynamic message, {dynamic detail, StackTrace? stackTrace}) => _loggerNoStack.i(message, detail, stackTrace);
 
   /// Warning Logger
-  void w(dynamic message, {dynamic detail, StackTrace stackTrace}) => _loggerNoStack.w(message, detail, stackTrace);
+  void w(dynamic message, {dynamic detail, StackTrace? stackTrace}) => _loggerNoStack.w(message, detail, stackTrace);
 
   /// Error Logger
-  void e(dynamic message, {dynamic detail, StackTrace stackTrace}) => _loggerNoStack.e(message, detail, stackTrace);
+  void e(dynamic message, {dynamic detail, StackTrace? stackTrace}) => _loggerNoStack.e(message, detail, stackTrace);
 
   static PrettyDioLogger get dioLogger => PrettyDioLogger(
         // verbose

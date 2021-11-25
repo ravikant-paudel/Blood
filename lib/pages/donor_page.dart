@@ -24,7 +24,7 @@ class DonorPage extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'A+'));
+                    router.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'A+'));
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
@@ -37,7 +37,7 @@ class DonorPage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'A-'));
+                    router.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'A-'));
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
@@ -56,7 +56,7 @@ class DonorPage extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'B+'));
+                    router.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'B+'));
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
@@ -69,7 +69,7 @@ class DonorPage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'B-'));
+                    router.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'B-'));
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
@@ -88,7 +88,7 @@ class DonorPage extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'AB+'));
+                    router.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'AB+'));
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
@@ -101,7 +101,7 @@ class DonorPage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'AB-'));
+                    router.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'AB-'));
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
@@ -120,7 +120,7 @@ class DonorPage extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'O+'));
+                    router.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'O+'));
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
@@ -133,7 +133,7 @@ class DonorPage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    navigator.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'O-'));
+                    router.push(Routes.donorListPage, arguments: DonorListPageArguments(bloodGroup: 'O-'));
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),
@@ -150,7 +150,7 @@ class DonorPage extends StatelessWidget {
             BloodButton(
               buttonText: 'Add Blood',
               onPressed: () {
-                navigator.push(Routes.addDonorPage);
+                router.push(Routes.addDonorPage);
               },
             ),
           ],

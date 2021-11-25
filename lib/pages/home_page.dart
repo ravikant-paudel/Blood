@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         ),*/
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          navigator.push(Routes.requestBloodPage);
+          router.push(Routes.requestBloodPage);
         },
         backgroundColor: Colors.red,
         // backgroundColor: Theme.of(context).primaryColor,

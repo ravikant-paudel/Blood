@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final StateNotifierProvider<AddDonorProvider> addDonorProvider = StateNotifierProvider((_) => AddDonorProvider());
+final StateNotifierProvider<AddDonorProvider, AddDonorState> addDonorProvider = StateNotifierProvider((_) => AddDonorProvider());
 
 class AddDonorProvider extends StateNotifier<AddDonorState> {
-  AddDonorProvider() : super(AddDonorState(isLoading: false, isSuccess: false));
+  AddDonorProvider() : super(AddDonorState(isLoading: false, isSuccess: false, nameDonor: '', bloodDonor: '', numberDonor: ''));
 
   void submitDonorName() {
     state = state.copyWith(isLoading: true);
@@ -20,7 +20,7 @@ class AddDonorProvider extends StateNotifier<AddDonorState> {
     state = state.copyWith(numberDonor: number);
   }
 
-  void updateBloodGroup(String blood) {
+  void updateBloodGroup(String? blood) {
     state = state.copyWith(bloodDonor: blood);
   }
 }
@@ -31,14 +31,14 @@ class AddDonorState {
   final String nameDonor, numberDonor, bloodDonor;
 
   AddDonorState({
-    this.isLoading,
-    this.isSuccess,
-    this.nameDonor,
-    this.numberDonor,
-    this.bloodDonor,
+    this.isLoading = false,
+    this.isSuccess = false,
+    required this.nameDonor,
+    required this.numberDonor,
+    required this.bloodDonor,
   });
 
-  AddDonorState copyWith({bool isLoading, bool isSuccess, String nameDonor, String numberDonor, String bloodDonor}) => AddDonorState(
+  AddDonorState copyWith({bool? isLoading, bool? isSuccess, String? nameDonor, String? numberDonor, String? bloodDonor}) => AddDonorState(
         isLoading: isLoading ?? this.isLoading,
         isSuccess: isSuccess ?? this.isSuccess,
         nameDonor: nameDonor ?? this.nameDonor,

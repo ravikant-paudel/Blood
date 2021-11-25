@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final StateNotifierProvider<BloodTheme> themeProvider = StateNotifierProvider((_) => BloodTheme());
+final StateNotifierProvider<BloodTheme, ThemeData> themeProvider = StateNotifierProvider((_) => BloodTheme());
 
 class BloodTheme extends StateNotifier<ThemeData> {
   BloodTheme() : super(_lightTheme);

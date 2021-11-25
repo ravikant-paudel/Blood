@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final StateNotifierProvider<HomeProvider> homeProvider = StateNotifierProvider((_) => HomeProvider());
+final StateNotifierProvider<HomeProvider, HomeState> homeProvider = StateNotifierProvider((_) => HomeProvider());
 
 class HomeProvider extends StateNotifier<HomeState> {
   HomeProvider() : super(HomeState(currentTab: 0, currentScreen: DashboardPage()));
 
-    Widget updateScreen(int currentTab) {
+  Widget updateScreen(int currentTab) {
     state = state.copyWith(currentTab: currentTab);
     switch (currentTab) {
       case 0:
@@ -28,15 +28,15 @@ class HomeProvider extends StateNotifier<HomeState> {
 }
 
 class HomeState {
-  final int currentTab;
+  final int? currentTab;
   final Widget currentScreen;
 
   HomeState({
-    this.currentTab,
-    this.currentScreen,
+    required this.currentTab,
+    required this.currentScreen,
   });
 
-  HomeState copyWith({int currentTab, Widget currentScreen}) => HomeState(
+  HomeState copyWith({int? currentTab, Widget? currentScreen}) => HomeState(
         currentTab: currentTab ?? this.currentTab,
         currentScreen: currentScreen ?? this.currentScreen,
       );

@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final StateNotifierProvider<AuthProvider> authProvider = StateNotifierProvider((ref) => AuthProvider(ref));
+final StateNotifierProvider<AuthProvider, AuthState> authProvider = StateNotifierProvider((ref) => AuthProvider(ref));
 
 // final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -16,8 +16,8 @@ class AuthProvider extends StateNotifier<AuthState> {
 
   Future<void> appStarted() async {
     await LocatorB.init();
-    ref.read(themeProvider).init();
-    final User currentUser = fbWrapper.checkCurrentUser();
+    ref.read(themeProvider.notifier).init();
+    final User? currentUser = fbWrapper.checkCurrentUser();
     if (currentUser != null) {
       state = AuthState.isAuthenticated;
       logThis('NOT ==============  here isr= equal');
