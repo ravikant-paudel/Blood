@@ -5,7 +5,7 @@ import 'package:blood/pages/home_page.dart';
 import 'package:blood/pages/request_blood_page.dart';
 
 @MaterialAutoRouter(
-  routes: [
+  routes: <AutoRoute>[
     AutoRoute(page: HomePage),
     AutoRoute(page: RequestBloodPage),
     AutoRoute(page: AddDonorPage),

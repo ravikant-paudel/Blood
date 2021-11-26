@@ -3,7 +3,6 @@
 import 'dart:io';
 
 import 'package:logger/logger.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 /// Logs provided message
 /// Default level is [Level.verbose]
@@ -32,17 +31,17 @@ class LogUtil {
   /// Error Logger
   void e(dynamic message, {dynamic detail, StackTrace? stackTrace}) => _loggerNoStack.e(message, detail, stackTrace);
 
-  static PrettyDioLogger get dioLogger => PrettyDioLogger(
-        // verbose
-        requestHeader: Logger.level.index == Level.verbose.index,
-        responseHeader: Logger.level.index == Level.verbose.index,
-        // debug, verbose
-        responseBody: Logger.level.index <= Level.debug.index,
-        request: Logger.level.index <= Level.debug.index,
-        requestBody: Logger.level.index <= Level.debug.index,
-        // error, warning, info, debug, verbose
-        error: Logger.level.index <= Level.error.index,
-      );
+  // static PrettyDioLogger get dioLogger => PrettyDioLogger(
+  //       // verbose
+  //       requestHeader: Logger.level.index == Level.verbose.index,
+  //       responseHeader: Logger.level.index == Level.verbose.index,
+  //       // debug, verbose
+  //       responseBody: Logger.level.index <= Level.debug.index,
+  //       request: Logger.level.index <= Level.debug.index,
+  //       requestBody: Logger.level.index <= Level.debug.index,
+  //       // error, warning, info, debug, verbose
+  //       error: Logger.level.index <= Level.error.index,
+  //     );
 
   int _getConsoleColumns() {
     try {

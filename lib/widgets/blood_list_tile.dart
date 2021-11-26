@@ -87,7 +87,7 @@ class BloodListTile extends StatelessWidget {
                                   const HorizontalGap(d_margin05),
                                   Expanded(
                                     child: Text(
-                                      requestBlood.patientName ?? '',
+                                      requestBlood.patientName,
                                       style: Theme.of(context).textTheme.headline6!.copyWith(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 12,
@@ -103,7 +103,7 @@ class BloodListTile extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
                                       child: Text(
-                                        'Age: ${requestBlood.patientAge}' ?? '',
+                                        'Age: ${requestBlood.patientAge}',
                                         // 'M|Age: 30',
                                         style: Theme.of(context).textTheme.overline!.copyWith(
                                               fontWeight: FontWeight.w900,
@@ -134,7 +134,7 @@ class BloodListTile extends StatelessWidget {
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
-                          requestBlood.contactNumber ?? '',
+                          requestBlood.contactNumber,
                           style: Theme.of(context).textTheme.bodyText2!.copyWith(
                                 fontSize: 10,
                               ),
@@ -147,7 +147,7 @@ class BloodListTile extends StatelessWidget {
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
-                          requestBlood.createdAt.toString() ?? '',
+                          requestBlood.createdAt.toString(),
                           style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 10),
                         ),
                       ],
@@ -172,7 +172,7 @@ class BloodListTile extends StatelessWidget {
                         const HorizontalGap(d_margin05),
                         Expanded(
                           child: Text(
-                            requestBlood.patientLocation ?? 'n/a',
+                            requestBlood.patientLocation,
                             style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 12),
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,

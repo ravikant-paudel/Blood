@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 class DonorListPage extends StatelessWidget {
   final String bloodGroup;
 
-  const DonorListPage(this.bloodGroup);
+  const DonorListPage({required this.bloodGroup});
 
   @override
   Widget build(BuildContext context) {

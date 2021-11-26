@@ -7,12 +7,13 @@ import 'package:flutter/material.dart' hide Router;
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ExtendedNavigator(
-        initialRoute: Routes.homePage,
-        router: Router(),
-        name: 'mainRouter',
-      ),
-    );
+    return Container();
+    // return Scaffold(
+    //   body: AutoRoute(
+    //     initialRoute: HomePageRoute(),
+    //     router: Router(),
+    //     name: 'mainRouter',
+    //   ),
+    // );
   }
 }

@@ -126,7 +126,7 @@ class RequestBloodPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: BloodGroupLabel(
-          bloodGroup ?? '',
+          bloodGroup,
           firstTextStyle: Theme.of(context).textTheme.headline6!.copyWith(
                 color: primaryTextDark,
                 fontWeight: FontWeight.w900,
