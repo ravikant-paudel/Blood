@@ -10,7 +10,7 @@ final StateNotifierProvider<AuthProvider, AuthState> authProvider = StateNotifie
 // final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class AuthProvider extends StateNotifier<AuthState> {
-  final ProviderReference ref;
+  final Ref ref;
 
   AuthProvider(this.ref) : super(AuthState.isInitial);
 

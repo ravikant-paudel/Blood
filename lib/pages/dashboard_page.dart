@@ -1,5 +1,6 @@
 import 'package:blood/providers/dashboard_provider.dart';
 import 'package:blood/utils/empty_util.dart';
+import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/widgets/blood_list_tile.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:blood/widgets/text.dart';
@@ -8,10 +9,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DashboardPage extends StatelessWidget {
+  final container = ProviderContainer();
   @override
   Widget build(BuildContext context) {
     onReady((_) {
-      (context as WidgetRef).read(dashboardProvider.notifier).obtainRequestDb();
+      container.read(dashboardProvider.notifier).obtainRequestDb();
     });
     return Scaffold(
       appBar: const CustomAppBar(
@@ -19,11 +21,12 @@ class DashboardPage extends StatelessWidget {
       ),
       body: Consumer(
         builder: (context, ref, child) {
-          final donorListState = ref.watch(dashboardProvider);
+          final donorListState = ref.read(dashboardProvider);
           if (donorListState.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
           final donors = donorListState.requests;
+          logThis(donors, tag: 'Donor LIst', developer: Developer.ravi);
           if (donors?.isNullOrEmpty ?? true) {
             return const Center(
               child: BloodText('No donor found'),

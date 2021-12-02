@@ -98,6 +98,7 @@ class FirebaseWrapper {
   }
 
   User? checkCurrentUser() {
+    logThis('checkCurrentUser');
     return _auth.currentUser;
   }
 

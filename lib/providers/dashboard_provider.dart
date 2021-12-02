@@ -7,12 +7,12 @@ import 'package:state_notifier/state_notifier.dart';
 final StateNotifierProvider<DashboardProvider, DashboardState> dashboardProvider = StateNotifierProvider((_) => DashboardProvider());
 
 class DashboardProvider extends StateNotifier<DashboardState> {
-  DashboardProvider() : super(DashboardState(isLoading: true, requests: []));
+  DashboardProvider() : super(DashboardState(isLoading: false, requests: []));
 
   Future<void> obtainRequestDb() async {
-    state = state.copyWith(isLoading: true);
+    // state = state.copyWith(isLoading: true);
     obtainDataFrmDb().listen((requests) {
-      logThis('The req is ============<><<><<>');
+      logThis(requests, tag: 'requests List');
       state = state.copyWith(isLoading: false, requests: requests);
     });
   }
