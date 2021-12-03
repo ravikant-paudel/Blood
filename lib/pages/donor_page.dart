@@ -1,9 +1,8 @@
 import 'package:blood/component/button.dart';
 import 'package:blood/component/gaps.dart';
-import 'package:blood/helper/router/router.gr.dart';
+import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/utils/blood_list_view.dart';
 import 'package:blood/utils/resources/dimens.dart';
-import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:blood/widgets/text.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +55,7 @@ class DonorPage extends StatelessWidget {
           BloodButton(
             buttonText: 'Add Blood',
             onPressed: () {
-              router.push(const AddDonorPageRoute());
+              goRouter.go('/addDonor');
             },
           ),
         ],
@@ -74,7 +73,7 @@ class _BloodGroupItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        router.push(DonorListPageRoute(bloodGroup: bloodGroup));
+        goRouter.go('/donorList?bg=$bloodGroup');
       },
       child: Container(
         decoration: BoxDecoration(color: Colors.red[400], shape: BoxShape.circle),

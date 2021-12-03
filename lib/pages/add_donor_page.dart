@@ -1,5 +1,6 @@
 import 'package:blood/component/button.dart';
 import 'package:blood/component/gaps.dart';
+import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/providers/add_donor_provider.dart';
 import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/utils/shortcuts.dart';
@@ -11,6 +12,8 @@ class AddDonorPage extends StatelessWidget {
   final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
 
   final GlobalKey<FormState> formKey = GlobalKey();
+
+  AddDonorPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class AddDonorPage extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (addDonorState.isSuccess) {
-          router.pop(context);
+          goRouter.pop(context);
         }
         return ListView(
           children: [
@@ -51,20 +54,20 @@ class AddDonorPage extends StatelessWidget {
                           hintText: 'Donor Number',
                         )),
                     const VerticalGap(),
-                    DropdownButtonFormField<String>(
-                      validator: (value) => value == null ? 'Please select blood group' : null,
-                      isExpanded: true,
-//              isDense: true,
-                      hint: const Text('-- Select Group --'),
-                      items: _dropdownItems.map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      value: addDonorState.bloodDonor,
-                      onChanged: addDProvider.updateBloodGroup,
-                    ),
+//                     DropdownButtonFormField<String>(
+//                       validator: (value) => value == null ? 'Please select blood group' : null,
+//                       isExpanded: true,
+// //                    isDense: true,
+//                       hint: const Text('-- Select Group --'),
+//                       items: _dropdownItems.map((String value) {
+//                         return DropdownMenuItem<String>(
+//                           value: value,
+//                           child: Text(value),
+//                         );
+//                       }).toList(),
+//                       value: addDonorState.bloodDonor,
+//                       onChanged: addDProvider.updateBloodGroup,
+//                     ),
                     const VerticalGap(d_margin6),
                     BloodButton(
                       buttonText: 'Add Donor',

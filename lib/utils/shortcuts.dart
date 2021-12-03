@@ -1,11 +1,10 @@
 // Copyright (c) 2020 The Khalti Authors. All rights reserved.
 
-import 'package:blood/helper/router/router.gr.dart';
-import 'package:blood/providers/auth_provider.dart';
+import 'package:blood/utils/empty_util.dart';
 import 'package:blood/utils/locator.dart';
 import 'package:blood/utils/preference_util.dart';
 import 'package:blood/widgets/firebase_wrapper.dart';
-import 'package:blood/utils/empty_util.dart';
+import 'package:flutter/material.dart';
 
 enum Developer { ravi }
 
@@ -16,9 +15,6 @@ enum Developer { ravi }
 
 /// Shortcut for [FirebaseWrapper].
 FirebaseWrapper get fbWrapper => LocatorB().fbWrapper;
-
-/// Shortcut for [ExtendedNavigator].
-final RootRouter router = RootRouter();
 
 /// Shortcut for [PreferenceUtil].
 PreferenceUtil get preference => LocatorB().preference;
@@ -33,4 +29,10 @@ void _log(dynamic message, {String? tag, Developer? developer}) {
   final hasDetail = tag.isNotNullAndNotEmpty || developer.isNotNullAndNotEmpty;
 
   LocatorB().logger.i(message, detail: hasDetail ? '${tag ?? ''} ${developer.isNotNullAndNotEmpty ? dev : ''}' : null);
+}
+
+extension ColorExtension on BuildContext {
+  ThemeData get theme => Theme.of(this);
+
+  ColorScheme get color => theme.colorScheme;
 }

@@ -1,5 +1,6 @@
 import 'package:blood/component/button.dart';
 import 'package:blood/component/gaps.dart';
+import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/providers/request_blood_provider.dart';
 import 'package:blood/utils/resources/colors.dart';
 import 'package:blood/utils/resources/dimens.dart';
@@ -11,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RequestBloodPage extends StatelessWidget {
+  const RequestBloodPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +27,7 @@ class RequestBloodPage extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (state.isSuccess) {
-          router.pop(context);
+          goRouter.pop(context);
         }
         return ListView(
           children: [

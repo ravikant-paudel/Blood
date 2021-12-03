@@ -1,172 +1,122 @@
-import 'package:blood/helper/router/router.gr.dart';
+import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/pages/dashboard_page.dart';
 import 'package:blood/pages/donor_page.dart';
 import 'package:blood/pages/history_page.dart';
 import 'package:blood/pages/profile_page.dart';
-import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key, this.path}) : super(key: key);
+
+  final String? path;
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentTab = 0; // to keep track of active tab index
-  final List<Widget> screens = [
-    DashboardPage(),
-    DonorPage(),
-    HistoryPage(),
-    ProfilePage(),
-  ]; // to store nested tabs
+  final Map<String, Widget> screens = {
+    'dashboard': const DashboardPage(),
+    'donor': const DonorPage(),
+    'history': HistoryPage(),
+    'profile': ProfilePage(),
+  }; // to store nested tabs
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = DashboardPage(); // Our first view in viewport
+  // Widget currentScreen = DashboardPage(); // Our first view in viewport
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[currentTab],
-      /*body: PageStorage(
-          bucket: bucket,
-//          child: homePro.updateScreen(homeState.currentTab),
-        child: currentScreen,
-        ),*/
+      body: screens[widget.path ?? screens.keys.first],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          router.push(const RequestBloodPageRoute());
+          goRouter.go('/requestBlood');
         },
         backgroundColor: Colors.red,
         // backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 10,
-        child: Container(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-//                        homePro.updateScreen(0);
-                      setState(() {
-                        currentScreen = DashboardPage(); // if user taps on this dashboard tab will be active
-                        currentTab = 0;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.dashboard,
-                          color: currentTab == 0 ? Colors.red : Colors.grey,
-                        ),
-                        Text(
-                          'Dashboard',
-                          style: TextStyle(
-                            color: currentTab == 0 ? Colors.red : Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-//                        homePro.updateScreen(1);
-                      setState(() {
-                        currentScreen = DonorPage(); // if user taps on this dashboard tab will be active
-                        currentTab = 1;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.assessment,
-                          color: currentTab == 1 ? Colors.red : Colors.grey,
-                        ),
-                        Text(
-                          'List',
-                          style: TextStyle(
-                            color: currentTab == 1 ? Colors.red : Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+      bottomNavigationBar: BottomNavScope(
+        path: widget.path ?? '',
+        child: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 10,
+          child: SizedBox(
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    _Item(path: 'dashboard', icon: Icons.dashboard, label: 'Dashboard'),
+                    _Item(path: 'donor', icon: Icons.assessment, label: 'List'),
+                  ],
+                ),
 
-              // Right Tab bar icons
+                // Right Tab bar icons
 
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-//                        homePro.updateScreen(2);
-                      setState(() {
-                        currentScreen = HistoryPage(); // if user taps on this dashboard tab will be active
-                        currentTab = 2;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.history,
-                          color: currentTab == 2 ? Colors.red : Colors.grey,
-                        ),
-                        Text(
-                          'History',
-                          style: TextStyle(
-                            color: currentTab == 2 ? Colors.red : Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-//                        homePro.updateScreen(3);
-                      setState(() {
-                        currentScreen = ProfilePage(); // if user taps on this dashboard tab will be active
-                        currentTab = 3;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.account_circle,
-                          color: currentTab == 3 ? Colors.red : Colors.grey,
-                        ),
-                        Text(
-                          'Profile',
-                          style: TextStyle(
-                            color: currentTab == 3 ? Colors.red : Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ],
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    _Item(path: 'history', icon: Icons.history, label: 'History'),
+                    _Item(path: 'profile', icon: Icons.person, label: 'Profile'),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
-//    }
-//    );
   }
+}
+
+class _Item extends StatelessWidget {
+  const _Item({
+    Key? key,
+    required this.path,
+    required this.icon,
+    required this.label,
+  }) : super(key: key);
+
+  final String path;
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = BottomNavScope.of(context) == path ? Colors.red : Colors.grey;
+
+    return MaterialButton(
+      minWidth: 40,
+      onPressed: () => goRouter.go('/$path'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: color),
+          Text(
+            label,
+            style: TextStyle(color: color),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BottomNavScope extends InheritedWidget {
+  const BottomNavScope({Key? key, required this.path, required Widget child}) : super(key: key, child: child);
+
+  final String path;
+
+  static String of(BuildContext context) {
+    final scope = context.dependOnInheritedWidgetOfExactType<BottomNavScope>();
+    assert(scope != null, 'You forgot to wrap your widget with _BottomNavScope');
+    return scope!.path;
+  }
+
+  @override
+  bool updateShouldNotify(BottomNavScope oldWidget) => oldWidget.path != path;
 }

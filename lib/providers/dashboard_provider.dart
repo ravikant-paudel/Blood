@@ -4,13 +4,18 @@ import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final StateNotifierProvider<DashboardProvider, DashboardState> dashboardProvider = StateNotifierProvider((_) => DashboardProvider());
+final StateNotifierProvider<DashboardProvider, DashboardState> dashboardProvider = StateNotifierProvider(
+  (ref) {
+    final provider = DashboardProvider()..obtainRequestDb();
+    return provider;
+  },
+);
 
 class DashboardProvider extends StateNotifier<DashboardState> {
-  DashboardProvider() : super(DashboardState(isLoading: false, requests: []));
+  DashboardProvider() : super(DashboardState(isLoading: true, requests: []));
 
   Future<void> obtainRequestDb() async {
-    // state = state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: true);
     obtainDataFrmDb().listen((requests) {
       logThis(requests, tag: 'requests List');
       state = state.copyWith(isLoading: false, requests: requests);
@@ -34,6 +39,14 @@ class DashboardState {
 
   @override
   String toString() => 'DashboardState(isLoading: $isLoading,request: $requests)';
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DashboardState && runtimeType == other.runtimeType && isLoading == other.isLoading && requests == other.requests;
+
+  @override
+  int get hashCode => isLoading.hashCode ^ requests.hashCode;
 }
 
 Stream<List<RequestBloodModel>> obtainDataFrmDb() {

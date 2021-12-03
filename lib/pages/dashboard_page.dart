@@ -5,23 +5,23 @@ import 'package:blood/widgets/blood_list_tile.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:blood/widgets/text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DashboardPage extends StatelessWidget {
-  final container = ProviderContainer();
+class DashboardPage extends ConsumerWidget {
+  const DashboardPage({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    onReady((_) {
-      container.read(dashboardProvider.notifier).obtainRequestDb();
-    });
+  Widget build(BuildContext context, WidgetRef ref) {
+    final donorListState = ref.watch(dashboardProvider);
+
+    logThis('test');
+
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Donor List',
       ),
-      body: Consumer(
-        builder: (context, ref, child) {
-          final donorListState = ref.read(dashboardProvider);
+      body: Builder(
+        builder: (context) {
           if (donorListState.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -46,8 +46,4 @@ class DashboardPage extends StatelessWidget {
       ),
     );
   }
-}
-
-void onReady(void Function(Duration) callback) {
-  SchedulerBinding.instance!.addPostFrameCallback(callback);
 }
