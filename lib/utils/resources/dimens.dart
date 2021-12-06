@@ -1,3 +1,4 @@
+//ignore_for_file: constant_identifier_names
 // Copyright (c) 2020 The Blood Authors. All rights reserved.
 
 // Always Use camelCase for dimen resources, prefixed with 'd_'.

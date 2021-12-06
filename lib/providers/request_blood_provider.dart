@@ -1,3 +1,6 @@
+import 'package:blood/models/request_blood/request_blood_model.dart';
+import 'package:blood/utils/constants.dart';
+import 'package:blood/utils/preference_util.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,67 +15,10 @@ class RequestBloodProvider extends StateNotifier<RequestBloodState> {
   final GlobalKey<FormState> requestFormKey = GlobalKey();
 
   final List<String> _dropdownBloodItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
-  final List<String> dropdownDistrict = [
-    'Achham',
-    'Arghakhanchi',
-    'Baglung',
-    'Baitadi',
-    'Bajhang',
-    'Bajura',
-    'Banke',
-    'Bara',
-    'Bardiya',
-    'Bhaktapur',
-    'Bhojpur',
-    'Chitwan',
-    'Dadeldhura',
-    'Dailekh',
-    'Dang Deukhuri',
-    'Darchula',
-    'Dhading',
-    'Dhankuta',
-    'Dhanusha',
-    'Dolakha',
-    'Dolpa',
-    'Doti',
-    'Gorkha',
-    'Gulmi',
-    'Humla',
-    'Ilam',
-    'Jajarkot',
-    'Jhapa',
-    'Jumla',
-    'Kailali',
-    'Kalikot',
-    'Kanchanpur',
-    'Kapilvastu',
-    'Kaski',
-    'Kathmandu',
-    'Kavrepalanchok',
-    'Khotang',
-    'Lalitpur',
-    'Lamjung',
-    'Mahottari',
-    'Makwanpur',
-    'Manang',
-    'Morang',
-    'Mugu',
-    'Mustang',
-    'Myagdi',
-    'Nawalparasi',
-    'Nuwakot',
-    'Okhaldhunga',
-    'Palpa',
-    'Panchthar',
-    'Parbat',
-    'Parsa',
-    'Pyuthan',
-    'Ramechhap'
-  ];
 
   void submitBloodRequest() {
     state = state.copyWith(isLoading: true);
-    // addBloodRequestToDb(state);
+    addBloodRequestToDb(state);
     state = state.copyWith(isLoading: false, isSuccess: true);
   }
 
@@ -97,7 +43,7 @@ class RequestBloodProvider extends StateNotifier<RequestBloodState> {
     state = state.copyWith(patientAge: age);
   }
 
-  void updateDistrict(String district) {
+  void updateDistrict(String? district) {
     state = state.copyWith(district: district);
   }
 }
@@ -105,8 +51,8 @@ class RequestBloodProvider extends StateNotifier<RequestBloodState> {
 class RequestBloodState {
   final bool isLoading;
   final bool isSuccess;
-  final String patientName, patientLocation, contactNumber, patientAge, district;
-  final String? bloodGroup;
+  final String patientName, patientLocation, contactNumber, patientAge;
+  final String? bloodGroup, district;
 
   RequestBloodState({
     this.isLoading = false,
@@ -126,7 +72,7 @@ class RequestBloodState {
       bloodGroup: null,
       contactNumber: '',
       patientAge: '',
-      district: '',
+      district: null,
     );
   }
 
@@ -156,20 +102,18 @@ class RequestBloodState {
       'contactNumber: $contactNumber, patientAge: $patientAge,district: $district)';
 }
 
-// final Firestore _firestore = Firestore.instance;
-//
-// Future<void> addBloodRequestToDb(RequestBloodState state) async {
-//   RequestBloodModel requestBlood = RequestBloodModel();
-//   final uId = preference.get(PreferenceKey.USER_ID);
-//   requestBlood = RequestBloodModel(
-//       patientName: state.patientName,
-//       bloodGroup: state.bloodGroup,
-//       patientLocation: state.patientLocation,
-//       contactNumber: state.contactNumber,
-//       patientAge: state.patientAge,
-//       district: state.district,
-//       submittedBy: uId.toString(),
-//       createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
-//
-//   _firestore.collection("request").add(requestBlood.toMap(requestBlood));
-// }
+Future<void> addBloodRequestToDb(RequestBloodState state) async {
+  final uId = preference.get(PreferenceKey.USER_ID);
+  RequestBloodModel requestBlood = RequestBloodModel(
+      patientName: state.patientName,
+      bloodGroup: state.bloodGroup ?? '',
+      patientLocation: state.patientLocation,
+      contactNumber: state.contactNumber,
+      patientAge: state.patientAge,
+      district: state.district ?? '',
+      submittedBy: uId.toString(),
+      createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
+
+  // fbWrapper.insertToDb(Constants.requestCollection, '', requestBlood.toMap(requestBlood));
+  // _firestore.collection("request").add(requestBlood.toMap(requestBlood));
+}

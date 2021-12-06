@@ -2,6 +2,7 @@ import 'package:blood/component/button.dart';
 import 'package:blood/component/gaps.dart';
 import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/providers/request_blood_provider.dart';
+import 'package:blood/utils/blood_list_view.dart';
 import 'package:blood/utils/resources/colors.dart';
 import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/utils/shortcuts.dart';
@@ -10,9 +11,13 @@ import 'package:blood/widgets/blood_text_form.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nepali_date_picker/nepali_date_picker.dart' as picker;
+import 'package:nepali_date_picker/nepali_date_picker.dart';
 
 class RequestBloodPage extends StatelessWidget {
   RequestBloodPage({Key? key}) : super(key: key);
+
+  NepaliDateTime? _selectedDateTime = NepaliDateTime.now();
 
   final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
 
@@ -31,23 +36,31 @@ class RequestBloodPage extends StatelessWidget {
         if (state.isSuccess) {
           goRouter.pop(context);
         }
-        print(state.bloodGroup);
-        logThis(state.bloodGroup, tag: 'State.blood');
-        return ListView(
+        return BloodListView(
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Form(
                 key: reqBloodProvider.requestFormKey,
                 child: Column(
-                  children: <Widget>[
-                    // ChooseBloodGroupComponent(),
-                    const VerticalGap(d_margin2),
-                    BloodTextForm(
-                      onChanged: reqBloodProvider.updatePatientLocation,
-                      validator: (value) => value,
-                      labelText: 'Location',
-                      hintText: 'Enter your location',
+                  children: [
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 16, top: 0, right: 16, left: 16),
+                        child: DropdownButtonFormField<String>(
+                          validator: (value) => value == null ? 'Please select district' : null,
+                          isExpanded: true,
+                          hint: const Text('-- Select District --'),
+                          items: dropdownDistrict.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          value: state.district,
+                          onChanged: reqBloodProvider.updateDistrict,
+                        ),
+                      ),
                     ),
                     const VerticalGap(d_margin05),
                     BloodTextForm(
@@ -75,16 +88,15 @@ class RequestBloodPage extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: () {
-                        // NepaliDateTime _selectedDateTime = await picker.showMaterialDatePicker(
-                        //   context: context,
-                        //   initialDate: NepaliDateTime.now(),
-                        //   firstDate: NepaliDateTime(2000),
-                        //   lastDate: NepaliDateTime(2090),
-                        //   initialDatePickerMode: DatePickerMode.day,
-                        // );
-                        //
-                        // print(_selectedDateTime);
+                      onTap: () async {
+                        _selectedDateTime = await showMaterialDatePicker(
+                          context: context,
+                          initialDate: _selectedDateTime ?? NepaliDateTime.now(),
+                          firstDate: NepaliDateTime(1970, 2, 5),
+                          lastDate: NepaliDateTime(2099, 11, 6),
+                          initialDatePickerMode: DatePickerMode.day,
+                        );
+                        print(_selectedDateTime);
                       },
                       child: Card(
                         child: Column(
@@ -103,13 +115,20 @@ class RequestBloodPage extends StatelessWidget {
                     ),
                     const VerticalGap(d_margin05),
                     BloodTextForm(
+                      onChanged: reqBloodProvider.updatePatientAge,
+                      validator: (value) => value,
+                      keyboardType: TextInputType.phone,
+                      labelText: 'Patient Age',
+                    ),
+                    const VerticalGap(d_margin05),
+                    BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientLocation,
                       validator: (value) => value,
                       labelText: 'Address / Location',
                     ),
                     const VerticalGap(d_margin6),
                     BloodButton(
-                      buttonText: 'Add Donor',
+                      buttonText: 'Request Blood',
                       onPressed: () {
                         if (reqBloodProvider.requestFormKey.currentState?.validate() ?? false) {
                           reqBloodProvider.submitBloodRequest();
@@ -147,4 +166,62 @@ class RequestBloodPage extends StatelessWidget {
       ),
     );
   }
+
+  final List<String> dropdownDistrict = [
+    'Achham',
+    'Arghakhanchi',
+    'Baglung',
+    'Baitadi',
+    'Bajhang',
+    'Bajura',
+    'Banke',
+    'Bara',
+    'Bardiya',
+    'Bhaktapur',
+    'Bhojpur',
+    'Chitwan',
+    'Dadeldhura',
+    'Dailekh',
+    'Dang Deukhuri',
+    'Darchula',
+    'Dhading',
+    'Dhankuta',
+    'Dhanusha',
+    'Dolakha',
+    'Dolpa',
+    'Doti',
+    'Gorkha',
+    'Gulmi',
+    'Humla',
+    'Ilam',
+    'Jajarkot',
+    'Jhapa',
+    'Jumla',
+    'Kailali',
+    'Kalikot',
+    'Kanchanpur',
+    'Kapilvastu',
+    'Kaski',
+    'Kathmandu',
+    'Kavrepalanchok',
+    'Khotang',
+    'Lalitpur',
+    'Lamjung',
+    'Mahottari',
+    'Makwanpur',
+    'Manang',
+    'Morang',
+    'Mugu',
+    'Mustang',
+    'Myagdi',
+    'Nawalparasi',
+    'Nuwakot',
+    'Okhaldhunga',
+    'Palpa',
+    'Panchthar',
+    'Parbat',
+    'Parsa',
+    'Pyuthan',
+    'Ramechhap'
+  ];
 }

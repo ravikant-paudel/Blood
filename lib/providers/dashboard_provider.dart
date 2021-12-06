@@ -51,7 +51,7 @@ class DashboardState {
 
 Stream<List<RequestBloodModel>> obtainDataFrmDb() {
   return fbWrapper.getStreamListFrmDb(
-    Constants.request_collection,
+    Constants.requestCollection,
     (document) {
       final data = document.data();
       if (data == null) return RequestBloodModel.fromJson(const {});

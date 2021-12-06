@@ -44,7 +44,7 @@ class FirebaseWrapper {
 
   Future<bool> authenticateUser(User signInUser) async {
     final QuerySnapshot result = await _firestore
-        .collection(Constants.user_collection)
+        .collection(Constants.userCollection)
         .where(
           Constants.userEmail,
           isEqualTo: signInUser.email,
@@ -66,7 +66,7 @@ class FirebaseWrapper {
       username: userName,
       notificationToken: notiToken,
     );
-    fbWrapper.insertToDb(Constants.user_collection, user.uid, user.toMap(user));
+    fbWrapper.insertToDb(Constants.userCollection, user.uid, user.toMap(user));
   }
 
   Future<void> insertToDb(String tableName, String docId, Map<String, dynamic> map) async {
