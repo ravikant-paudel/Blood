@@ -1,3 +1,4 @@
+import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -10,6 +11,7 @@ class RequestBloodProvider extends StateNotifier<RequestBloodState> {
 
   final GlobalKey<FormState> requestFormKey = GlobalKey();
 
+  final List<String> _dropdownBloodItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
   final List<String> dropdownDistrict = [
     'Achham',
     'Arghakhanchi',
@@ -78,7 +80,8 @@ class RequestBloodProvider extends StateNotifier<RequestBloodState> {
     state = state.copyWith(patientName: name);
   }
 
-  void updateBloodGroup(String blood) {
+  void updateBloodGroup(String? blood) {
+    logThis(blood, tag: 'BloodGroupLOG');
     state = state.copyWith(bloodGroup: blood);
   }
 
@@ -102,7 +105,8 @@ class RequestBloodProvider extends StateNotifier<RequestBloodState> {
 class RequestBloodState {
   final bool isLoading;
   final bool isSuccess;
-  final String patientName, bloodGroup, patientLocation, contactNumber, patientAge, district;
+  final String patientName, patientLocation, contactNumber, patientAge, district;
+  final String? bloodGroup;
 
   RequestBloodState({
     this.isLoading = false,
@@ -119,7 +123,7 @@ class RequestBloodState {
     return RequestBloodState(
       patientName: '',
       patientLocation: '',
-      bloodGroup: '',
+      bloodGroup: null,
       contactNumber: '',
       patientAge: '',
       district: '',

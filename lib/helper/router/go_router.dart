@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final goRouter = GoRouter(
+  debugLogDiagnostics: true,
   redirect: (state) {
     final currentUser = fbWrapper.checkCurrentUser();
     if (state.location != '/login' && currentUser == null) {
@@ -29,24 +30,25 @@ final goRouter = GoRouter(
       ),
     ),
     GoRoute(
-      path: '/:path',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          key: state.pageKey,
-          child: HomePage(
-            path: state.params['path'],
+        path: '/:path',
+        pageBuilder: (context, state) {
+          return MaterialPage(
+            key: state.pageKey,
+            child: HomePage(
+              path: state.params['path'],
+            ),
+          );
+        },
+        routes: [
+          GoRoute(
+            name: 'requestBlood',
+            path: 'requestBlood',
+            pageBuilder: (context, state) => MaterialPage(
+              key: state.pageKey,
+              child: RequestBloodPage(),
+            ),
           ),
-        );
-      },
-    ),
-    GoRoute(
-      name: 'requestBlood',
-      path: '/requestBlood',
-      pageBuilder: (context, state) => MaterialPage(
-        key: state.pageKey,
-        child: const RequestBloodPage(),
-      ),
-    ),
+        ]),
     GoRoute(
       name: 'donorList',
       path: '/donorList',

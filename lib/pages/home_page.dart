@@ -3,6 +3,7 @@ import 'package:blood/pages/dashboard_page.dart';
 import 'package:blood/pages/donor_page.dart';
 import 'package:blood/pages/history_page.dart';
 import 'package:blood/pages/profile_page.dart';
+import 'package:blood/pages/request_blood_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,12 +27,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final path = widget.path ?? screens.keys.first;
     return Scaffold(
-      body: screens[widget.path ?? screens.keys.first],
+      body: screens[path],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          goRouter.go('/requestBlood');
-        },
+        onPressed: () => goRouter.go('/$path/requestBlood'),
         backgroundColor: Colors.red,
         // backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add),

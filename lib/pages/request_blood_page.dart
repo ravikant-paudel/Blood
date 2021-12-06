@@ -12,7 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RequestBloodPage extends StatelessWidget {
-  const RequestBloodPage({Key? key}) : super(key: key);
+  RequestBloodPage({Key? key}) : super(key: key);
+
+  final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,8 @@ class RequestBloodPage extends StatelessWidget {
         if (state.isSuccess) {
           goRouter.pop(context);
         }
+        print(state.bloodGroup);
+        logThis(state.bloodGroup, tag: 'State.blood');
         return ListView(
           children: [
             Padding(
@@ -52,24 +56,24 @@ class RequestBloodPage extends StatelessWidget {
                       validator: (value) => RegExp(r'\w{4,}').hasMatch(value ?? '') ? null : 'At least 4 character',
                     ),
                     const VerticalGap(d_margin05),
-                    // Card(
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.only(bottom: 16, top: 0, right: 16, left: 16),
-                    //     child: DropdownButtonFormField<String>(
-                    //       validator: (value) => value == null ? 'Please select blood group' : null,
-                    //       isExpanded: true,
-                    //       hint: const Text('-- Select Group --'),
-                    //       items: _dropdownItems.map((String value) {
-                    //         return DropdownMenuItem<String>(
-                    //           value: value,
-                    //           child: Text(value),
-                    //         );
-                    //       }).toList(),
-                    //       value: state.bloodGroup,
-                    //       onChanged: reqBloodProvider.updateBloodGroup,
-                    //     ),
-                    //   ),
-                    // ),
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 16, top: 0, right: 16, left: 16),
+                        child: DropdownButtonFormField<String>(
+                          validator: (value) => value == null ? 'Please select blood group' : null,
+                          isExpanded: true,
+                          hint: const Text('-- Select Group --'),
+                          items: _dropdownItems.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          value: state.bloodGroup,
+                          onChanged: reqBloodProvider.updateBloodGroup,
+                        ),
+                      ),
+                    ),
                     InkWell(
                       onTap: () {
                         // NepaliDateTime _selectedDateTime = await picker.showMaterialDatePicker(
