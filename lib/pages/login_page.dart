@@ -1,3 +1,4 @@
+import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/providers/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,8 +29,10 @@ class LoginPage extends StatelessWidget {
                 ),
                 Center(
                   child: RaisedButton(
-                    onPressed: () {
-                      loginProv.fetchGoogleLogin();
+                    onPressed: () async {
+                      if (await loginProv.fetchGoogleLogin()) {
+                        goRouter.go('/home/dashboard');
+                      }
                     },
                     child: const Text('Google Login'),
                   ),

@@ -15,14 +15,14 @@ class UserModel {
     this.profilePhoto,
   });
 
-  Map<String, dynamic> toMap(UserModel user) {
+  Map<String, dynamic> toMap() {
     final data = <String, dynamic>{};
-    data['uid'] = user.uid;
-    data['name'] = user.name;
-    data['email'] = user.email;
-    data['username'] = user.username;
-    data['notificationToken'] = user.notificationToken;
-    data['profile_photo'] = user.profilePhoto;
+    data['uid'] = uid;
+    data['name'] = name;
+    data['email'] = email;
+    data['username'] = username;
+    data['notificationToken'] = notificationToken;
+    data['profile_photo'] = profilePhoto;
     return data;
   }
 

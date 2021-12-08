@@ -11,16 +11,17 @@ class LoginProvider extends StateNotifier<LoginState> {
 
   LoginProvider(this.pRef) : super(LoginState(isLoading: false));
 
-  Future<void> fetchGoogleLogin() async {
+  Future<bool> fetchGoogleLogin() async {
     state = state.copyWith(isLoading: true);
-    fbWrapper.signIn().then((isFinish) {
-      if (isFinish == true) {
-        pRef.read(authProvider.notifier).loggedIn();
-        state = state.copyWith(isLoading: false);
-      } else {
-        state = state.copyWith(isLoading: false, isFailed: Failure('User is null'));
-      }
-    });
+    final isFinish = await fbWrapper.signIn();
+    if (isFinish == true) {
+      pRef.read(authProvider.notifier).loggedIn();
+      state = state.copyWith(isLoading: false);
+      return true;
+    } else {
+      state = state.copyWith(isLoading: false, isFailed: Failure('User is null'));
+      return false;
+    }
   }
 }
 

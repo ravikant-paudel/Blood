@@ -103,7 +103,7 @@ class RequestBloodState {
 }
 
 Future<void> addBloodRequestToDb(RequestBloodState state) async {
-  final uId = preference.get(PreferenceKey.USER_ID);
+  final uId = preference.get(PreferenceKey.userId);
   RequestBloodModel requestBlood = RequestBloodModel(
       patientName: state.patientName,
       bloodGroup: state.bloodGroup ?? '',
@@ -114,6 +114,5 @@ Future<void> addBloodRequestToDb(RequestBloodState state) async {
       submittedBy: uId.toString(),
       createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
 
-  // fbWrapper.insertToDb(Constants.requestCollection, '', requestBlood.toMap(requestBlood));
-  // _firestore.collection("request").add(requestBlood.toMap(requestBlood));
+  fbWrapper.insertToDb(Constants.requestCollection, '', requestBlood.toJson());
 }

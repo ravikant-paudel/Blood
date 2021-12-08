@@ -19,7 +19,7 @@ final goRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      redirect: (_) => '/dashboard',
+      redirect: (_) => '/home/dashboard',
     ),
     GoRoute(
       name: 'login',
@@ -30,7 +30,7 @@ final goRouter = GoRouter(
       ),
     ),
     GoRoute(
-        path: '/:path',
+        path: '/home/:path',
         pageBuilder: (context, state) {
           return MaterialPage(
             key: state.pageKey,

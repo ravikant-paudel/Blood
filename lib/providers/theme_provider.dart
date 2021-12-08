@@ -17,11 +17,11 @@ class BloodTheme extends StateNotifier<ThemeData> {
 
   void onThemeChange(bool isDark) {
     state = isDark ? _darkTheme : _lightTheme;
-    preference.set(PreferenceKey.THEME_MODE, isDark);
+    preference.set(PreferenceKey.themeMode, isDark);
   }
 
   void init() {
-    onThemeChange(preference.get(PreferenceKey.THEME_MODE) ?? false);
+    onThemeChange(preference.get(PreferenceKey.themeMode) ?? false);
   }
 
   static final _darkTheme = ThemeData.from(

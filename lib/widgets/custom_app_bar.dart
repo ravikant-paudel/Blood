@@ -42,17 +42,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           title: Text(
             title,
             style: Theme.of(context).textTheme.headline6!.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
           ),
           iconTheme: IconThemeData(
-            color: preference.get(PreferenceKey.THEME_MODE) != null ? Colors.white : Colors.black,
+            color: preference.get(PreferenceKey.themeMode) != null ? Colors.white : Colors.black,
           ),
         ),
         SvgPicture.asset(
           'assets/appbar.svg',
-          fit: BoxFit.fill ,
+          fit: BoxFit.fill,
           // width: MediaQuery.of(context).size.width,
         ),
       ],

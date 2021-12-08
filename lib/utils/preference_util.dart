@@ -8,9 +8,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'empty_util.dart';
 
 enum PreferenceKey {
-  USER_ID,
-  THEME_MODE,
-  NOTIFICATION_TOKEN,
+  userId,
+  themeMode,
+  notificationToken,
 }
 
 extension RawPrefenceKey on PreferenceKey {

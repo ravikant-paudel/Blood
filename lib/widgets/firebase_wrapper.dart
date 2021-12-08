@@ -26,11 +26,12 @@ class FirebaseWrapper {
         idToken: _signInAuthentication?.idToken,
       );
       final result = await _auth.signInWithCredential(credential);
-
+      logThis(result, tag: 'result');
       final signInUser = result.user;
       if (signInUser != null) {
         final isNewUser = await authenticateUser(signInUser);
-        preference.set(PreferenceKey.USER_ID, signInUser.uid);
+        logThis(signInUser, tag: 'signInUser.uid');
+        preference.set(PreferenceKey.userId, signInUser.uid);
         if (isNewUser) await addDataToDb(signInUser);
         return true;
       } else {
@@ -57,7 +58,7 @@ class FirebaseWrapper {
   Future<void> addDataToDb(User cUser) async {
     //user class
     final String userName = Utils.getUsername(cUser.email ?? '');
-    final String notiToken = preference.get(PreferenceKey.NOTIFICATION_TOKEN);
+    final String notiToken = preference.get(PreferenceKey.notificationToken);
     final UserModel user = UserModel(
       uid: cUser.uid,
       email: cUser.email,
@@ -66,7 +67,7 @@ class FirebaseWrapper {
       username: userName,
       notificationToken: notiToken,
     );
-    fbWrapper.insertToDb(Constants.userCollection, user.uid, user.toMap(user));
+    fbWrapper.insertToDb(Constants.userCollection, user.uid, user.toMap());
   }
 
   Future<void> insertToDb(String tableName, String docId, Map<String, dynamic> map) async {
@@ -87,7 +88,7 @@ class FirebaseWrapper {
     MapQuery Function(MapQuery)? query,
   }) {
     if (query != null) {
-      return query(_firestore.collection(tableName)).snapshots().map(
+      return query(_firestore.collection(tableName)).orderBy('createdAt', descending: true).snapshots().map(
             (snapShot) => snapShot.docs.map(funQuery).toList(),
           );
     } else {
@@ -103,7 +104,6 @@ class FirebaseWrapper {
   }
 
   Future<void> loginOut() async {
-    await _googleSignIn.disconnect();
     await _googleSignIn.signOut();
     return _auth.signOut();
   }

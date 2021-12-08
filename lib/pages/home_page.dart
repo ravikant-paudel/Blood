@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: screens[path],
       floatingActionButton: FloatingActionButton(
-        onPressed: () => goRouter.go('/$path/requestBlood'),
+        onPressed: () => goRouter.go('/home/$path/requestBlood'),
         backgroundColor: Colors.red,
         // backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add),
@@ -91,7 +91,7 @@ class _Item extends StatelessWidget {
 
     return MaterialButton(
       minWidth: 40,
-      onPressed: () => goRouter.go('/$path'),
+      onPressed: () => goRouter.go('/home/$path'),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

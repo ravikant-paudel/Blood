@@ -3,6 +3,7 @@ import 'package:blood/component/gaps.dart';
 import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/providers/request_blood_provider.dart';
 import 'package:blood/utils/blood_list_view.dart';
+import 'package:blood/utils/preference_util.dart';
 import 'package:blood/utils/resources/colors.dart';
 import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/utils/shortcuts.dart';
@@ -23,6 +24,7 @@ class RequestBloodPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    logThis(preference.get(PreferenceKey.userId), tag: 'USER_ID');
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Request Blood',
@@ -43,6 +45,7 @@ class RequestBloodPage extends StatelessWidget {
               child: Form(
                 key: reqBloodProvider.requestFormKey,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Card(
                       child: Padding(
@@ -96,34 +99,36 @@ class RequestBloodPage extends StatelessWidget {
                           lastDate: NepaliDateTime(2099, 11, 6),
                           initialDatePickerMode: DatePickerMode.day,
                         );
-                        print(_selectedDateTime);
+
+                        print(_selectedDateTime?.toIso8601String());
                       },
                       child: Card(
                         child: Column(
-                          children: const [
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             Text('Date'),
-                            Text('Choose date'),
+                            Text(picker.NepaliDateFormat.yMMMMEEEEd().format(_selectedDateTime!)),
                           ],
                         ),
                       ),
                     ),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updateContactNumber,
-                      validator: (value) => value,
+                      validator: (value) => value == null ? 'Please add Contact number' : null,
                       keyboardType: TextInputType.phone,
                       labelText: 'Contact Number',
                     ),
                     const VerticalGap(d_margin05),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientAge,
-                      validator: (value) => value,
+                      validator: (value) => value == null ? 'Please add patient age' : null,
                       keyboardType: TextInputType.phone,
                       labelText: 'Patient Age',
                     ),
                     const VerticalGap(d_margin05),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientLocation,
-                      validator: (value) => value,
+                      validator: (value) => value == null ? 'Please add address' : null,
                       labelText: 'Address / Location',
                     ),
                     const VerticalGap(d_margin6),
