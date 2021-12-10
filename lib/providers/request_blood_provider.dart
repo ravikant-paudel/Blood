@@ -4,7 +4,6 @@ import 'package:blood/utils/preference_util.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_notifier/state_notifier.dart';
 
 final StateNotifierProvider<RequestBloodProvider, RequestBloodState> requestBloodProvider =
     StateNotifierProvider((_) => RequestBloodProvider());
@@ -46,6 +45,10 @@ class RequestBloodProvider extends StateNotifier<RequestBloodState> {
   void updateDistrict(String? district) {
     state = state.copyWith(district: district);
   }
+  //
+  // void updateDate(String? district) {
+  //   state = state.copyWith(district: district);
+  // }
 }
 
 class RequestBloodState {
@@ -53,6 +56,7 @@ class RequestBloodState {
   final bool isSuccess;
   final String patientName, patientLocation, contactNumber, patientAge;
   final String? bloodGroup, district;
+  final DateTime requestDate;
 
   RequestBloodState({
     this.isLoading = false,
@@ -63,6 +67,7 @@ class RequestBloodState {
     required this.contactNumber,
     required this.patientAge,
     required this.district,
+    required this.requestDate,
   });
 
   factory RequestBloodState.initial() {
@@ -73,6 +78,7 @@ class RequestBloodState {
       contactNumber: '',
       patientAge: '',
       district: null,
+      requestDate: DateTime.now(),
     );
   }
 
@@ -84,6 +90,7 @@ class RequestBloodState {
           String? bloodGroup,
           String? contactNumber,
           String? patientAge,
+          DateTime? requestDate,
           String? district}) =>
       RequestBloodState(
         isLoading: isLoading ?? this.isLoading,
@@ -94,12 +101,13 @@ class RequestBloodState {
         patientAge: patientAge ?? this.patientAge,
         patientLocation: patientLocation ?? this.patientLocation,
         district: district ?? this.district,
+        requestDate: requestDate ?? this.requestDate,
       );
 
   @override
   String toString() => 'RequestBloodState(isLoading: $isLoading,isSuccess: $isSuccess,'
       ' patientName: $patientName,bloodGroup: $bloodGroup,'
-      'contactNumber: $contactNumber, patientAge: $patientAge,district: $district)';
+      'contactNumber: $contactNumber, patientAge: $patientAge,district: $district,requestDate: $requestDate)';
 }
 
 Future<void> addBloodRequestToDb(RequestBloodState state) async {
@@ -112,7 +120,8 @@ Future<void> addBloodRequestToDb(RequestBloodState state) async {
       patientAge: state.patientAge,
       district: state.district ?? '',
       submittedBy: uId.toString(),
-      createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
+      // createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
+      createdAt: state.requestDate);
 
   fbWrapper.insertToDb(Constants.requestCollection, '', requestBlood.toJson());
 }

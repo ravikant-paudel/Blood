@@ -99,16 +99,18 @@ class RequestBloodPage extends StatelessWidget {
                           lastDate: NepaliDateTime(2099, 11, 6),
                           initialDatePickerMode: DatePickerMode.day,
                         );
-
                         print(_selectedDateTime?.toIso8601String());
                       },
                       child: Card(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Date'),
-                            Text(picker.NepaliDateFormat.yMMMMEEEEd().format(_selectedDateTime!)),
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(d_margin2),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Date'),
+                              Text(picker.NepaliDateFormat.yMMMMEEEEd().format(_selectedDateTime!)),
+                            ],
+                          ),
                         ),
                       ),
                     ),

@@ -31,9 +31,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
         AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
@@ -50,10 +50,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: preference.get(PreferenceKey.themeMode) != null ? Colors.white : Colors.black,
           ),
         ),
-        SvgPicture.asset(
-          'assets/appbar.svg',
-          fit: BoxFit.fill,
-          // width: MediaQuery.of(context).size.width,
+        Positioned(
+          top: kToolbarHeight + MediaQuery.of(context).padding.top,
+          child: SvgPicture.asset(
+            'assets/appbar.svg',
+            fit: BoxFit.fill,
+            // width: MediaQuery.of(context).size.width,
+          ),
         ),
       ],
     );
@@ -61,5 +64,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   // ignore: avoid_field_initializers_in_const_classes
-  final Size preferredSize = const Size.fromHeight(kToolbarHeight + 120);
+  final Size preferredSize = const Size.fromHeight(kToolbarHeight);
 }

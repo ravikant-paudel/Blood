@@ -32,15 +32,13 @@ class DashboardPage extends ConsumerWidget {
               child: BloodText('No donor found'),
             );
           }
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: ListView(
-              children: donors!
-                  .map((donor) => BloodListTile(
-                        requestBlood: donor,
-                      ))
-                  .toList(),
-            ),
+          return ListView(
+            padding: const EdgeInsets.fromLTRB(16, 120, 16, 0),
+            children: donors!
+                .map((donor) => BloodListTile(
+                      requestBlood: donor,
+                    ))
+                .toList(),
           );
         },
       ),

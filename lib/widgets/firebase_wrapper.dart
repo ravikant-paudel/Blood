@@ -88,7 +88,7 @@ class FirebaseWrapper {
     MapQuery Function(MapQuery)? query,
   }) {
     if (query != null) {
-      return query(_firestore.collection(tableName)).orderBy('createdAt', descending: true).snapshots().map(
+      return query(_firestore.collection(tableName)).snapshots().map(
             (snapShot) => snapShot.docs.map(funQuery).toList(),
           );
     } else {
