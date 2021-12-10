@@ -13,8 +13,6 @@ class RequestBloodProvider extends StateNotifier<RequestBloodState> {
 
   final GlobalKey<FormState> requestFormKey = GlobalKey();
 
-  final List<String> _dropdownBloodItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
-
   void submitBloodRequest() {
     state = state.copyWith(isLoading: true);
     addBloodRequestToDb(state);
@@ -120,8 +118,7 @@ Future<void> addBloodRequestToDb(RequestBloodState state) async {
       patientAge: state.patientAge,
       district: state.district ?? '',
       submittedBy: uId.toString(),
-      // createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
-      createdAt: state.requestDate);
+      createdAt: DateTime.now().toUtc().toLocal());
 
   fbWrapper.insertToDb(Constants.requestCollection, '', requestBlood.toJson());
 }

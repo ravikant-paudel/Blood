@@ -34,11 +34,7 @@ class DashboardPage extends ConsumerWidget {
           }
           return ListView(
             padding: const EdgeInsets.fromLTRB(16, 120, 16, 0),
-            children: donors!
-                .map((donor) => BloodListTile(
-                      requestBlood: donor,
-                    ))
-                .toList(),
+            children: donors!.map(BloodListTile.new).toList(),
           );
         },
       ),

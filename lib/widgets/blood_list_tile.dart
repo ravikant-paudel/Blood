@@ -11,7 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class BloodListTile extends StatelessWidget {
   final RequestBloodModel requestBlood;
 
-  const BloodListTile({Key? key, required this.requestBlood}) : super(key: key);
+  const BloodListTile(this.requestBlood, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

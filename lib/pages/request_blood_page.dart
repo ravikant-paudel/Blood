@@ -12,13 +12,9 @@ import 'package:blood/widgets/blood_text_form.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nepali_date_picker/nepali_date_picker.dart' as picker;
-import 'package:nepali_date_picker/nepali_date_picker.dart';
 
 class RequestBloodPage extends StatelessWidget {
   RequestBloodPage({Key? key}) : super(key: key);
-
-  NepaliDateTime? _selectedDateTime = NepaliDateTime.now();
 
   final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
 
@@ -41,12 +37,18 @@ class RequestBloodPage extends StatelessWidget {
         return BloodListView(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.fromLTRB(16, 120, 16, 0),
               child: Form(
                 key: reqBloodProvider.requestFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    BloodTextForm(
+                      onChanged: reqBloodProvider.updatePatientName,
+                      labelText: 'Patient Name',
+                      validator: (value) => RegExp(r'\w{4,}').hasMatch(value ?? '') ? null : 'At least 4 character',
+                    ),
+                    const VerticalGap(d_margin05),
                     Card(
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 16, top: 0, right: 16, left: 16),
@@ -67,9 +69,9 @@ class RequestBloodPage extends StatelessWidget {
                     ),
                     const VerticalGap(d_margin05),
                     BloodTextForm(
-                      onChanged: reqBloodProvider.updatePatientName,
-                      labelText: 'Patient Name',
-                      validator: (value) => RegExp(r'\w{4,}').hasMatch(value ?? '') ? null : 'At least 4 character',
+                      onChanged: reqBloodProvider.updatePatientLocation,
+                      validator: (value) => value == null ? 'Please add address' : null,
+                      labelText: 'Address / Location',
                     ),
                     const VerticalGap(d_margin05),
                     Card(
@@ -90,30 +92,30 @@ class RequestBloodPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () async {
-                        _selectedDateTime = await showMaterialDatePicker(
-                          context: context,
-                          initialDate: _selectedDateTime ?? NepaliDateTime.now(),
-                          firstDate: NepaliDateTime(1970, 2, 5),
-                          lastDate: NepaliDateTime(2099, 11, 6),
-                          initialDatePickerMode: DatePickerMode.day,
-                        );
-                        print(_selectedDateTime?.toIso8601String());
-                      },
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(d_margin2),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Date'),
-                              Text(picker.NepaliDateFormat.yMMMMEEEEd().format(_selectedDateTime!)),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () async {
+                    //     _selectedDateTime = await showMaterialDatePicker(
+                    //       context: context,
+                    //       initialDate: _selectedDateTime ?? NepaliDateTime.now(),
+                    //       firstDate: NepaliDateTime(1970, 2, 5),
+                    //       lastDate: NepaliDateTime(2099, 11, 6),
+                    //       initialDatePickerMode: DatePickerMode.day,
+                    //     );
+                    //     print(_selectedDateTime?.toIso8601String());
+                    //   },
+                    //   child: Card(
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.all(d_margin2),
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text('Date'),
+                    //           Text(picker.NepaliDateFormat.yMMMMEEEEd().format(_selectedDateTime!)),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updateContactNumber,
                       validator: (value) => value == null ? 'Please add Contact number' : null,
@@ -126,12 +128,6 @@ class RequestBloodPage extends StatelessWidget {
                       validator: (value) => value == null ? 'Please add patient age' : null,
                       keyboardType: TextInputType.phone,
                       labelText: 'Patient Age',
-                    ),
-                    const VerticalGap(d_margin05),
-                    BloodTextForm(
-                      onChanged: reqBloodProvider.updatePatientLocation,
-                      validator: (value) => value == null ? 'Please add address' : null,
-                      labelText: 'Address / Location',
                     ),
                     const VerticalGap(d_margin6),
                     BloodButton(

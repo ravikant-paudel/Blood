@@ -13,10 +13,6 @@ enum PreferenceKey {
   notificationToken,
 }
 
-extension RawPrefenceKey on PreferenceKey {
-  String get rawKey => toString().substring(14);
-}
-
 class PreferenceUtil {
   late final SharedPreferences _prefs;
 
@@ -25,7 +21,9 @@ class PreferenceUtil {
   }
 
   Future<bool>? set<T>(PreferenceKey prefKey, T value) {
-    final key = prefKey.rawKey;
+    final x = PreferenceKey.values.byName('userId');
+    x.name;
+    final key = prefKey.name;
     if (key.isNotNullAndNotEmpty) {
       if (value is String) return _prefs.setString(key, value);
       if (value is int) return _prefs.setInt(key, value);
@@ -36,16 +34,16 @@ class PreferenceUtil {
     return Future.value(false);
   }
 
-  bool has(PreferenceKey prefKey) => prefKey.rawKey.isNotNullAndNotEmpty && _prefs.containsKey(prefKey.rawKey);
+  bool has(PreferenceKey prefKey) => prefKey.name.isNotNullAndNotEmpty && _prefs.containsKey(prefKey.name);
 
   T get<T>(PreferenceKey prefKey) {
     try {
-      return _prefs.get(prefKey.rawKey) as T;
+      return _prefs.get(prefKey.name) as T;
     } on Exception catch (e, s) {
       errorLog(e, stackTrace: s);
       rethrow;
     }
   }
 
-  Future<bool> remove(PreferenceKey prefKey) async => prefKey.rawKey.isNotNullAndNotEmpty && await _prefs.remove(prefKey.rawKey);
+  Future<bool> remove(PreferenceKey prefKey) async => prefKey.name.isNotNullAndNotEmpty && await _prefs.remove(prefKey.name);
 }
