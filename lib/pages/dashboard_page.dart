@@ -13,9 +13,7 @@ class DashboardPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final donorListState = ref.watch(dashboardProvider);
-
-    logThis('test');
-
+    logThis('test', tag: 'OnPage Dashboard');
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Donor List',

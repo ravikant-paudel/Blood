@@ -27,8 +27,8 @@ class BloodListTile extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: 45,
+                  height: 43,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primary,
                     borderRadius: const BorderRadius.only(

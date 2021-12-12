@@ -32,6 +32,7 @@ class RequestBloodPage extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (state.isSuccess) {
+          logThis('In case of success');
           goRouter.pop(context);
         }
         return BloodListView(
