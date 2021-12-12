@@ -1,4 +1,5 @@
 import 'package:blood/providers/dashboard_provider.dart';
+import 'package:blood/utils/blood_list_view.dart';
 import 'package:blood/utils/empty_util.dart';
 import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/utils/shortcuts.dart';
@@ -17,7 +18,7 @@ class DashboardPage extends ConsumerWidget {
     logThis('test', tag: 'OnPage Dashboard');
     return Scaffold(
       appBar: const CustomAppBar(
-        title: 'Donor List',
+        title: 'Dashboard',
       ),
       body: Builder(
         builder: (context) {
@@ -31,7 +32,8 @@ class DashboardPage extends ConsumerWidget {
               child: BloodText('No donor found'),
             );
           }
-          return ListView(
+          return BloodListView(
+            // onRefresh: () ,
             padding: const EdgeInsets.fromLTRB(d_margin2, d_topPaddingForToolbar, d_margin2, 0),
             children: donors!.map(BloodListTile.new).toList(),
           );

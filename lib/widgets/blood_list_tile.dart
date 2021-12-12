@@ -1,4 +1,5 @@
 import 'package:blood/component/gaps.dart';
+import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/models/request_blood/request_blood_model.dart';
 import 'package:blood/utils/resources/colors.dart';
 import 'package:blood/utils/resources/dimens.dart';
@@ -20,7 +21,7 @@ class BloodListTile extends StatelessWidget {
         elevation: 2,
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
-          onTap: () {},
+          onTap: () => goRouter.go('/home/dashboard/dashboardDetail'),
           child: Stack(
             children: [
               Align(
