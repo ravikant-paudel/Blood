@@ -13,6 +13,9 @@ enum Developer { ravi }
 ///// Shortcut for [DialogUtil].
 //DialogUtil get dialog => Locator().dialog;
 
+/// Shortcut for getting Locator
+LocatorB get locator => LocatorB();
+
 /// Shortcut for [FirebaseWrapper].
 FirebaseWrapper get fbWrapper => LocatorB().fbWrapper;
 

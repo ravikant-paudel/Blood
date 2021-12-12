@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:blood/utils/log_util.dart';
 import 'package:blood/utils/network_util.dart';
 import 'package:blood/utils/preference_util.dart';
+import 'package:blood/utils/url_launcher_util.dart';
 import 'package:blood/widgets/firebase_wrapper.dart';
 import 'package:logger/logger.dart';
 
@@ -52,4 +53,5 @@ class LocatorB {
   LogUtil logger = LogUtil(Level.verbose);
 //  DialogUtil dialog = DialogUtil(rootNavKey);
   NetworkUtil connectivity = NetworkUtil();
+  UrlLauncherUtil urlLauncher = UrlLauncherUtil();
 }

@@ -1,5 +1,6 @@
 import 'package:blood/providers/dashboard_provider.dart';
 import 'package:blood/utils/empty_util.dart';
+import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/widgets/blood_list_tile.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
@@ -31,7 +32,7 @@ class DashboardPage extends ConsumerWidget {
             );
           }
           return ListView(
-            padding: const EdgeInsets.fromLTRB(16, 120, 16, 0),
+            padding: const EdgeInsets.fromLTRB(d_margin2, d_topPaddingForToolbar, d_margin2, 0),
             children: donors!.map(BloodListTile.new).toList(),
           );
         },

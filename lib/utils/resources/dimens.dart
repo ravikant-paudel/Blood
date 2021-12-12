@@ -17,6 +17,10 @@ const double d_margin6 = 48;
 const double d_margin7 = 56;
 const double d_margin8 = 64;
 const double d_margin9 = 72;
+const double d_margin10 = 128;
+
+/// 120
+const double d_topPaddingForToolbar = 120;
 
 // -------------------- Border Width ---------------------
 

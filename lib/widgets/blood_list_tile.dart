@@ -64,24 +64,24 @@ class BloodListTile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 30.0),
+                                padding: const EdgeInsets.only(left: 35.0),
                                 child: Text(
                                   'Request Blood',
                                   style: Theme.of(context).textTheme.headline6!.copyWith(
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
                               ),
-                              const VerticalGap(d_margin05),
+                              const VerticalGap(d_margin105),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 // crossAxisAlignment: CrossAxisAlignment.,
                                 children: [
                                   SvgPicture.asset(
                                     'assets/person.svg',
-                                    height: 10,
-                                    width: 10,
+                                    height: 12,
+                                    width: 12,
                                   ),
                                   const HorizontalGap(d_margin05),
                                   Expanded(
@@ -89,7 +89,7 @@ class BloodListTile extends StatelessWidget {
                                       requestBlood.patientName,
                                       style: Theme.of(context).textTheme.headline6!.copyWith(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 12,
+                                            fontSize: 11,
                                           ),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
@@ -117,19 +117,17 @@ class BloodListTile extends StatelessWidget {
                             ],
                           ),
                         ),
-                        BloodGroupLabel(
-                          requestBlood.bloodGroup,
-                        ),
+                        BloodGroupLabel(requestBlood.bloodGroup),
                       ],
                     ),
-                    const VerticalGap(d_margin105),
+                    const VerticalGap(d_margin205),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SvgPicture.asset(
                           'assets/contact.svg',
-                          height: 10,
-                          width: 10,
+                          height: 12,
+                          width: 12,
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
@@ -141,8 +139,8 @@ class BloodListTile extends StatelessWidget {
                         const HorizontalGap(d_margin4),
                         SvgPicture.asset(
                           'assets/calender.svg',
-                          height: 10,
-                          width: 10,
+                          height: 12,
+                          width: 12,
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
@@ -199,9 +197,7 @@ class BloodListTile extends StatelessWidget {
                         ),
                         const HorizontalGap(),
                         InkWell(
-                          onTap: () {
-                            logThis('message when phone click');
-                          },
+                          onTap: () => locator.urlLauncher.launchDialer('9841523939'),
                           child: Container(
                             height: 25,
                             width: 25,
