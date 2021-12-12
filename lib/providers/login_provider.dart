@@ -2,12 +2,11 @@ import 'package:blood/providers/auth_provider.dart';
 import 'package:blood/utils/failure.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_notifier/state_notifier.dart';
 
 final StateNotifierProvider<LoginProvider, LoginState> loginProvider = StateNotifierProvider((ref) => LoginProvider(ref));
 
 class LoginProvider extends StateNotifier<LoginState> {
-  ProviderReference pRef;
+  Ref pRef;
 
   LoginProvider(this.pRef) : super(LoginState(isLoading: false));
 

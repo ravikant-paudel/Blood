@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
                   'Blood',
                 ),
                 Center(
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     onPressed: () async {
                       if (await loginProv.fetchGoogleLogin()) {
                         goRouter.go('/home/dashboard');

@@ -5,7 +5,6 @@ import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/widgets/blood_group_label.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BloodListTile extends StatelessWidget {
@@ -41,13 +40,13 @@ class BloodListTile extends StatelessWidget {
                     child: BloodGroupLabel(
                       requestBlood.bloodGroup,
                       firstTextStyle: Theme.of(context).textTheme.headline6!.copyWith(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             fontWeight: FontWeight.w900,
                             fontSize: 14,
                             height: 1.3,
                           ),
                       secTextStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             height: 1,
                           ),
                     ),

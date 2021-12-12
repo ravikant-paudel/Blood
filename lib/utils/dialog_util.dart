@@ -8,7 +8,7 @@ class DialogUtil {
 
   final GlobalKey<NavigatorState> navigatorKey;
 
-  bool _isDialogOpen = false;
+  final bool _isDialogOpen = false;
 
   /// Returns true if any dialog is open.
   bool get isDialogOpen => _isDialogOpen;

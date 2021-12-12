@@ -2,7 +2,6 @@ import 'package:blood/models/request_blood/request_blood_model.dart';
 import 'package:blood/utils/constants.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_notifier/state_notifier.dart';
 
 final StateNotifierProvider<DashboardProvider, DashboardState> dashboardProvider = StateNotifierProvider(
   (ref) {

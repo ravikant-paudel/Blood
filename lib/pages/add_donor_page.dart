@@ -3,13 +3,12 @@ import 'package:blood/component/gaps.dart';
 import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/providers/add_donor_provider.dart';
 import 'package:blood/utils/resources/dimens.dart';
-import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddDonorPage extends StatelessWidget {
-  final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
+  // final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
 
   final GlobalKey<FormState> formKey = GlobalKey();
 

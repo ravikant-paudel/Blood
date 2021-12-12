@@ -6,7 +6,6 @@ import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:blood/widgets/text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class DonorPage extends StatelessWidget {
   const DonorPage({Key? key}) : super(key: key);

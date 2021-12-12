@@ -1,7 +1,6 @@
 import 'package:blood/component/button.dart';
 import 'package:blood/component/gaps.dart';
 import 'package:blood/helper/router/go_router.dart';
-import 'package:blood/providers/theme_provider.dart';
 import 'package:blood/utils/blood_list_view.dart';
 import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/utils/shortcuts.dart';
@@ -19,8 +18,8 @@ class ProfilePage extends StatelessWidget {
           title: 'Profile',
         ),
         body: Consumer(builder: (context, ref, child) {
-          final themeState = ref.watch(themeProvider);
-          final themePro = ref.watch(themeProvider.notifier);
+          // final themeState = ref.watch(themeProvider);
+          // final themePro = ref.watch(themeProvider.notifier);
           final currentUser = fbWrapper.checkCurrentUser();
           return BloodListView(
             children: [

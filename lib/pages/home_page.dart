@@ -3,7 +3,6 @@ import 'package:blood/pages/dashboard_page.dart';
 import 'package:blood/pages/donor_page.dart';
 import 'package:blood/pages/history_page.dart';
 import 'package:blood/pages/profile_page.dart';
-import 'package:blood/pages/request_blood_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,10 +18,11 @@ class _HomePageState extends State<HomePage> {
   final Map<String, Widget> screens = {
     'dashboard': const DashboardPage(),
     'donor': const DonorPage(),
-    'history': HistoryPage(),
-    'profile': ProfilePage(),
+    'history': const HistoryPage(),
+    'profile': const ProfilePage(),
   }; // to store nested tabs
   final PageStorageBucket bucket = PageStorageBucket();
+
   // Widget currentScreen = DashboardPage(); // Our first view in viewport
 
   @override

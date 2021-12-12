@@ -3,9 +3,10 @@ import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/widgets/blood_group_label.dart';
 import 'package:blood/widgets/text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 class ChooseBloodGroupComponent extends StatelessWidget {
+  const ChooseBloodGroupComponent({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,7 +24,7 @@ class ChooseBloodGroupComponent extends StatelessWidget {
             ),
             const VerticalGap(d_margin1),
             ToggleButtons(
-              isSelected: [],
+              isSelected: const [],
               children: [
                 Card(
                   child: Padding(

@@ -111,24 +111,21 @@ class BloodButton extends StatelessWidget {
               return MaterialButton(
                 onPressed: () => _onPressed(context),
                 textColor: Colors.white,
-                color: Theme.of(context).primaryColor,
                 shape: shape,
                 child: BloodText(buttonText),
               );
             case _BloodButtonType.outline:
-              return OutlineButton(
+              return OutlinedButton(
                 onPressed: () => _onPressed(context),
-                borderSide: const BorderSide(color: Colors.white),
-                shape: shape,
                 child: child,
               );
             case _BloodButtonType.flat:
               return icon == null
-                  ? FlatButton(
+                  ? TextButton(
                       onPressed: () => _onPressed(context),
                       child: child,
                     )
-                  : FlatButton.icon(
+                  : TextButton.icon(
                       onPressed: () => _onPressed(context),
                       icon: ConstrainedBox(constraints: const BoxConstraints(maxWidth: d_iconMedium), child: icon!),
                       label: child,
@@ -142,7 +139,6 @@ class BloodButton extends StatelessWidget {
                 ),
               );
           }
-          return const SizedBox();
         },
       ),
     );
@@ -166,9 +162,8 @@ class BloodAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       onPressed: onPressed,
-      textColor: DefaultTextStyle.of(context).style.color,
       child: Text(text),
     );
   }
