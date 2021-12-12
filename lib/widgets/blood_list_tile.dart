@@ -1,6 +1,8 @@
 import 'package:blood/component/gaps.dart';
 import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/models/request_blood/request_blood_model.dart';
+import 'package:blood/utils/date_format.dart';
+import 'package:blood/utils/date_util.dart';
 import 'package:blood/utils/resources/colors.dart';
 import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/utils/shortcuts.dart';
@@ -15,6 +17,7 @@ class BloodListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var formattedDate = DateUtil(requestBlood.createdAt.toString()).format(DateFormatPattern.fullDateWithTimeAndDay);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Material(
@@ -137,7 +140,7 @@ class BloodListTile extends StatelessWidget {
                                 fontSize: 10,
                               ),
                         ),
-                        const HorizontalGap(d_margin4),
+                        const HorizontalGap(d_margin3),
                         SvgPicture.asset(
                           'assets/calender.svg',
                           height: 12,
@@ -145,7 +148,7 @@ class BloodListTile extends StatelessWidget {
                         ),
                         const HorizontalGap(d_margin05),
                         Text(
-                          requestBlood.createdAt.toString(),
+                          formattedDate,
                           style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 10),
                         ),
                       ],
