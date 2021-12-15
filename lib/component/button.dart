@@ -1,6 +1,7 @@
 import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/widgets/text.dart';
 import 'package:flutter/material.dart';
+import 'package:blood/utils/shortcuts.dart';
 
 enum _BloodButtonType {
   primary,
@@ -8,6 +9,7 @@ enum _BloodButtonType {
   outline,
   flat,
   text,
+  white,
 }
 
 class BloodButton extends StatelessWidget {
@@ -81,6 +83,17 @@ class BloodButton extends StatelessWidget {
   })  : _buttonType = _BloodButtonType.text,
         super(key: key);
 
+  const BloodButton.white({
+    Key? key,
+    required this.buttonText,
+    required this.onPressed,
+    this.padding = const EdgeInsets.symmetric(vertical: 14.0),
+    this.autoUnFocus = true,
+    this.icon,
+    this.minWidth = double.infinity,
+  })  : _buttonType = _BloodButtonType.white,
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final child = BloodText(
@@ -104,6 +117,14 @@ class BloodButton extends StatelessWidget {
                 onPressed: () => _onPressed(context),
                 textColor: Colors.white,
                 color: Theme.of(context).primaryColor,
+                shape: shape,
+                child: BloodText(buttonText),
+              );
+            case _BloodButtonType.white:
+              return MaterialButton(
+                onPressed: () => _onPressed(context),
+                textColor: context.color.primary,
+                color: Colors.white,
                 shape: shape,
                 child: BloodText(buttonText),
               );
