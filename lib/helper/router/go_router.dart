@@ -1,4 +1,5 @@
 import 'package:blood/pages/add_donor_page.dart';
+import 'package:blood/pages/dashboard_detail_page.dart';
 import 'package:blood/pages/donor_list_page.dart';
 import 'package:blood/pages/home_page.dart';
 import 'package:blood/pages/login_page.dart';
@@ -30,25 +31,37 @@ final goRouter = GoRouter(
       ),
     ),
     GoRoute(
-        path: '/home/:path',
-        pageBuilder: (context, state) {
-          return MaterialPage(
-            key: state.pageKey,
-            child: HomePage(
-              path: state.params['path'],
-            ),
-          );
-        },
-        routes: [
-          GoRoute(
-            name: 'requestBlood',
-            path: 'requestBlood',
-            pageBuilder: (context, state) => MaterialPage(
-              key: state.pageKey,
-              child: RequestBloodPage(),
-            ),
+      path: '/home/:path',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: HomePage(
+            path: state.params['path'],
           ),
-        ]),
+        );
+      },
+      routes: [
+        GoRoute(
+          name: 'requestBlood',
+          path: 'requestBlood',
+          pageBuilder: (context, state) => MaterialPage(
+            key: state.pageKey,
+            child: RequestBloodPage(),
+          ),
+        ),
+        GoRoute(
+          name: 'dashboardDetail',
+          path: 'dashboardDetail/:idx',
+          pageBuilder: (context, state) {
+            // final family = Families.family(state.params['fid']!);
+            return MaterialPage(
+              key: state.pageKey,
+              child: const DashboardDetailPage(),
+            );
+          },
+        ),
+      ],
+    ),
     GoRoute(
       name: 'donorList',
       path: '/donorList',

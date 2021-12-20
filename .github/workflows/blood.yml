@@ -1,0 +1,31 @@
+name: Apk generate on master
+on:
+  push:
+    branches:
+      - master
+jobs:
+  blood:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out current repository
+        uses: actions/checkout@v2
+
+      - name: Setup Flutter Stable
+        uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+
+      - name: Get package dependencies
+        run: flutter pub get
+
+      - name: Analyze dart code for the project
+        run: flutter analyze
+
+      - name: Generate Apk
+        run: flutter build apk --split-per-abi
+
+      - name: Create release with artifacts
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/outputs/flutter-apk/*.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}

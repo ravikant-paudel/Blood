@@ -17,7 +17,7 @@ class DonorPage extends StatelessWidget {
         title: 'Donors',
       ),
       body: BloodListView(
-        padding: const EdgeInsets.symmetric(vertical: d_margin4, horizontal: d_margin2),
+        padding: const EdgeInsets.fromLTRB(d_margin2, d_topPaddingForToolbar, d_margin2, 0),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

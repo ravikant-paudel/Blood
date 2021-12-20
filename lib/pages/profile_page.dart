@@ -22,6 +22,7 @@ class ProfilePage extends StatelessWidget {
           // final themePro = ref.watch(themeProvider.notifier);
           final currentUser = fbWrapper.checkCurrentUser();
           return BloodListView(
+            padding: const EdgeInsets.fromLTRB(d_margin2, d_topPaddingForToolbar, d_margin2, 0),
             children: [
               const VerticalGap(),
               Text(currentUser?.displayName ?? ''),

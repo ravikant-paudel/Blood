@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     _Item(path: 'dashboard', icon: Icons.dashboard, label: 'Dashboard'),
-                    _Item(path: 'donor', icon: Icons.assessment, label: 'List'),
+                    _Item(path: 'donor', icon: Icons.assessment, label: 'Donor'),
                   ],
                 ),
 

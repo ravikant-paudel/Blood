@@ -1,14 +1,13 @@
 // Copyright (c) 2020 The Blood Authors. All rights reserved.
 
-
 import 'package:flutter/material.dart';
 
 const int _rawPrimary = 0xFFCA2B28;
-const int _rawAccent  = 0xFFFFFFFF;
+const int _rawAccent = 0xFFFFFFFF;
 
 // --------------- Primary Color-----------------
 
- const MaterialColor primaryColorLight = MaterialColor(
+const MaterialColor primaryColorLight = MaterialColor(
   _rawPrimary,
   {
     50: Color(0xFFee9595),
@@ -40,7 +39,6 @@ const MaterialColor primaryColorDark = MaterialColor(
   },
 );
 
-
 // --------------- Accent Color-----------------
 
 const MaterialColor accentColorLight = MaterialColor(
@@ -65,7 +63,6 @@ const Color secondaryTextDark = Color(0xFFFEFEFE);
 
 const Color bloodGroupColor = Color(0xFFd4d4d4);
 const Color buttonColor = Color(0xFF11A407);
-
 
 /*
 

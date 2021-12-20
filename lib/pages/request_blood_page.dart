@@ -9,6 +9,7 @@ import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:blood/widgets/blood_group_label.dart';
 import 'package:blood/widgets/blood_text_form.dart';
+import 'package:blood/widgets/choose_blood_group_component.dart';
 import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,6 +45,12 @@ class RequestBloodPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    ChooseBloodGroupComponent(
+                      onChanged: (s) {
+                        logThis(s);
+                      },
+                    ),
+                    const VerticalGap(d_margin2),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientName,
                       labelText: 'Patient Name',
