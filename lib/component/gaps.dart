@@ -7,7 +7,7 @@ class VerticalGap extends StatelessWidget {
   /// A vertical space of [gapSize].
   ///
   /// Default gap is 24.0.
-  const VerticalGap([this.gapSize = d_margin3]);
+  const VerticalGap([this.gapSize = d_margin3]) : super(key: null);
 
   final double gapSize;
 
@@ -20,7 +20,7 @@ class HorizontalGap extends StatelessWidget {
   /// A horizontal space of [gapSize].
   ///
   /// Default gap is 10.0.
-  const HorizontalGap([this.gapSize = d_horizontalGap]);
+  const HorizontalGap([this.gapSize = d_horizontalGap]) : super(key: null);
 
   final double gapSize;
 

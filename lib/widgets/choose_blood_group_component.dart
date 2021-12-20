@@ -31,7 +31,6 @@ class _ChooseBloodGroupComponentState extends State<ChooseBloodGroupComponent> {
                     fontSize: 14,
                   ),
             ),
-            const VerticalGap(d_margin1),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: d_margin2, vertical: d_margin1),
               child: ChooseBloodScope(
@@ -40,7 +39,7 @@ class _ChooseBloodGroupComponentState extends State<ChooseBloodGroupComponent> {
                   spacing: d_margin1,
                   crossAxisAlignment: WrapCrossAlignment.end,
                   children: [
-                    for (final group in ['A+', 'A-'])
+                    for (final group in ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'])
                       _Button(
                         value: group,
                         onChanged: (group) {
@@ -81,13 +80,13 @@ class _Button extends StatelessWidget {
   ButtonStyle _style(BuildContext context) {
     if (value == ChooseBloodScope.of(context)) {
       return ElevatedButton.styleFrom(
-        primary: Color(0xFFCB2C28),
+        primary: const Color(0xFFCB2C28),
         onPrimary: Colors.white,
       );
     }
     return ElevatedButton.styleFrom(
-      primary: Color(0xFFEBEBEB),
-      onPrimary: Color(0xFFC6C1C1),
+      primary: const Color(0xFFEBEBEB),
+      onPrimary: const Color(0xFFC6C1C1),
     );
   }
 }
