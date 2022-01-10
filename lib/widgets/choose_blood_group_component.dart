@@ -8,6 +8,7 @@ class ChooseBloodGroupComponent extends StatefulWidget {
   const ChooseBloodGroupComponent({Key? key, required this.onChanged}) : super(key: key);
 
   final ValueChanged<String?> onChanged;
+  // final bool forNotification;
 
   @override
   State<ChooseBloodGroupComponent> createState() => _ChooseBloodGroupComponentState();
@@ -21,15 +22,16 @@ class _ChooseBloodGroupComponentState extends State<ChooseBloodGroupComponent> {
     return Card(
       margin: EdgeInsets.zero,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.fromLTRB(8, 16, 0, 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BloodText(
-              'Choose Blood Group',
-              style: Theme.of(context).textTheme.headline6!.copyWith(
-                    fontSize: 14,
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: BloodText(
+                'Choose Blood Group',
+                style: Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: d_margin2, vertical: d_margin1),

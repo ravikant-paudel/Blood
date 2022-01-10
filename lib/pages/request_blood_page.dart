@@ -45,18 +45,17 @@ class RequestBloodPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    ChooseBloodGroupComponent(
-                      onChanged: (s) {
-                        logThis(s);
-                      },
-                    ),
-                    const VerticalGap(d_margin2),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientName,
                       labelText: 'Patient Name',
-                      validator: (value) => RegExp(r'\w{4,}').hasMatch(value ?? '') ? null : 'At least 4 character',
+                      validator: (value) => RegExp(r'\w{2,}').hasMatch(value ?? '') ? null : 'At least 4 character',
                     ),
-                    const VerticalGap(d_margin05),
+                    const VerticalGap(d_margin1),
+                    BloodTextForm(
+                      onChanged: reqBloodProvider.updatePatientName,
+                      labelText: 'Patient Name',
+                      validator: (value) => RegExp(r'\w{2,}').hasMatch(value ?? '') ? null : 'At least 4 character',
+                    ),
                     Card(
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 16, top: 0, right: 16, left: 16),
@@ -76,6 +75,13 @@ class RequestBloodPage extends StatelessWidget {
                       ),
                     ),
                     const VerticalGap(d_margin05),
+                    const VerticalGap(d_margin1),
+                    ChooseBloodGroupComponent(
+                      onChanged: (s) {
+                        logThis(s);
+                      },
+                    ),
+                    const VerticalGap(d_margin2),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientLocation,
                       validator: (value) => value == null ? 'Please add address' : null,
@@ -124,12 +130,7 @@ class RequestBloodPage extends StatelessWidget {
                     //     ),
                     //   ),
                     // ),
-                    BloodTextForm(
-                      onChanged: reqBloodProvider.updateContactNumber,
-                      validator: (value) => value == null ? 'Please add Contact number' : null,
-                      keyboardType: TextInputType.phone,
-                      labelText: 'Contact Number',
-                    ),
+
                     const VerticalGap(d_margin05),
                     BloodTextForm(
                       onChanged: reqBloodProvider.updatePatientAge,

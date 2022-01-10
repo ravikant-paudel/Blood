@@ -52,6 +52,7 @@ class LoginPage extends StatelessWidget {
                   if (await loginProv.fetchGoogleLogin()) {
                     goRouter.go('/home/dashboard');
                   }
+                  goRouter.go('/login');
                 },
                 buttonText: 'Google Login',
               ),

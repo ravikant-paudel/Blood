@@ -58,14 +58,14 @@ class FirebaseWrapper {
   Future<void> addDataToDb(User cUser) async {
     //user class
     final String userName = Utils.getUsername(cUser.email ?? '');
-    final String notiToken = preference.get(PreferenceKey.notificationToken);
+    // final String notiToken = preference.get(PreferenceKey.notificationToken);
     final UserModel user = UserModel(
       uid: cUser.uid,
       email: cUser.email,
       name: cUser.displayName ?? '',
       profilePhoto: cUser.photoURL,
       username: userName,
-      notificationToken: notiToken,
+      notificationToken: '',
     );
     fbWrapper.insertToDb(Constants.userCollection, user.uid, user.toMap());
   }

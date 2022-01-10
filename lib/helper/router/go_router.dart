@@ -4,6 +4,7 @@ import 'package:blood/pages/donor_list_page.dart';
 import 'package:blood/pages/home_page.dart';
 import 'package:blood/pages/login_page.dart';
 import 'package:blood/pages/request_blood_page.dart';
+import 'package:blood/pages/splash_page.dart';
 import 'package:blood/utils/shortcuts.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -21,6 +22,14 @@ final goRouter = GoRouter(
     GoRoute(
       path: '/',
       redirect: (_) => '/home/dashboard',
+    ),
+    GoRoute(
+      name: 'splash',
+      path: '/splash',
+      pageBuilder: (context, state) => MaterialPage(
+        key: state.pageKey,
+        child: const SplashPage(),
+      ),
     ),
     GoRoute(
       name: 'login',
