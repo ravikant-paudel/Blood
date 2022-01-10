@@ -27,7 +27,7 @@ class AddDonorPage extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (addDonorState.isSuccess) {
-          goRouter.pop(context);
+          goRouter.pop();
         }
         return ListView(
           children: [

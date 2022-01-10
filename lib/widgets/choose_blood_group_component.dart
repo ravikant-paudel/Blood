@@ -1,13 +1,12 @@
-import 'package:blood/component/gaps.dart';
 import 'package:blood/utils/resources/dimens.dart';
 import 'package:blood/widgets/text.dart';
 import 'package:flutter/material.dart';
-import 'package:blood/utils/shortcuts.dart';
 
 class ChooseBloodGroupComponent extends StatefulWidget {
   const ChooseBloodGroupComponent({Key? key, required this.onChanged}) : super(key: key);
 
   final ValueChanged<String?> onChanged;
+
   // final bool forNotification;
 
   @override

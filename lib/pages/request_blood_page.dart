@@ -34,7 +34,7 @@ class RequestBloodPage extends StatelessWidget {
         }
         if (state.isSuccess) {
           logThis('In case of success');
-          goRouter.pop(context);
+          goRouter.pop();
         }
         return BloodListView(
           children: [
