@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final goRouter = GoRouter(
-  debugLogDiagnostics: true,
+  // debugLogDiagnostics: true,
+  initialLocation: '/splash',
   redirect: (state) {
     final currentUser = fbWrapper.checkCurrentUser();
     if (state.location != '/login' && currentUser == null) {
