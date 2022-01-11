@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final goRouter = GoRouter(
-  // debugLogDiagnostics: true,
+  debugLogDiagnostics: true,
   initialLocation: '/splash',
   redirect: (state) {
     final currentUser = fbWrapper.checkCurrentUser();
@@ -63,7 +63,6 @@ final goRouter = GoRouter(
           name: 'dashboardDetail',
           path: 'dashboardDetail/:idx',
           pageBuilder: (context, state) {
-            // final family = Families.family(state.params['fid']!);
             return MaterialPage(
               key: state.pageKey,
               child: const DashboardDetailPage(),
@@ -91,10 +90,13 @@ final goRouter = GoRouter(
       ],
     ),
   ],
-  errorPageBuilder: (context, state) => MaterialPage<void>(
-    key: state.pageKey,
-    child: const Scaffold(
-      body: Center(child: Text('Error Page.')),
-    ),
-  ),
+  errorPageBuilder: (context, state) {
+    logThis(state.error, tag: 'ERROR');
+    return MaterialPage<void>(
+      key: state.pageKey,
+      child: const Scaffold(
+        body: Center(child: Text('Error Page.')),
+      ),
+    );
+  },
 );

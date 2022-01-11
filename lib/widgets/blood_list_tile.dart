@@ -24,7 +24,7 @@ class BloodListTile extends StatelessWidget {
         elevation: 2,
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
-          onTap: () => goRouter.go('/home/dashboard/dashboardDetail'),
+          onTap: () => goRouter.go('/home/dashboard/dashboardDetail/${requestBlood.id}'),
           child: Stack(
             children: [
               Align(

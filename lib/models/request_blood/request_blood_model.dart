@@ -8,13 +8,20 @@ part 'request_blood_model.g.dart';
 @freezed
 abstract class RequestBloodModel with _$RequestBloodModel {
   factory RequestBloodModel({
+    required String id,
     required String patientName,
+    required String patientBedNumber,
     required String bloodGroup,
     required String patientLocation,
     required String contactNumber,
     required String patientAge,
     required String district,
     required String submittedBy,
+    required String patientSex,
+    required String requestTime,
+    required String bloodUnit,
+    required String relation,
+    required String hospitalInfo,
     @JsonKey(fromJson: _dateTimeFromTimestamp, toJson: _timestampFromDateTime) required DateTime createdAt,
   }) = _RequestBloodModel;
 

@@ -56,6 +56,7 @@ class RequestBloodPage extends StatelessWidget {
                       labelText: 'Patient Name',
                       validator: (value) => RegExp(r'\w{2,}').hasMatch(value ?? '') ? null : 'At least 4 character',
                     ),
+                    const VerticalGap(d_margin1),
                     Card(
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 16, top: 0, right: 16, left: 16),
@@ -74,7 +75,6 @@ class RequestBloodPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const VerticalGap(d_margin05),
                     const VerticalGap(d_margin1),
                     ChooseBloodGroupComponent(
                       onChanged: (s) {
