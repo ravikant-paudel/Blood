@@ -26,28 +26,73 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ColoredBox(
-        color: context.color.primary,
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/logo.svg',
-                height: 80,
-                width: 80,
-                color: Colors.white,
+      body: Stack(
+        children: [
+          ColoredBox(
+            color: context.color.primary,
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'assets/logo.svg',
+                    height: 80,
+                    width: 80,
+                    color: Colors.white,
+                  ),
+                  const VerticalGap(d_margin1),
+                  Text(
+                    'Blood',
+                    style: context.theme.textTheme.headline5!.copyWith(
+                      color: context.color.secondary,
+                    ),
+                  ),
+                ],
               ),
-              const VerticalGap(d_margin1),
-              Text(
-                'Blood',
-                style: context.theme.textTheme.headline5!.copyWith(
-                  color: context.color.secondary,
-                ),
-              ),
-            ],
+            ),
           ),
+          const PositionedCircle(containerHeight: 336, containerWidth: 336, positionedLeft: -253, positionedTop: 42),
+          const PositionedCircle(containerHeight: 336, containerWidth: 336, positionedLeft: -297, positionedTop: 234),
+          const PositionedCircle(containerHeight: 166, containerWidth: 166, positionedLeft: 308, positionedBottom: 162),
+          const PositionedCircle(containerHeight: 295, containerWidth: 295, positionedLeft: 175, positionedBottom: -48),
+        ],
+      ),
+    );
+  }
+}
+
+class PositionedCircle extends StatelessWidget {
+  const PositionedCircle({
+    Key? key,
+    required this.containerHeight,
+    required this.containerWidth,
+    this.positionedLeft,
+    this.positionedTop,
+    this.positionedRight,
+    this.positionedBottom,
+  }) : super(key: key);
+
+  final double containerHeight;
+  final double containerWidth;
+  final double? positionedLeft;
+  final double? positionedTop;
+  final double? positionedRight;
+  final double? positionedBottom;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: positionedLeft,
+      top: positionedTop,
+      bottom: positionedBottom,
+      right: positionedRight,
+      child: Container(
+        height: containerHeight,
+        width: containerWidth,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.19),
+          shape: BoxShape.circle,
         ),
       ),
     );
