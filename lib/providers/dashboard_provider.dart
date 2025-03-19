@@ -58,15 +58,3 @@ Stream<List<RequestBloodModel>> obtainDataFrmDb() {
     },
   );
 }
-
-// Future<List<RequestBloodModel>> obtainDataFrmDb() async {
-//   QuerySnapshot snapshot = await Firestore.instance.collection('request').orderBy("createdAt", descending: true).getDocuments();
-//
-//   List<RequestBloodModel> _dashboardList = [];
-//
-//   snapshot.documents.forEach((document) {
-//     RequestBloodModel request = RequestBloodModel.fromMap(document.data);
-//     _dashboardList.add(request);
-//   });
-//   return _dashboardList;
-// }
