@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "243440890133",
+    "firebase_url": "https://blood-b007.firebaseio.com",
+    "project_id": "blood-b007",
+    "storage_bucket": "blood-b007.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243440890133:android:2914284443d1b458d0391c",
+        "android_client_info": {
+          "package_name": "com.catchsquare.blood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243440890133-89bgbvme26dff8idpk6b4em8vnkfnc1l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.catchsquare.blood",
+            "certificate_hash": "03b19e05bee2f8dd19a0d1163b078c3c91f60e6c"
+          }
+        },
+        {
+          "client_id": "243440890133-rbqocgkeotkkb3dn9goumukitlle5l0t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-ChPD_Fs6weab2YECWYQhJu5jFkoPqWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243440890133-rbqocgkeotkkb3dn9goumukitlle5l0t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "243440890133-km4l73n0j40jk53liui0rtso7obkipn8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.catchsquare.blood"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
