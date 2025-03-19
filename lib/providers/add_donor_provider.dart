@@ -1,26 +1,21 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final StateNotifierProvider<AddDonorProvider, AddDonorState> addDonorProvider = StateNotifierProvider((_) => AddDonorProvider());
+final addDonorProvider = StateNotifierProvider.autoDispose<AddDonorNotifier, AddDonorState>(
+  (ref) => AddDonorNotifier(),
+);
 
-class AddDonorProvider extends StateNotifier<AddDonorState> {
-  AddDonorProvider() : super(AddDonorState(isLoading: false, isSuccess: false, nameDonor: '', bloodDonor: '', numberDonor: ''));
+class AddDonorNotifier extends StateNotifier<AddDonorState> {
+  AddDonorNotifier() : super(AddDonorState(isLoading: false, isSuccess: false, nameDonor: '', bloodDonor: '', numberDonor: ''));
 
-  void submitDonorName() {
+  void updateName(String name) => state = state.copyWith(nameDonor: name);
+  void updateNumber(String number) => state = state.copyWith(numberDonor: number);
+  void updateBloodGroup(String? blood) => state = state.copyWith(bloodDonor: blood);
+
+  Future<void> submitDonor() async {
     state = state.copyWith(isLoading: true);
-    // addDataToDb(state);
+    // Simulate async operation
+    await Future.delayed(const Duration(seconds: 1));
     state = state.copyWith(isLoading: false, isSuccess: true);
-  }
-
-  void updateName(String name) {
-    state = state.copyWith(nameDonor: name);
-  }
-
-  void updateNumber(String number) {
-    state = state.copyWith(numberDonor: number);
-  }
-
-  void updateBloodGroup(String? blood) {
-    state = state.copyWith(bloodDonor: blood);
   }
 }
 
@@ -44,27 +39,4 @@ class AddDonorState {
         numberDonor: numberDonor ?? this.numberDonor,
         bloodDonor: bloodDonor ?? this.bloodDonor,
       );
-
-  @override
-  String toString() =>
-      'AddDonorState(isLoading: $isLoading,isSuccess: $isSuccess, nameDonor: $nameDonor,numberDonor: $numberDonor,bloodDonor: $bloodDonor)';
 }
-
-// Future<void> addDataToDb(AddDonorState state) async {
-//   //FirebaseUser cUser
-//   // AddDonorModel addDonor = AddDonorModel();
-//   final uId = preference.get(PreferenceKey.USER_ID);
-//   final addDonor = AddDonorModel(
-//       donorName: state.nameDonor,
-//       donorNumber: state.numberDonor,
-//       donorBloodGroup: state.bloodDonor,
-//       submittedBy: uId.toString(),
-//       createdAt: DateTime.now().toUtc().millisecondsSinceEpoch);
-//
-//   // _firestore.collection("donors").add(addDonor.toMap(addDonor));
-//   fbWrapper.insertToDb(
-//     Constants.donor_collection,
-//     null,
-//     addDonor.toJson(),
-//   );
-// }
