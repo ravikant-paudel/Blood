@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
         body: Consumer(builder: (context, ref, child) {
           // final themeState = ref.watch(themeProvider);
           // final themePro = ref.watch(themeProvider.notifier);
-          final currentUser = fbWrapper.checkCurrentUser();
+          final currentUser = fbWrapper.currentUser;
           return BloodListView(
             padding: const EdgeInsets.fromLTRB(d_margin2, d_topPaddingForToolbar, d_margin2, 0),
             children: [
@@ -33,7 +33,7 @@ class ProfilePage extends StatelessWidget {
               BloodButton(
                 buttonText: 'SIGN OUT',
                 onPressed: () {
-                  fbWrapper.loginOut();
+                  fbWrapper.logout();
                   goRouter.go('/login');
                 },
               ),

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:blood/models/user_model.dart';
 import 'package:blood/utils/constants.dart';
-import 'package:blood/utils/empty_util.dart';
 import 'package:blood/utils/failure.dart';
 import 'package:blood/utils/preference_util.dart';
 import 'package:blood/utils/shortcuts.dart';
@@ -13,100 +12,188 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseWrapper {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: ['email', 'profile'],
+    clientId: '', // Add if needed for web
+  );
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<bool> signIn() async {
+  // Main authentication flow
+  Future<bool> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? _signInAccount = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication? _signInAuthentication = await _signInAccount?.authentication;
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) return false;
 
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: _signInAuthentication?.accessToken,
-        idToken: _signInAuthentication?.idToken,
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
-      final result = await _auth.signInWithCredential(credential);
-      logThis(result, tag: 'result');
-      final signInUser = result.user;
-      if (signInUser != null) {
-        final isNewUser = await authenticateUser(signInUser);
-        logThis(signInUser, tag: 'signInUser.uid');
-        preference.set(PreferenceKey.userId, signInUser.uid);
-        if (isNewUser) await addDataToDb(signInUser);
-        return true;
-      } else {
-        return false;
-      }
-    } on Failure catch (e) {
-      logThis(' error is $e');
+
+      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+      return await _handleUserResult(userCredential);
+    } on FirebaseAuthException catch (e) {
+      _logError('Google Sign-In Failed', e);
+      return false;
+    } catch (e, stack) {
+      _logError('Unexpected Error', e, stack);
       return false;
     }
   }
 
-  Future<bool> authenticateUser(User signInUser) async {
-    final QuerySnapshot result = await _firestore
-        .collection(Constants.userCollection)
-        .where(
-          Constants.userEmail,
-          isEqualTo: signInUser.email,
-        )
-        .get();
-    final List<DocumentSnapshot> docs = result.docs;
-    return docs.isEmpty;
+  Future<bool> _handleUserResult(UserCredential credential) async {
+    final user = credential.user;
+    if (user == null) return false;
+
+    preference.set(PreferenceKey.userId, user.uid);
+
+    if (credential.additionalUserInfo?.isNewUser ?? false) {
+      await _createUserDocument(user);
+    }
+
+    return true;
   }
 
-  Future<void> addDataToDb(User cUser) async {
-    //user class
-    final String userName = Utils.getUsername(cUser.email ?? '');
-    // final String notiToken = preference.get(PreferenceKey.notificationToken);
-    final UserModel user = UserModel(
-      uid: cUser.uid,
-      email: cUser.email,
-      name: cUser.displayName ?? '',
-      profilePhoto: cUser.photoURL,
-      username: userName,
-      notificationToken: '',
+  Future<void> _createUserDocument(User user) async {
+    final userDoc = _firestore.collection(Constants.userCollection).doc(user.uid);
+
+    final userData = UserModel(
+      uid: user.uid,
+      email: user.email!,
+      name: user.displayName ?? 'Anonymous',
+      profilePhoto: user.photoURL,
+      username: Utils.getUsername(user.email!),
+      notificationToken: preference.get(PreferenceKey.notificationToken) ?? '',
+      createdAt: null,
+      lastLogin: null,
     );
-    fbWrapper.insertToDb(Constants.userCollection, user.uid, user.toMap());
+
+    await userDoc.set(userData.toUpdateMap());
   }
 
-  Future<void> insertToDb(String tableName, String docId, Map<String, dynamic> map) async {
-    if (docId.isNotNullAndNotEmpty) {
-      await _firestore.collection(tableName).doc(docId).set(map);
-    } else {
-      await _firestore.collection(tableName).add(map);
+  // Database operations
+  Future<void> insertDocument({
+    required String collection,
+    required String? docId,
+    required Map<String, dynamic> data,
+    bool merge = true,
+  }) async {
+    try {
+      final ref = docId != null ? _firestore.collection(collection).doc(docId) : _firestore.collection(collection).doc();
+
+      await ref.set(data, SetOptions(merge: merge));
+    } on FirebaseException catch (e) {
+      throw Failure('Database Error: ${e.code}');
     }
   }
 
-  String getRandomId(String tableName) {
-    return _firestore.collection(tableName).doc().id;
-  }
-
-  Stream<List<T>> getStreamListFrmDb<T>(
-    String tableName,
-    T Function(DocumentSnapshot<Map<String, dynamic>>) funQuery, {
-    MapQuery Function(MapQuery)? query,
+  // Stream operations
+  Stream<List<T>> collectionStream<T>({
+    required String path,
+    required T Function(DocumentSnapshot<Map<String, dynamic>> doc) builder,
+    Query<Map<String, dynamic>> Function(Query<Map<String, dynamic>> query)? queryBuilder,
+    int Function(T, T)? sort,
   }) {
-    if (query != null) {
-      return query(_firestore.collection(tableName)).orderBy('createdAt', descending: true).snapshots().map(
-            (snapShot) => snapShot.docs.map(funQuery).toList(),
-          );
-    } else {
-      return _firestore.collection(tableName).snapshots().map(
-            (snapShot) => snapShot.docs.map(funQuery).toList(),
-          );
+    try {
+      Query<Map<String, dynamic>> query = _firestore.collection(path);
+      if (queryBuilder != null) query = queryBuilder(query);
+
+      return query.snapshots().handleError((e) {
+        throw Failure('Stream Error: ${e.code}');
+      }).map((snapshot) {
+        final docs = snapshot.docs.map(builder).toList();
+        if (sort != null) docs.sort(sort);
+        return docs;
+      });
+    } on FirebaseException catch (e) {
+      throw Failure('Stream Setup Failed: ${e.code}');
     }
   }
 
-  User? checkCurrentUser() {
-    logThis('checkCurrentUser');
-    return _auth.currentUser;
+  // User management
+  Stream<User?> authStateChanges() => _auth.authStateChanges();
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw Failure('Password Reset Failed: ${e.code}');
+    }
   }
 
-  Future<void> loginOut() async {
-    await _googleSignIn.signOut();
-    return _auth.signOut();
+  Future<void> updateProfile({
+    String? displayName,
+    String? photoURL,
+  }) async {
+    try {
+      await _auth.currentUser?.updateDisplayName(displayName);
+      await _auth.currentUser?.updatePhotoURL(photoURL);
+      await _auth.currentUser?.reload();
+    } on FirebaseAuthException catch (e) {
+      throw Failure('Profile Update Failed: ${e.code}');
+    }
   }
+
+  // Phone authentication
+  Future<void> verifyPhoneNumber({
+    required String phoneNumber,
+    required Function(String) onCodeSent,
+    required Function(Failure) onError,
+  }) async {
+    await _auth.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        await _auth.signInWithCredential(credential);
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        onError(Failure('Verification Failed: ${e.code}'));
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        preference.set(PreferenceKey.verificationId, verificationId);
+        onCodeSent(verificationId);
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
+      timeout: const Duration(seconds: 120),
+    );
+  }
+
+  // Session management
+  User? get currentUser => _auth.currentUser;
+
+  bool get isEmailVerified => _auth.currentUser?.emailVerified ?? false;
+
+  Future<void> logout() async {
+    try {
+      await _googleSignIn.signOut();
+      await _auth.signOut();
+      await preference.clearAll();
+    } on FirebaseAuthException catch (e) {
+      throw Failure('Logout Failed: ${e.code}');
+    }
+  }
+
+  // Error handling
+  void _logError(String context, dynamic error, [StackTrace? stack]) {
+    logThis('$context: ${error.toString()}');
+    if (stack != null) logThis('Stack Trace: $stack');
+  }
+
+  // Utility
+  String generateDocumentId(String collectionPath) => _firestore.collection(collectionPath).doc().id;
 }
 
-typedef MapQuery = Query<Map<String, dynamic>>;
+// // Before
+// fbWrapper.signIn();
+// fbWrapper.getStreamListFrmDb(...);
+// fbWrapper.insertToDb(...);
+// fbWrapper.checkCurrentUser();
+// fbWrapper.loginOut();
+//
+// // After
+// fbWrapper.signInWithGoogle();
+// fbWrapper.collectionStream(...);
+// fbWrapper.insertDocument(...);
+// fbWrapper.currentUser;  // Property access
+// fbWrapper.logout();

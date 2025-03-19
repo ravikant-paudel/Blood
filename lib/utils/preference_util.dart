@@ -1,4 +1,4 @@
-// Copyright (c) 2020 The Khalti Authors. All rights reserved.
+// Copyright (c) 2020 The Blood Authors. All rights reserved.
 
 import 'dart:async';
 
@@ -11,6 +11,7 @@ enum PreferenceKey {
   userId,
   themeMode,
   notificationToken,
+  verificationId,
 }
 
 class PreferenceUtil {
@@ -20,18 +21,19 @@ class PreferenceUtil {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  Future<bool>? set<T>(PreferenceKey prefKey, T value) {
-    final x = PreferenceKey.values.byName('userId');
-    x.name;
-    final key = prefKey.name;
-    if (key.isNotNullAndNotEmpty) {
+  Future<bool> set<T>(PreferenceKey prefKey, T value) async {
+    try {
+      final key = prefKey.name;
       if (value is String) return _prefs.setString(key, value);
       if (value is int) return _prefs.setInt(key, value);
       if (value is bool) return _prefs.setBool(key, value);
       if (value is double) return _prefs.setDouble(key, value);
       if (value is List<String>) return _prefs.setStringList(key, value);
+      return false;
+    } on Exception catch (e, s) {
+      errorLog(e, stackTrace: s);
+      return false;
     }
-    return Future.value(false);
   }
 
   bool has(PreferenceKey prefKey) => prefKey.name.isNotNullAndNotEmpty && _prefs.containsKey(prefKey.name);
@@ -42,6 +44,15 @@ class PreferenceUtil {
     } on Exception catch (e, s) {
       errorLog(e, stackTrace: s);
       rethrow;
+    }
+  }
+
+  Future<bool> clearAll() async {
+    try {
+      return await _prefs.clear();
+    } on Exception catch (e, s) {
+      errorLog(e, stackTrace: s);
+      return false;
     }
   }
 

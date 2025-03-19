@@ -139,7 +139,7 @@ class RequestBloodState {
 
 Future<void> addBloodRequestToDb(RequestBloodState state) async {
   final uId = preference.get(PreferenceKey.userId);
-  final id = fbWrapper.getRandomId(Constants.requestCollection);
+  final id = fbWrapper.generateDocumentId(Constants.requestCollection);
   RequestBloodModel requestBlood = RequestBloodModel(
       id: id,
       patientName: state.patientName,
@@ -157,5 +157,5 @@ Future<void> addBloodRequestToDb(RequestBloodState state) async {
       hospitalInfo: state.hospitalInfo,
       createdAt: DateTime.now().toUtc().toLocal());
 
-  fbWrapper.insertToDb(Constants.requestCollection, id, requestBlood.toJson());
+  fbWrapper.insertDocument(collection: Constants.requestCollection, docId: id, data: requestBlood.toJson());
 }

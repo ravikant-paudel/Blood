@@ -13,7 +13,7 @@ final goRouter = GoRouter(
   debugLogDiagnostics: true,
   initialLocation: '/splash',
   redirect: (BuildContext context, GoRouterState state) {
-    final currentUser = fbWrapper.checkCurrentUser();
+    final currentUser = fbWrapper.currentUser;
     if (state.uri.toString() != '/login' && currentUser == null) {
       return '/login';
     }

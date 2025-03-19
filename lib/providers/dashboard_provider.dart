@@ -1,6 +1,7 @@
 import 'package:blood/models/request_blood/request_blood_model.dart';
 import 'package:blood/utils/constants.dart';
 import 'package:blood/utils/shortcuts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final StateNotifierProvider<DashboardProvider, DashboardState> dashboardProvider = StateNotifierProvider(
@@ -49,12 +50,11 @@ class DashboardState {
 }
 
 Stream<List<RequestBloodModel>> obtainDataFrmDb() {
-  return fbWrapper.getStreamListFrmDb(
-    Constants.requestCollection,
-    (document) {
+  return fbWrapper.collectionStream(
+    path: Constants.requestCollection,
+    builder: (DocumentSnapshot<Map<String, dynamic>> document) {
       final data = document.data();
-      if (data == null) return RequestBloodModel.fromJson(const {});
-      return RequestBloodModel.fromJson(data);
+      return RequestBloodModel.fromJson(data ?? {});
     },
   );
 }

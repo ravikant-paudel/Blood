@@ -16,7 +16,7 @@ class AuthProvider extends StateNotifier<AuthState> {
   Future<void> appStarted() async {
     await LocatorB.init();
     ref.read(themeProvider.notifier).init();
-    final User? currentUser = fbWrapper.checkCurrentUser();
+    final User? currentUser = fbWrapper.currentUser;
     if (currentUser != null) {
       state = AuthState.isAuthenticated;
       logThis('NOT ==============  here isr= equal');

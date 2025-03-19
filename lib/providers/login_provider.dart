@@ -12,8 +12,8 @@ class LoginProvider extends StateNotifier<LoginState> {
 
   Future<bool> fetchGoogleLogin() async {
     state = state.copyWith(isLoading: true);
-    final isFinish = await fbWrapper.signIn();
-    if (isFinish ) {
+    final isFinish = await fbWrapper.signInWithGoogle();
+    if (isFinish) {
       pRef.read(authProvider.notifier).loggedIn();
       state = state.copyWith(isLoading: false);
       return true;
