@@ -54,7 +54,11 @@ Stream<List<RequestBloodModel>> obtainDataFrmDb() {
     path: Constants.requestCollection,
     builder: (DocumentSnapshot<Map<String, dynamic>> document) {
       final data = document.data();
-      return RequestBloodModel.fromJson(data ?? {});
+      if (data == null) {
+        logThis('Empty document ${document.id}');
+        return RequestBloodModel.empty(); // Ensure you have this method
+      }
+      return RequestBloodModel.fromJson(data);
     },
   );
 }

@@ -7,6 +7,26 @@ part 'request_blood_model.g.dart';
 
 @freezed
 abstract class RequestBloodModel with _$RequestBloodModel {
+  // Add empty factory constructor
+  factory RequestBloodModel.empty() => RequestBloodModel(
+        id: '',
+        patientName: '',
+        patientBedNumber: '',
+        bloodGroup: '',
+        patientLocation: '',
+        contactNumber: '',
+        patientAge: '',
+        district: '',
+        submittedBy: '',
+        patientSex: '',
+        requestTime: '',
+        bloodUnit: '',
+        relation: '',
+        hospitalInfo: '',
+        createdAt: DateTime.now(),
+      );
+
+  // Rest of your existing code
   factory RequestBloodModel({
     required String id,
     required String patientName,
