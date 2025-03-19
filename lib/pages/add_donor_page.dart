@@ -1,89 +1,79 @@
-import 'package:blood/component/button.dart';
-import 'package:blood/component/gaps.dart';
-import 'package:blood/helper/router/go_router.dart';
 import 'package:blood/providers/add_donor_provider.dart';
-import 'package:blood/utils/resources/dimens.dart';
-import 'package:blood/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddDonorPage extends StatelessWidget {
-  // final List<String> _dropdownItems = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
-
-  final GlobalKey<FormState> formKey = GlobalKey();
+class AddDonorPage extends ConsumerWidget {
+  final _formKey = GlobalKey<FormState>();
+  final List<String> _bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'O+', 'O-'];
 
   AddDonorPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(addDonorProvider);
+    final notifier = ref.read(addDonorProvider.notifier);
+
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'AddDonorPage',
-      ),
-      body: Consumer(builder: (context, ref, child) {
-        final addDonorState = ref.watch(addDonorProvider);
-        final addDProvider = ref.watch(addDonorProvider.notifier);
-        if (addDonorState.isLoading) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (addDonorState.isSuccess) {
-          goRouter.pop();
-        }
-        return ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                        onChanged: addDProvider.updateName,
-                        validator: (value) => RegExp(r'\w{6,}').hasMatch(value ?? '') ? null : 'At least 6 character',
-                        decoration: const InputDecoration(
-                          hintText: 'Donor name',
-                        )),
-                    const VerticalGap(),
-                    TextFormField(
-                        onChanged: addDProvider.updateNumber,
-                        validator: (value) => value,
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 16),
-                        keyboardType: TextInputType.phone,
-                        decoration: const InputDecoration(
-                          hintText: 'Donor Number',
-                        )),
-                    const VerticalGap(),
-//                     DropdownButtonFormField<String>(
-//                       validator: (value) => value == null ? 'Please select blood group' : null,
-//                       isExpanded: true,
-// //                    isDense: true,
-//                       hint: const Text('-- Select Group --'),
-//                       items: _dropdownItems.map((String value) {
-//                         return DropdownMenuItem<String>(
-//                           value: value,
-//                           child: Text(value),
-//                         );
-//                       }).toList(),
-//                       value: addDonorState.bloodDonor,
-//                       onChanged: addDProvider.updateBloodGroup,
-//                     ),
-                    const VerticalGap(d_margin6),
-                    BloodButton(
-                      buttonText: 'Add Donor',
-                      onPressed: () {
-                        if (formKey.currentState?.validate() ?? false) {
-                          //call provider
-                          addDProvider.submitDonorName();
-                        }
-                      },
-                    ),
-                  ],
-                ),
+      appBar: AppBar(title: const Text('Add Donor')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Name'),
+                validator: (value) => value!.length >= 3 ? null : 'Minimum 3 characters',
+                onChanged: notifier.updateName,
               ),
-            ),
-          ],
-        );
-      }),
+              const SizedBox(height: 16),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Phone Number'),
+                keyboardType: TextInputType.phone,
+                validator: (value) => _validatePhoneNumber(value),
+                onChanged: notifier.updateNumber,
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<String>(
+                value: state.bloodDonor,
+                items: _bloodGroups
+                    .map((group) => DropdownMenuItem(
+                          value: group,
+                          child: Text(group),
+                        ))
+                    .toList(),
+                onChanged: notifier.updateBloodGroup,
+                decoration: const InputDecoration(labelText: 'Blood Group'),
+                validator: (value) => value == null ? 'Select blood group' : null,
+              ),
+              const SizedBox(height: 24),
+              state.isLoading
+                  ? const CircularProgressIndicator()
+                  : ElevatedButton(
+                      onPressed: () => _submitForm(ref, context),
+                      child: const Text('Submit'),
+                    ),
+            ],
+          ),
+        ),
+      ),
     );
+  }
+
+  String? _validatePhoneNumber(String? value) {
+    if (value == null || value.isEmpty) return 'Enter phone number';
+    if (!RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$').hasMatch(value)) {
+      return 'Invalid phone number';
+    }
+    return null;
+  }
+
+  Future<void> _submitForm(WidgetRef ref, BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      await ref.read(addDonorProvider.notifier).submitDonor();
+      if (ref.read(addDonorProvider).isSuccess) {
+        Navigator.of(context).pop();
+      }
+    }
   }
 }
